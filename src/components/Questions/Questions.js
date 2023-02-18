@@ -139,7 +139,223 @@ const Questions = () => {
       {
         questionNo: 17,
         question: "Have you served in the military?",
-        answer: [{ Served_military: data.Served_military }],
+        answer: [
+          {
+            Served_military: data.Served_military,
+            Current_status: data.Current_status,
+            Deployed: data.Deployed,
+            Deployed_Location: data.Deployed_Location,
+            Deployed_Timeline: data.Deployed_Timeline,
+            Combat: data.Combat,
+            military_related_traumatic_experiences: data.military_related_traumatic_experiences,
+            Disciplinary_actions: data.Disciplinary_actions,
+          },
+        ],
+      },
+      {
+        questionNo: 18,
+        question: "Please list any job-relevant volunteer experience?",
+        answer: [{ Job_relevant_Experience: data.Job_relevant_Experience }],
+      },
+      {
+        questionNo: 19,
+        question: "What is your current living situation?",
+        answer: [{ living_City_State: data.living_City_State, Who_do_you_live_with: data.Who_do_you_live_with }],
+      },
+      {
+        questionNo: 19,
+        question: "What is your current living situation?",
+        answer: [{ living_City_State: data.living_City_State, Who_do_you_live_with: data.Who_do_you_live_with }],
+      },
+      {
+        questionNo: 20,
+        question: "What is your current relationship status?",
+        answer: [
+          {
+            Relationship_Status: data.Relationship_Status,
+            How_long_have_you_been_in_this_relationship: data.How_long_have_you_been_in_this_relationship,
+            Do_you_have_any_previous_marriages: data.Do_you_have_any_previous_marriages,
+            How_long_have_you_been_together: data.How_long_have_you_been_together,
+            How_long_have_you_been_married: data.How_long_have_you_been_married,
+            Timeline_of_the_marriage: data.Timeline_of_the_marriage,
+            Timeline_of_previous_relationships: data.Timeline_of_previous_relationships,
+            Timeline_of_current_relationship: data.Timeline_of_current_relationship,
+          },
+        ],
+      },
+      {
+        questionNo: 21,
+        question: "Do you have any children?",
+        answer: [{ Children: data.Children, Son_Or_Daughter: data.Son_Or_Daughter, Children_Type: data.Children_Type, Children_Age: data.Children_Age }],
+      },
+      {
+        questionNo: 22,
+        question: "Do you have any children?",
+        answer: [{ Alcohol: data.Alcohol, Times: data.Times, Drinks_per_time: data.Drinks_per_time }],
+      },
+      {
+        questionNo: 23,
+        question: "Do you have any history of alcohol-related issues/concerns (i.e. dependence, problem drinking, legal issues, relationship issues related to your drinking)?",
+        answer: [{ Alcohol_related_issues: data.Alcohol_related_issues }],
+      },
+      {
+        questionNo: 24,
+        question: "Have you ever used drugs/illicit substances?",
+        answer: [{ Drugs_illicit: data.Drugs_illicit, Timeline_of_use: data.Timeline_of_use, Type_of_drug: data.Type_of_drug, Alcohol_Frequency: data.Alcohol_Frequency, Alcohol_Add: data.Alcohol_Add }],
+      },
+      {
+        questionNo: 25,
+        question: "Do you have any history of drug-related issues/concerns?",
+        answer: [{ Drug_related_issues: data.Drug_related_issues }],
+      },
+      {
+        questionNo: 26,
+        question: "Do you have any history of mental health symptoms or diagnoses (i.e., anxiety, depression, PTSD, ADHD)?",
+        answer: [{ Health_symptoms: data.Health_symptoms, Specify_Symptoms: data.Specify_Symptoms, Timeline_of_experienced_symptoms: data.Timeline_of_experienced_symptoms, Drug_related_add: data.Drug_related_add }],
+      },
+      {
+        questionNo: 27,
+        question: "Have you ever attended counseling or psychotherapy services?",
+        answer: [{ Psychotherapy_services: data.Psychotherapy_services, Dates_of_attendance: data.Dates_of_attendance, Timeline_of_experienced_symptoms: data.Timeline_of_experienced_symptoms }],
+      },
+      {
+        questionNo: 28,
+        question: "Have you ever been prescribed medication for psychiatric purposes?",
+        answer: [
+          {
+            Psychiatric_purposes: data.Psychiatric_purposes,
+            Type_of_medication: data.Type_of_medication,
+            Reason_for_prescription: data.Reason_for_prescription,
+            Dosage: data.Dosage,
+            When_did_you_take_the_medication: data.When_did_you_take_the_medication,
+            Psychiatric_purposes_add: data.Psychiatric_purposes_add,
+          },
+        ],
+      },
+      {
+        questionNo: 29,
+        question: "Have you ever been hospitalized for a psychiatric reason?",
+        answer: [
+          {
+            Psychiatric_reason: data.Psychiatric_reason,
+            Reason_short_answer: data.Reason_short_answer,
+            Psychiatric_reason_Timeline: data.Psychiatric_reason_Timeline,
+            Psychiatric_reason_Location: data.Psychiatric_reason_Location,
+            Psychiatric_reason_Name_of_hospital: data.Psychiatric_reason_Name_of_hospital,
+            Psychiatric_reason_add: data.Psychiatric_reason_add,
+          },
+        ],
+      },
+      {
+        questionNo: 30,
+        question: "Have you ever experienced thoughts about suicide?",
+        answer: [{ Thoughts_about_suicide: data.Thoughts_about_suicide }],
+      },
+      {
+        questionNo: 31,
+        question: "Have you ever engaged in self-harm behaviors (i.e., cutting or hitting yourself)?",
+        answer: [{ Self_harm_behaviors: data.Self_harm_behaviors }],
+      },
+      {
+        questionNo: 32,
+        question: "Have you ever experienced thoughts about seriously harming someone else?",
+        answer: [{ Harming_someone_else: data.Harming_someone_else }],
+      },
+      {
+        questionNo: 33,
+        question: "Have you ever experienced auditory/visual hallucinations?",
+        answer: [{ Visual_hallucination: data.Visual_hallucination }],
+      },
+      {
+        questionNo: 34,
+        question: "Have you ever experienced paranoid thinking or delusional thoughts?",
+        answer: [{ Delusional_Thoughts: data.Delusional_Thoughts }],
+      },
+      {
+        questionNo: 35,
+        question: "Have you ever been knocked unconscious following an accident, an assault, or any kind of injury?",
+        answer: [
+          {
+            Unconscious_accident: data.Unconscious_accident,
+            Experience_Prolonged_Symptoms: data.Experience_Prolonged_Symptoms,
+            Experience_Prolonged_Symptoms_sort_answer: data.Experience_Prolonged_Symptoms_sort_answer,
+            How_long_did_you_lose_consciousness_for: data.How_long_did_you_lose_consciousness_for,
+            Unconscious_accident_Year: data.Unconscious_accident_Year,
+          },
+        ],
+      },
+      {
+        questionNo: 36,
+        question: "Have you ever experienced significant financial- or credit-related difficulties (i.e., being sent to collections, bankruptcy, foreclosure)?",
+        answer: [{ Credit_related_difficulties: data.Credit_related_difficulties, Credit_related_difficulties_timeline: data.Credit_related_difficulties_timeline, Credit_related_difficulties_Explain: data.Credit_related_difficulties_Explain }],
+      },
+      {
+        questionNo: 37,
+        question: "Have you ever been fined/charged with a serious traffic violation?",
+        answer: [{ Traffic_violation: data.Traffic_violation, Traffic_violation_Explain: data.Traffic_violation_Explain, Traffic_violation_date: data.Traffic_violation_date, Traffic_violation_Add: data.Traffic_violation_Add }],
+      },
+      {
+        questionNo: 38,
+        question: "Have you ever been fined/charged with a serious traffic violation?",
+        answer: [
+          {
+            Charged_criminal_offense: data.Charged_criminal_offense,
+            Charged_criminal_offense_date: data.Charged_criminal_offense_date,
+            Were_you_arrested: data.Were_you_arrested,
+            Charged_criminal_offense_Sort_Answer: data.Charged_criminal_offense_Sort_Answer,
+            What_were_the_consequences: data.What_were_the_consequences,
+          },
+        ],
+      },
+      {
+        questionNo: 39,
+        question: "Please provide a list of your hobbies and interests.- short answer",
+        answer: [{Hobbies_and_interests:data.Hobbies_and_interests}],
+      },
+      {
+        questionNo: 40,
+        question: "Please list any special job-relevant skills or talents?- short answer",
+        answer: [{Hobbies_and_interests:data.Hobbies_and_interests}],
+      },
+      {
+        questionNo: 41,
+        question: "Please provide a brief summary of the last time you were stressed. -short answer",
+        answer: [{Stressed:data.Stressed}],
+      },
+      {
+        questionNo: 42,
+        question: "How do you typically cope with stress? -short answer",
+        answer: [{Cope_with_stress:data.Cope_with_stress}],
+      },
+      {
+        questionNo: 43,
+        question: "Please provide a brief summary of the last time you were particularly angry. -short answer",
+        answer: [{Particularly_angry:data.Particularly_angry}],
+      },
+      {
+        questionNo: 44,
+        question: "How do you typically cope with anger? -short answer",
+        answer: [{cope_with_anger:data.cope_with_anger}],
+      },
+      {
+        questionNo: 45,
+        question: "Please provide a brief summary related to the last time you faced adversity. -short answer",
+        answer: [{faced_adversity:data.faced_adversity}],
+      },
+      {
+        questionNo: 46,
+        question: "How do you typically cope with adversity? -short answer",
+        answer: [{with_adversity:data.with_adversity}],
+      },
+      {
+        questionNo: 47,
+        question: "What are your short-term goals? -short answer",
+        answer: [{short_term_goals:data.short_term_goals}],
+      },
+      {
+        questionNo: 48,
+        question: "What are your short-term goals? -short answer",
+        answer: [{long_term_goals:data.long_term_goals}],
       },
     ];
 
@@ -151,6 +367,21 @@ const Questions = () => {
   const Associate = watch("Associate");
   const Job_relevant_certificates = watch("Job_relevant_certificates");
   const Served_military = watch("Served_military");
+  const Current_status = watch("Current_status");
+  const Deployed = watch("Deployed");
+  const Relationship_Status = watch("Relationship_Status");
+  const Children = watch("Children");
+  const Alcohol = watch("Alcohol");
+  const Drugs_illicit = watch("Drugs_illicit");
+  const Health_symptoms = watch("Health_symptoms");
+  const Psychotherapy_services = watch("Psychotherapy_services");
+  const Psychiatric_purposes = watch("Psychiatric_purposes");
+  const Psychiatric_reason = watch("Psychiatric_reason");
+  const Unconscious_accident = watch("Unconscious_accident");
+  const Experience_Prolonged_Symptoms = watch("Experience_Prolonged_Symptoms");
+  const Credit_related_difficulties = watch("Credit_related_difficulties");
+  const Traffic_violation = watch("Traffic_violation");
+  const Charged_criminal_offense = watch("Charged_criminal_offense");
 
   // console.log(errors);
 
@@ -448,33 +679,551 @@ const Questions = () => {
           {Served_military === "yes" && (
             <div className="d-flex justify-content-around gap-3">
               <div>
-              <p>I. Branch</p>
-              <select {...register("Military_Branch", { required: true })} className="form-select" aria-label="Default select example">
-                <option defaultValue>Branch</option>
-                {
-                  militaryBranch.map(b => <option value={b}>{b}</option> )
-                }                
-              </select>
+                <p>I. Branch</p>
+                <select {...register("Military_Branch", { required: true })} className="form-select" aria-label="Default select example">
+                  <option defaultValue>Branch</option>
+                  {militaryBranch.map((b) => (
+                    <option value={b}>{b}</option>
+                  ))}
+                </select>
               </div>
               <div>
-              <p>II. Rank</p>
-              <input {...register("Military_Rank", { required: false })} type="text" className="form-control" placeholder="Sort answer" />
+                <p>II. Rank</p>
+                <input {...register("Military_Rank", { required: false })} type="text" className="form-control" placeholder="Sort answer" />
               </div>
 
               <div>
-              <p>III. Current Status</p>
-              <select {...register("Current_status", { required: true })} className="form-select" aria-label="Default select example">
-                <option defaultValue>Branch</option>
-                <option value="Active">Active</option>               
-                <option value="Reserve">Reserve</option>               
-                <option value="Discharged_discharge_status">Discharged_discharge_status</option>                             
-              </select>
+                <p>III. Current Status</p>
+                <select {...register("Current_status", { required: true })} className="form-select" aria-label="Default select example">
+                  <option defaultValue>Branch</option>
+                  <option value="Active">Active</option>
+                  <option value="Reserve">Reserve</option>
+                  <option value="Discharged">Discharged_discharge_status</option>
+                </select>
               </div>
 
+              {Current_status === "Discharged" && (
+                <select {...register("Current_status", { required: true })} className="form-select" aria-label="Default select example">
+                  <option defaultValue>Branch</option>
+                  <option value="Honorable">Honorable</option>
+                  <option value="General, Under Honorable Conditions">General, Under Honorable Conditions</option>
+                  <option value="Under Other than Honorable Conditions">Under Other than Honorable Conditions</option>
+                  <option value="Bad Conduct">Bad Conduct</option>
+                  <option value="Dishonorable">Dishonorable</option>
+                </select>
+              )}
 
+              <div>
+                <p>IV. Were you ever deployed?</p>
+                <select {...register("Deployed", { required: true })} className="form-select" aria-label="Default select example">
+                  <option defaultValue>Select Option</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              {Deployed === "yes" && (
+                <div>
+                  <input {...register("Deployed_Location", { required: false })} type="text" className="form-control" placeholder="Location" />
+                  <input {...register("Deployed_Timeline", { required: false })} type="text" className="form-control" placeholder="Timeline" />
+                  <input {...register("Extra_field", { required: false })} type="text" className="form-control" placeholder="Add+" />
+                </div>
+              )}
+
+              <div>
+                <p>V. Were you ever deployed?</p>
+                <select {...register("Combat", { required: true })} className="form-select" aria-label="Default select example">
+                  <option defaultValue>Select Option</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div>
+                <p>VI. Did you experience any military-related traumatic experiences?</p>
+                <select {...register("military_related_traumatic_experiences", { required: true })} className="form-select" aria-label="Default select example">
+                  <option defaultValue>Select Option</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div>
+                <p>VII. Do you have a history of formal military-related disciplinary actions?</p>
+                <select {...register("Disciplinary_actions", { required: true })} className="form-select" aria-label="Default select example">
+                  <option defaultValue>Select Option</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
             </div>
           )}
         </div>
+
+        {/* question 18 */}
+
+        <div>
+          <h6 className="form-label my-3">18. Please list any job-relevant volunteer experience?</h6>
+          <div className="d-flex gap-4">
+            <input {...register("Job_relevant_Experience", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="Job Relevant Experience" />
+          </div>
+        </div>
+
+        {/* question 19 */}
+
+        <div>
+          <h6 className="form-label my-3">19. What is your current living situation?</h6>
+          <div className="d-flex gap-4">
+            <input {...register("living_City_State", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="City and State" />
+            <input {...register("Who_do_you_live_with", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="Who_do_you_live_with?" />
+          </div>
+        </div>
+
+        {/* question 20 */}
+
+        <div>
+          <h6 className="form-label my-3">20. What is your current relationship status?</h6>
+          <select {...register("Relationship_Status", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="Single">Single</option>
+            <option value="In a relationship">In a relationship</option>
+            <option value="Engaged">Engaged</option>
+            <option value="Married">Married</option>
+            <option value="Divorced/single">Divorced/single</option>
+          </select>
+
+          {Relationship_Status === "In a relationship" && (
+            <div>
+              <h6 className="form-label my-3">i. How long have you been in this relationship?</h6>
+              <input {...register("How_long_have_you_been_in_this_relationship", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="Answer" />
+            </div>
+          )}
+          {Relationship_Status === "Engaged" && (
+            <div>
+              <h6 className="form-label my-3">i. How long have you been in this relationship?</h6>
+              <input {...register("How_long_have_you_been_in_this_relationship", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="Answer" />
+            </div>
+          )}
+          {Relationship_Status === "Married" && (
+            <div>
+              <h6 className="form-label my-3">I. How long have you been married?</h6>
+              <input {...register("How_long_have_you_been_married", { required: false })} type="text" className="form-control" placeholder="Answer" />
+              <h6 className="form-label my-3">II. How long have you been together?</h6>
+              <input {...register("How_long_have_you_been_together", { required: false })} type="text" className="form-control" placeholder="Answer" />
+              <h6 className="form-label my-3">III. Do you have any previous marriages?</h6>
+              <input {...register("Do_you_have_any_previous_marriages", { required: false })} type="text" className="form-control" placeholder="Timeline" />
+            </div>
+          )}
+
+          {Relationship_Status === "Divorced/single" && (
+            <div>
+              <h6 className="form-label my-3">I. Timeline of current relationship</h6>
+              <input {...register("Timeline_of_current_relationship", { required: true })} type="text" className="form-control" placeholder="Answer" />
+              <h6 className="form-label my-3">II. Timeline of previous relationships</h6>
+              <input {...register("Timeline_of_previous_relationships", { required: true })} type="text" className="form-control" placeholder="Answer" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 21 */}
+
+        <div>
+          <h6 className="form-label my-3">21. Do you have any children?</h6>
+          <select {...register("Children", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          {Children === "yes" && (
+            <div>
+              <select {...register("Son_Or_Daughter", { required: true })} className="form-select mt-2" aria-label="Default select example">
+                <option defaultValue>Select Option</option>
+                <option value="son">Son</option>
+                <option value="daughter">Daughter</option>
+              </select>
+              <select {...register("Children_Type", { required: true })} className="form-select mt-2" aria-label="Default select example">
+                <option defaultValue>Select Option</option>
+                <option value="Biological">Biological</option>
+                <option value="Step">Step</option>
+                <option value="Adopted">Adopted</option>
+              </select>
+
+              <input {...register("Children_Age", { required: true })} type="text" className="form-control mt-2" placeholder="Age" />
+            </div>
+          )}
+        </div>
+        {/* questions 22 */}
+        <div>
+          <h6 className="form-label my-3">22. Do you have any history of alcohol use?</h6>
+          <select {...register("Alcohol", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Alcohol === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. How often and how much do you currently drink?</h6>
+              <input {...register("Times", { required: true })} type="text" className="form-control" placeholder="Times (1,2,3,4,5,,,,10) per (Week, Month, Year)" />
+              <input {...register("Drinks_per_time", { required: true })} type="text" className="form-control mt-2" placeholder="Drinks per time (1,2,3,4,,,20)" />
+            </div>
+          )}
+        </div>
+        {/* questions 23 */}
+        <div>
+          <h6 className="form-label my-3">23. Do you have any history of alcohol-related issues/concerns (i.e. dependence, problem drinking, legal issues, relationship issues related to your drinking)?</h6>
+          <select {...register("Alcohol_related_issues", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        {/* questions 24 */}
+        <div>
+          <h6 className="form-label my-3">24. Have you ever used drugs/illicit substances?</h6>
+          <select {...register("Drugs_illicit", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Drugs_illicit === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Type of drug.</h6>
+              <input {...register("Type_of_drug", { required: true })} type="text" className="form-control" placeholder="Times (1,2,3,4,5,,,,10) per (Week, Month, Year)" />
+              <h6 className="form-label my-3">II. Frequency Frequency (daily, monthly, yearly)</h6>
+              <select {...register("Alcohol_Frequency", { required: true })} className="form-select" aria-label="Default select example">
+                <option defaultValue>Select Option</option>
+                <option value="daily">Daily</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+              <h6 className="form-label my-3">III. Timeline of use</h6>
+              <input {...register("Timeline_of_use", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">III. +Add</h6>
+              <input {...register("Alcohol_Add", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 25 */}
+        <div>
+          <h6 className="form-label my-3">25. Do you have any history of drug-related issues/concerns?</h6>
+          <select {...register("Drug_related_issues", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        {/* questions 26 */}
+
+        <div>
+          <h6 className="form-label my-3">26. Do you have any history of drug-related issues/concerns?</h6>
+          <select {...register("Health_symptoms", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Health_symptoms === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Specify Symptoms</h6>
+              <input {...register("Specify_Symptoms", { required: true })} type="text" className="form-control" placeholder="Specify Symptoms" />
+              <h6 className="form-label my-3">II. Timeline of experienced symptoms.</h6>
+              <input {...register("Timeline_of_experienced_symptoms", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">III. +Add</h6>
+              <input {...register("Drug_related_add", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 27 */}
+
+        <div>
+          <h6 className="form-label my-3">27. Have you ever attended counseling or psychotherapy services?</h6>
+          <select {...register("Psychotherapy_services", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Psychotherapy_services === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Dates of attendance</h6>
+              <input {...register("Dates_of_attendance", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
+              <h6 className="form-label my-3">II. Number of sessions </h6>
+              <input {...register("Timeline_of_experienced_symptoms", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 28 */}
+
+        <div>
+          <h6 className="form-label my-3">28. Have you ever been prescribed medication for psychiatric purposes?</h6>
+          <select {...register("Psychiatric_purposes", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Psychiatric_purposes === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Type of medication</h6>
+              <input {...register("Type_of_medication", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
+              <h6 className="form-label my-3">II. Reason for prescription </h6>
+              <input {...register("Reason_for_prescription", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">III. Dosage </h6>
+              <input {...register("Dosage", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">IV. When did you take the medication? </h6>
+              <input {...register("When_did_you_take_the_medication", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">V. +Add </h6>
+              <input {...register("Psychiatric_purposes_add", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 29 */}
+
+        <div>
+          <h6 className="form-label my-3">29. Have you ever been hospitalized for a psychiatric reason?</h6>
+          <select {...register("Psychiatric_reason", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Psychiatric_reason === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Reason- short answer</h6>
+              <input {...register("Reason_short_answer", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
+              <h6 className="form-label my-3">II. Timeline </h6>
+              <input {...register("Psychiatric_reason_Timeline", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">III. Location </h6>
+              <input {...register("Psychiatric_reason_Location", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">IV. When did you take the medication? </h6>
+              <input {...register("Psychiatric_reason_Name_of_hospital", { required: true })} type="text" className="form-control mt-2" placeholder="Psychiatric reason Name of hospital" />
+              <h6 className="form-label my-3">V. +Add </h6>
+              <input {...register("Psychiatric_reason_add", { required: false })} type="text" className="form-control mt-2" placeholder="+Add" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 30 */}
+
+        <div>
+          <h6 className="form-label my-3">30. Have you ever experienced thoughts about suicide?</h6>
+          <select {...register("Thoughts_about_suicide", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        {/* questions 31 */}
+
+        <div>
+          <h6 className="form-label my-3">31. Have you ever engaged in self-harm behaviors (i.e., cutting or hitting yourself)?</h6>
+          <select {...register("Self_harm_behaviors", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        {/* questions 32 */}
+        <div>
+          <h6 className="form-label my-3">32. Have you ever experienced thoughts about seriously harming someone else?</h6>
+          <select {...register("Harming_someone_else", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        {/* questions 33 */}
+        <div>
+          <h6 className="form-label my-3">33. Have you ever experienced auditory/visual hallucinations?</h6>
+          <select {...register("Visual_hallucination", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        {/* questions 34 */}
+        <div>
+          <h6 className="form-label my-3">34. Have you ever experienced paranoid thinking or delusional thoughts?</h6>
+          <select {...register("Delusional_Thoughts", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        {/* questions 35 */}
+
+        <div>
+          <h6 className="form-label my-3">35.Have you ever been knocked unconscious following an accident, an assault, or any kind of injury?</h6>
+          <select {...register("Unconscious_accident", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Unconscious_accident === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. When - year</h6>
+              <input {...register("Unconscious_accident_Year", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
+              <h6 className="form-label my-3">II. How long did you lose consciousness for? </h6>
+              <input {...register("How_long_did_you_lose_consciousness_for", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">III. Following the injury, did you experience prolonged symptoms (i.e., headaches, dizziness, depression) or functional issues (i.e., attention, memory, employment, relationship)? </h6>
+              <select {...register("Experience_Prolonged_Symptoms", { required: true })} className="form-select" aria-label="Default select example">
+                <option defaultValue>Select Option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+
+              {Experience_Prolonged_Symptoms === "yes" && <input {...register("Experience_Prolonged_Symptoms_sort_answer", { required: true })} type="text" className="form-control mt-2" placeholder="Sort answer" />}
+            </div>
+          )}
+        </div>
+
+        {/* questions 36 */}
+
+        <div>
+          <h6 className="form-label my-3">36.Have you ever experienced significant financial- or credit-related difficulties (i.e., being sent to collections, bankruptcy, foreclosure)?</h6>
+          <select {...register("Credit_related_difficulties", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Credit_related_difficulties === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Explain- short answer</h6>
+              <input {...register("Credit_related_difficulties_Explain", { required: true })} type="text" className="form-control" placeholder="Explain- short answer" />
+              <h6 className="form-label my-3">II. Timeline </h6>
+              <input {...register("Credit_related_difficulties_timeline", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 37 */}
+        <div>
+          <h6 className="form-label my-3">37. Have you ever been fined/charged with a serious traffic violation?</h6>
+          <select {...register("Traffic_violation", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Traffic_violation === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Explain - short answer</h6>
+              <input {...register("Traffic_violation_Explain", { required: true })} type="text" className="form-control" placeholder="Explain- short answer" />
+              <h6 className="form-label my-3">II. Date </h6>
+              <input {...register("Traffic_violation_date", { required: true })} type="date" className="form-control mt-2" placeholder="Timeline of use" />
+              <h6 className="form-label my-3">II. +Add </h6>
+              <input {...register("Traffic_violation_Add", { required: true })} type="text" className="form-control mt-2" placeholder="Add" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 38 */}
+        <div>
+          <h6 className="form-label my-3">38. Have you ever been charged with a criminal offense?</h6>
+          <select {...register("Charged_criminal_offense", { required: true })} className="form-select" aria-label="Default select example">
+            <option defaultValue>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          {Charged_criminal_offense === "yes" && (
+            <div>
+              <h6 className="form-label my-3">I. Date</h6>
+              <input {...register("Charged_criminal_offense_date", { required: true })} type="text" className="form-control" placeholder="Charged_criminal_offense_date" />
+
+              <h6 className="form-label my-3">II. Were you arrested?</h6>
+              <select {...register("Were_you_arrested", { required: true })} className="form-select" aria-label="Default select example">
+                <option defaultValue>Select Option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+
+              <h6 className="form-label my-3">III. Please outline the charge(s)- short answer</h6>
+              <input {...register("Charged_criminal_offense_Sort_Answer", { required: true })} type="text" className="form-control mt-2" placeholder="Sort Answer" />
+
+              <h6 className="form-label my-3">II. What were the consequences? </h6>
+              <input {...register("What_were_the_consequences", { required: true })} type="date" className="form-control mt-2" placeholder="Short answer" />
+            </div>
+          )}
+        </div>
+
+        {/* questions 39 */}
+        <div>
+          <h6 className="form-label my-3">39. Please provide a list of your hobbies and interests.- short answer</h6>
+          <input {...register("Hobbies_and_interests", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 40 */}
+        <div>
+          <h6 className="form-label my-3">40. Please list any special job-relevant skills or talents?- short answer</h6>
+          <input {...register("Job_relevant_skills", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 41 */}
+        <div>
+          <h6 className="form-label my-3">41. Please provide a brief summary of the last time you were stressed. - short answer</h6>
+          <input {...register("Stressed", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 42 */}
+        <div>
+          <h6 className="form-label my-3">42. How do you typically cope with stress? -short answer</h6>
+          <input {...register("Cope_with_stress", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 43 */}
+        <div>
+          <h6 className="form-label my-3">43. Please provide a brief summary of the last time you were particularly angry. -short answer</h6>
+          <input {...register("Particularly_angry", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 44 */}
+        <div>
+          <h6 className="form-label my-3">44. How do you typically cope with anger? -short answer</h6>
+          <input {...register("cope_with_anger", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+        {/* questions 45 */}
+        <div>
+          <h6 className="form-label my-3">45. Please provide a brief summary related to the last time you faced adversity. -short answer</h6>
+          <input {...register("faced_adversity", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 46 */}
+        <div>
+          <h6 className="form-label my-3">46. How do you typically cope with adversity? -short answer</h6>
+          <input {...register("with_adversity", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 47 */}
+        <div>
+          <h6 className="form-label my-3">47. What are your short-term goals? -short answer</h6>
+          <input {...register("short_term_goals", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+        </div>
+
+        {/* questions 48 */}
+        <div>
+          <h6 className="form-label my-3">48. What are your long-term goals? -short answer</h6>
+          <input {...register("long_term_goals", { required: true })} type="text" className="form-control" placeholder="long term goals" />
+        </div>
+
+
+
+
+
 
         <input type="submit" className="btn btn-primary my-3" value="submit" />
       </form>
