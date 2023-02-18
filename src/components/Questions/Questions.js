@@ -521,7 +521,7 @@ const Questions = () => {
 
         {/* question 10 */}
         <div className="w-100">
-          <h6 className="form-label my-3">10. WDid your family ever go without basic needs?</h6>
+          <h6 className="form-label my-3">10. Did your family ever go without basic needs?</h6>
           <select {...register("Basic_Needs", { required: true })} className="form-select" aria-label="Default select example">
             <option defaultValue>Select Option</option>
             <option value="yes">Yes</option>
