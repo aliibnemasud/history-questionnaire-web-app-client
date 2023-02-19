@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { applyingPosition, militaryBranch, siblings } from "./data";
+import axios from 'axios';
 
 const Questions = () => {
   const [position, setPosition] = useState("");
@@ -10,7 +11,7 @@ const Questions = () => {
   const [associate, setAssociate] = useState("");
   const [earnedCertificates, setEarnedCertificates] = useState("");
 
-  // Hello
+  // hello......
   const {
     register,
     watch,
@@ -59,7 +60,7 @@ const Questions = () => {
       {
         questionNo: 6,
         question: "Where did you grow-up?",
-        answer: [{ City: data.City, State: data.State, Ages: data.Ages, City: data.City }],
+        answer: [{ City: data.City, State: data.State, Ages: data.Ages, Other_Address: data.Other_Address }],
       },
       {
         questionNo: 7,
@@ -359,7 +360,11 @@ const Questions = () => {
       },
     ];
 
-    console.log(answer);
+    axios.post('http://localhost:5000/questions', {questionAnswer: answer})
+    .then(res => {
+      console.log(res.data)
+      alert("Data Posted Successfully!")
+    })  
   };
 
   const Biological_Parents = watch("Biological_Parents");
@@ -454,13 +459,16 @@ const Questions = () => {
 
         {/* for the first page */}
 
+        {/* question 6 */}
         <div>
           <h6 className="form-label my-3">6. Where did you grow-up?</h6>
           <div className="d-flex justify-content-around gap-3">
             <input {...register("City", { required: true })} type="text" className="form-control" placeholder="City" />
             <input {...register("State", { required: true })} type="text" className="form-control" placeholder="State" />
             <input {...register("Ages", { required: true })} type="text" className="form-control" placeholder="Ages/Timeline" />
+            <input {...register("Other_Address")} type="text" className="form-control" placeholder="Ages/Timeline" />
           </div>
+          
         </div>
 
         <div>
@@ -1217,13 +1225,9 @@ const Questions = () => {
         {/* questions 48 */}
         <div>
           <h6 className="form-label my-3">48. What are your long-term goals? -short answer</h6>
-          <input {...register("long_term_goals", { required: true })} type="text" className="form-control" placeholder="long term goals" />
+          <input {...register("long_term_goals", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
+          {errors.long_term_goals && <p className="text-danger">This is required</p> }
         </div>
-
-
-
-
-
 
         <input type="submit" className="btn btn-primary my-3" value="submit" />
       </form>
