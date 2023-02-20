@@ -23,6 +23,10 @@ const SeeAnswer = () => {
       <section className="container p-5">
         {questionAnswer.map((question) => <AnswersDetails question={question} key={question?._id} />)}        
       </section>
+
+      <section>
+        <button className="btn btn-primary">Go For the Next Step</button>        
+      </section>
     </div>
   );
 };

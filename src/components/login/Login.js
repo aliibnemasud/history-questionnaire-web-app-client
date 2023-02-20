@@ -1,38 +1,55 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Loading from "../Shared/Loading";
+import SocialLogin from "./SocialLogin";
+import axios from "axios";
 
 const Login = () => {
-  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
-  const [authuser, authLoading, autherror] = useAuthState(auth);
+  const [authUser, authLoading, authError] = useAuthState(auth);
+  const email = authUser?.email;
 
-  const [googleError, setGoogleError] = useState('');
-  const [passSignError, setPassSignError] = useState('');
+  const [googleError, setGoogleError] = useState("");
+  const [passSignError, setPassSignError] = useState("");
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const navigate = useNavigate();
+  const token = localStorage.getItem('accessToken')
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    signInWithEmailAndPassword(email, password);
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      await signInWithEmailAndPassword(email, password);      
+      const {data} = await axios.post('http://localhost:5000/login', {email})      
+      localStorage.setItem('accessToken', data?.accessToken)
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(()=> {
+
+    /* if(token){
+      return navigate("/dashboard");
+     } */
+    
+  },[token, gUser, authUser])
+
+  if (gLoading || loading || authLoading) {
+    return <Loading/>
   }
 
-  if(gloading || loading){
-    return <h1>Loading....</h1>
-  }
+  if (authUser?.uid) {      
+    navigate("/dashboard");
+  }  
 
-  if(authuser?.uid){
-    navigate('/dashboard')
-  }
-
-  if(error || gerror){
-    setGoogleError(error)
-    setPassSignError(gerror)
-  }
+  // console.log({authUser}, {user})
 
   return (
     <div className="row vh-100">
@@ -43,24 +60,23 @@ const Login = () => {
         <div className="w-50 text-center">
           <h1 className="mb-3">Login</h1>
           <form onSubmit={handleLogin}>
-            <input ref={emailRef} class="form-control" type="email" placeholder="email or username" aria-label="default input example" /> <br />
-            <input ref={passwordRef} class="form-control" type="password" placeholder="Password" aria-label="default input example" />
+            <input autoComplete="false" ref={emailRef} className="form-control" type="email" required placeholder="email or username" aria-label="default input example" /> <br />
+            <input autoComplete="false" ref={passwordRef} className="form-control" type="password" required placeholder="Password" aria-label="default input example" />
+            <p className="mt-2">Don't have account? <Link to="/signup">Sign Up</Link></p>
+            {googleError && <p className="text-danger">{googleError}</p>}
+            {passSignError && <p className="text-danger">{passSignError}</p>}            
             {
-              googleError && <p className="text-danger">{googleError}</p>
-            }
-            {
-              passSignError && <p className="text-danger">{passSignError}</p>
-            }
+              error && <p className="text-danger">Error: {error?.message}</p>
+            }                        
             <button type="submit" className="btn btn-primary my-3">
               Login
             </button>
+            
           </form>
-          <div className="">
-            <button className="btn btn-secondary" onClick={() => signInWithGoogle()}>
-              Google Login
-            </button>
-          </div>
+          <SocialLogin/>
         </div>
+
+        
       </div>
     </div>
   );

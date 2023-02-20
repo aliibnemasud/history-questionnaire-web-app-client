@@ -2,35 +2,20 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { applyingPosition, militaryBranch, siblings } from "./data";
 import axios from 'axios';
+import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "../Shared/Loading";
+import auth from "../../firebase.init";
+import { useNavigate } from "react-router-dom";
 
 const Questions = () => {
-  const [position, setPosition] = useState("");
-  const [biologicalParents, setBiologicalParents] = useState("");
+  const [position, setPosition] = useState("");  
   const [biologicalParentsStatus, setBiologicalParentsStatus] = useState("");
+  const [user, loading] = useAuthState(auth)
+  const navigate = useNavigate(); 
+  const {register,watch,handleSubmit,formState: { errors }} = useForm();
+  const token = localStorage.getItem('accessToken')
 
-  const [associate, setAssociate] = useState("");
-  const [earnedCertificates, setEarnedCertificates] = useState("");
-
-  // hello......
-  const {
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
   const onSubmit = (data) => {
-    //console.log(data.First_Name)
-
-    /* const answer = [{ First_Name: "Ali", Last_Name: "Ibne Masud" }];
-    for (let key in answer[0]) {
-      let splitedKey = key.split("_");
-      let newKey = "";
-      splitedKey.map((str) => {
-        newKey = newKey + " " + str;
-      });
-      console.log(newKey + ": " + answer[0][key]);
-    } */
-
     let answer = [
       {
         questionNo: 1,
@@ -359,13 +344,24 @@ const Questions = () => {
         answer: [{long_term_goals:data.long_term_goals}],
       },
     ];
-
-    axios.post('http://localhost:5000/questions', {questionAnswer: answer})
+    axios.post('http://localhost:5000/questions', {questionAnswer: answer, email: user?.email },{
+      headers: {
+        "authorization": `Barer ${token}`
+      }
+    })
     .then(res => {
       console.log(res.data)
       alert("Data Posted Successfully!")
-    })  
+    })
   };
+
+  if(loading){
+    return <Loading/>
+  }
+
+  if(!user?.uid){
+    return navigate('/')
+  }
 
   const Biological_Parents = watch("Biological_Parents");
   const attendUniversity = watch("Attend_University");
@@ -386,9 +382,7 @@ const Questions = () => {
   const Experience_Prolonged_Symptoms = watch("Experience_Prolonged_Symptoms");
   const Credit_related_difficulties = watch("Credit_related_difficulties");
   const Traffic_violation = watch("Traffic_violation");
-  const Charged_criminal_offense = watch("Charged_criminal_offense");
-
-  // console.log(errors);
+  const Charged_criminal_offense = watch("Charged_criminal_offense");  
 
   return (
     <div className="container">
@@ -490,13 +484,13 @@ const Questions = () => {
           {biologicalParentsStatus === "Deceased" && (
             <div>
               <div className="form-check form-check-inline mt-2">
-                <input {...register("Deceased", { required: true })} className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                <input {...register("Deceased", { required: true })} className="form-check-input" type="radio" name="inlineRadioOptions" value="option1" />
                 <label className="form-check-label" htmlFor="inlineRadio1">
                   Father
                 </label>
               </div>
               <div className="form-check form-check-inline">
-                <input {...register("Deceased", { required: true })} className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                <input {...register("Deceased", { required: true })} className="form-check-input" type="radio" name="inlineRadioOptions" value="option2" />
                 <label className="form-check-label" htmlFor="inlineRadio2">
                   Mother
                 </label>

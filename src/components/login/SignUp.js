@@ -1,12 +1,16 @@
+import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const SignUp = () => {
-  const [authuser, authLoading, autherror] = useAuthState(auth);
+  const [authUser, authLoading, authError] = useAuthState(auth);
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
   const [signUpError, setSignUError] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [updateProfile, updating, upDateError] = useUpdateProfile(auth);
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -23,15 +27,24 @@ const SignUp = () => {
       setSignUError("Password doesn't match")
     } else {
       await createUserWithEmailAndPassword(email, password);
-    }    
+      await updateProfile({ displayName })      
+    }
+
+    await axios.post('http://localhost:5000/user', {name: displayName, email: email })    
+    const {data} = await axios.post('http://localhost:5000/login', {email})      
+    localStorage.setItem('accessToken', data?.accessToken)
   };
 
-  if(loading || authLoading) {
-    return <h1>Loading.....</h1>
+  if(loading || authLoading || updating) {
+    return <Loading/>
   }
 
-  if(authuser?.uid){
-    navigate('/dashboard')
+  if(authUser?.uid){
+    navigate('/dashboard')    
+  }
+
+  if(upDateError){
+    return <h1>Update Error</h1>
   }
 
   return (
@@ -44,9 +57,11 @@ const SignUp = () => {
           <h1 className="mb-3">Sign Up</h1>
           
           <form onSubmit={handleCreateAccount}>
-            <input class="form-control" ref={emailRef} required type="email" placeholder="email or username" aria-label="default input example" /> <br />
-            <input class="form-control" ref={passwordRef} required type="password" placeholder="Password" aria-label="default input example" /> <br />
-            <input class="form-control" ref={confirmPasswordRef} required type="password" placeholder="Confirm Password" aria-label="default input example" />
+            <input className="form-control" onChange={(e)=> setDisplayName(e.target.value)} required type="text" placeholder="Type your name" aria-label="default input example" /> <br />
+            <input className="form-control" ref={emailRef} required type="email" placeholder="email or username" aria-label="default input example" /> <br />
+            <input className="form-control" ref={passwordRef} required type="password" placeholder="Password" aria-label="default input example" /> <br />
+            <input className="form-control" ref={confirmPasswordRef} required type="password" placeholder="Confirm Password" aria-label="default input example" />
+            <p className="mt-2">Don't have account? <Link to="/">Login</Link></p>
             {
               signUpError && <p className="text-danger mt-3">{signUpError}</p>
             }
