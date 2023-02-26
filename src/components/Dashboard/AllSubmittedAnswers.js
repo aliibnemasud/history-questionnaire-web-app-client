@@ -35,14 +35,14 @@ const AllSubmittedAnswers = () => {
           </tr>
         </thead>
         <tbody>
-          {questions.map((question) => {
+          {questions.map((question, index) => {
             let name = question.questionAnswer[0].answer[0].First_Name + " " + question?.questionAnswer[0]?.answer[0]?.Last_Name;
             return (
               <tr>
-                <td>1</td>
+                <td>{index+1}</td>
                 <td>{name}</td>
                 <td>{question?.email}</td>
-                <td>In Progress</td>
+                <td><span className={`badge ${ question?.status !== 'approved' ? 'text-bg-warning': "text-bg-success" }`}>{question?.status}</span></td>
                 <td>
                   <button onClick={()=> navigate(`/seeAnswer/${question?._id}`)} className="btn btn-warning fw-bold">View Answer</button>
                 </td>

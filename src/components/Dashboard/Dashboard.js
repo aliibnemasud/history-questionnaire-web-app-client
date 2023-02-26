@@ -18,7 +18,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
   const [validator, setValidator] = useState([]);
-  const [fetchLoading, setFetchLoading] = useState(true);
+  const [fetchLoading, setFetchLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -28,10 +28,11 @@ const Dashboard = () => {
         },
       })
       .then((res) => {
-        setValidator(res?.data?.validator);
-        setFetchLoading(false);
+        setValidator(res?.data?.validator);        
       });
   }, [authUser]);
+
+
 
   if (loading || authLoading || fetchLoading) {
     return <Loading />;
@@ -40,7 +41,7 @@ const Dashboard = () => {
   if (!authUser?.uid) {
     navigate("/");
   }
-
+  
   return (
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row className="vh-100">

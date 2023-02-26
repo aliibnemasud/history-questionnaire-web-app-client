@@ -6,7 +6,8 @@ import Login from './components/login/Login';
 import SignUp from './components/login/SignUp';
 import Questions from './components/Questions/Questions';
 import Error from './components/Shared/Error';
-
+import { ToastContainer} from 'react-toastify';
+import Answers from './components/Answers/Answers';
 
 function App() {
   return (
@@ -17,9 +18,13 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/questions' element={<Questions/>}></Route>
         <Route path='/seeAnswer/:questionId' element={<SeeAnswer/>}></Route>
+
+        <Route path='/answers/:questionId' element={<Answers/>}></Route>
+
+
         <Route path='*' element={<Error/>}></Route>
       </Routes>
-      
+      <ToastContainer/>
     </div>
   );
 }

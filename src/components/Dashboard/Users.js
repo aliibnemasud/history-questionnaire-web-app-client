@@ -53,7 +53,7 @@ const Users = () => {
               <td>{user?.name}</td>
               <td>{user?.email}</td>
               <td>
-                <span class="badge text-bg-success">{user?.role}</span>
+              <span className={`badge ${ user?.role !== 'validator' ? 'text-bg-warning': "text-bg-success" }`}>{user?.role}</span>                
               </td>
               <td>
                 <button onClick={() => makeValidator(user?._id)} className="btn btn-success fw-bold mx-2">

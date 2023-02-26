@@ -44,14 +44,14 @@ const MySubmittedQuestions = () => {
               <tr>
                 <td>1</td>
                 <td>{name}</td>
-                <td>candidatemail@exmple.com</td>
-                <td>In Progress</td>
+                <td>{question?.email}</td>
+                <td> <span className={`badge ${ question?.status !== 'approved' ? 'text-bg-warning': "text-bg-success" }`}>{question?.status}</span></td>
                 <td>
-                  <button onClick={()=> navigate(`/seeAnswer/${question?._id}`)} className="btn btn-warning fw-bold">View Answer</button>
+                  <button onClick={()=> navigate(`/seeAnswer/${question?._id}`)} className="btn btn-warning fw-bold">View My Answer</button>
                 </td>
                 <td>
-                  <button className="btn btn-success fw-bold mx-2">Approved</button>
-                  <button className="btn btn-danger fw-bold">Delete</button>
+                  <button disabled={question?.status !== 'approved'} className="btn btn-success fw-bold mx-2">Take Second Test</button>
+                  {/* <button className="btn btn-danger fw-bold">Delete</button> */}
                 </td>
               </tr>
             );
