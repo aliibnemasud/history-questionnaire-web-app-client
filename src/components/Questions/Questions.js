@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { applyingPosition, militaryBranch, siblings } from "./data";
-import axios from 'axios';
+import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
 import auth from "../../firebase.init";
 import { useNavigate } from "react-router-dom";
 
 const Questions = () => {
-  const [position, setPosition] = useState("");  
+  const [position, setPosition] = useState("");
   const [biologicalParentsStatus, setBiologicalParentsStatus] = useState("");
-  const [user, loading] = useAuthState(auth)
-  const navigate = useNavigate(); 
-  const {register,watch,handleSubmit,formState: { errors }} = useForm();
-  const token = localStorage.getItem('accessToken')
+  const [user, loading] = useAuthState(auth);
+  const [siblingState, setSiblingState] = useState(1);
+  const navigate = useNavigate();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const token = localStorage.getItem("accessToken");
 
   const onSubmit = (data) => {
     let answer = [
@@ -55,7 +61,7 @@ const Questions = () => {
       {
         questionNo: 8,
         question: "How many siblings do you have?",
-        answer: [],
+        answer: [{ Siblings: data.Siblings, Biological_brother: data.Biological_brother }],
       },
       {
         questionNo: 9,
@@ -69,7 +75,7 @@ const Questions = () => {
       },
       {
         questionNo: 11,
-        question: "Did your family ever go without basic needs?",
+        question: "Did you experience any abuse or neglect in your childhood?",
         answer: [{ Experience_any_abuse_or_neglect: data.Experience_any_abuse_or_neglect }],
       },
       {
@@ -147,12 +153,7 @@ const Questions = () => {
         questionNo: 19,
         question: "What is your current living situation?",
         answer: [{ living_City_State: data.living_City_State, Who_do_you_live_with: data.Who_do_you_live_with }],
-      },
-      {
-        questionNo: 19,
-        question: "What is your current living situation?",
-        answer: [{ living_City_State: data.living_City_State, Who_do_you_live_with: data.Who_do_you_live_with }],
-      },
+      },      
       {
         questionNo: 20,
         question: "What is your current relationship status?",
@@ -176,7 +177,7 @@ const Questions = () => {
       },
       {
         questionNo: 22,
-        question: "Do you have any children?",
+        question: "Do you have any history of alcohol use?",
         answer: [{ Alcohol: data.Alcohol, Times: data.Times, Drinks_per_time: data.Drinks_per_time }],
       },
       {
@@ -187,7 +188,7 @@ const Questions = () => {
       {
         questionNo: 24,
         question: "Have you ever used drugs/illicit substances?",
-        answer: [{ Drugs_illicit: data.Drugs_illicit, Timeline_of_use: data.Timeline_of_use, Type_of_drug: data.Type_of_drug, Alcohol_Frequency: data.Alcohol_Frequency, Alcohol_Add: data.Alcohol_Add }],
+        answer: [{ Drugs_illicit: data.Drugs_illicit, Timeline_of_use: data.Timeline_of_use, Type_of_drug: data.Type_of_drug, Drugs_Frequency: data.Drugs_Frequency, Alcohol_Add: data.Alcohol_Add }],
       },
       {
         questionNo: 25,
@@ -202,7 +203,7 @@ const Questions = () => {
       {
         questionNo: 27,
         question: "Have you ever attended counseling or psychotherapy services?",
-        answer: [{ Psychotherapy_services: data.Psychotherapy_services, Dates_of_attendance: data.Dates_of_attendance, Timeline_of_experienced_symptoms: data.Timeline_of_experienced_symptoms }],
+        answer: [{ Psychotherapy_services: data.Psychotherapy_services, Dates_of_attendance: data.Dates_of_attendance, Number_of_sessions:data.Number_of_sessions }],
       },
       {
         questionNo: 28,
@@ -296,71 +297,76 @@ const Questions = () => {
       {
         questionNo: 39,
         question: "Please provide a list of your hobbies and interests.- short answer",
-        answer: [{Hobbies_and_interests:data.Hobbies_and_interests}],
+        answer: [{ Hobbies_and_interests: data.Hobbies_and_interests }],
       },
       {
         questionNo: 40,
         question: "Please list any special job-relevant skills or talents?- short answer",
-        answer: [{Hobbies_and_interests:data.Hobbies_and_interests}],
+        answer: [{ Hobbies_and_interests: data.Hobbies_and_interests }],
       },
       {
         questionNo: 41,
         question: "Please provide a brief summary of the last time you were stressed. -short answer",
-        answer: [{Stressed:data.Stressed}],
+        answer: [{ Stressed: data.Stressed }],
       },
       {
         questionNo: 42,
         question: "How do you typically cope with stress? -short answer",
-        answer: [{Cope_with_stress:data.Cope_with_stress}],
+        answer: [{ Cope_with_stress: data.Cope_with_stress }],
       },
       {
         questionNo: 43,
         question: "Please provide a brief summary of the last time you were particularly angry. -short answer",
-        answer: [{Particularly_angry:data.Particularly_angry}],
+        answer: [{ Particularly_angry: data.Particularly_angry }],
       },
       {
         questionNo: 44,
         question: "How do you typically cope with anger? -short answer",
-        answer: [{cope_with_anger:data.cope_with_anger}],
+        answer: [{ cope_with_anger: data.cope_with_anger }],
       },
       {
         questionNo: 45,
         question: "Please provide a brief summary related to the last time you faced adversity. -short answer",
-        answer: [{faced_adversity:data.faced_adversity}],
+        answer: [{ faced_adversity: data.faced_adversity }],
       },
       {
         questionNo: 46,
         question: "How do you typically cope with adversity? -short answer",
-        answer: [{with_adversity:data.with_adversity}],
+        answer: [{ with_adversity: data.with_adversity }],
       },
       {
         questionNo: 47,
         question: "What are your short-term goals? -short answer",
-        answer: [{short_term_goals:data.short_term_goals}],
+        answer: [{ short_term_goals: data.short_term_goals }],
       },
       {
         questionNo: 48,
         question: "What are your short-term goals? -short answer",
-        answer: [{long_term_goals:data.long_term_goals}],
+        answer: [{ long_term_goals: data.long_term_goals }],
       },
     ];
-    axios.post('http://localhost:5000/questions', {questionAnswer: answer, email: user?.email },{
-      headers: {
-        "authorization": `Barer ${token}`
-      }
-    })
-    .then(res => {
-      console.log(res.data)
-      alert("Data Posted Successfully!")
-    })
+    axios
+      .post(
+        "http://localhost:5000/questions",
+        { questionAnswer: answer, email: user?.email },
+        {
+          headers: {
+            authorization: `Barer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        alert("Data Posted Successfully!");
+      });
   };
 
-  if(loading){
-    return <Loading/>
+  if (loading) {
+    return <Loading />;
   }
 
-  if(!user?.uid){
-    return navigate('/')
+  if (!user?.uid) {
+    return navigate("/");
   }
 
   const Biological_Parents = watch("Biological_Parents");
@@ -382,7 +388,28 @@ const Questions = () => {
   const Experience_Prolonged_Symptoms = watch("Experience_Prolonged_Symptoms");
   const Credit_related_difficulties = watch("Credit_related_difficulties");
   const Traffic_violation = watch("Traffic_violation");
-  const Charged_criminal_offense = watch("Charged_criminal_offense");  
+  const Charged_criminal_offense = watch("Charged_criminal_offense");
+  const Siblings = watch("Siblings");
+
+  // console.log(Siblings);
+
+  const addSiblings = () => {
+    setSiblingState(siblingState + 1);
+  };
+
+  let siblingsArray = [];
+  for (let i = 1; i <= siblingState; i++) {
+    siblingsArray.push(
+      <select className="form-select" {...register("Siblings", { required: true })} aria-label="Default select example">
+        <option defaultValue>Select position</option>
+        {siblings.map((position, index) => (
+          <option value={position} key={index}>
+            {position}
+          </option>
+        ))}
+      </select>
+    );
+  }
 
   return (
     <div className="container">
@@ -460,9 +487,8 @@ const Questions = () => {
             <input {...register("City", { required: true })} type="text" className="form-control" placeholder="City" />
             <input {...register("State", { required: true })} type="text" className="form-control" placeholder="State" />
             <input {...register("Ages", { required: true })} type="text" className="form-control" placeholder="Ages/Timeline" />
-            <input {...register("Other_Address")} type="text" className="form-control" placeholder="Ages/Timeline" />
+            <input {...register("Other_Address")} type="text" className="form-control" placeholder="+add" />
           </div>
-          
         </div>
 
         <div>
@@ -472,6 +498,7 @@ const Questions = () => {
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
+
           {Biological_Parents === "no" && (
             <select {...register("Biological_Parents_Status", { required: true })} className="form-select" onChange={(e) => setBiologicalParentsStatus(e.target.value)} aria-label="Default select example">
               <option defaultValue>Select Option</option>
@@ -503,14 +530,13 @@ const Questions = () => {
         {/* question 8 */}
         <div>
           <h6 className="form-label my-3">8. How many siblings do you have?</h6>
-          <select className="form-select" onChange={(e) => setPosition(e.target.value)} aria-label="Default select example">
-            <option defaultValue>Select position</option>
-            {siblings.map((position, index) => (
-              <option value={position} key={index}>
-                {position}
-              </option>
-            ))}
-          </select>
+          {siblingsArray}
+
+          {Siblings === "biological brother" && <input {...register("Biological_brother", { required: true })} type="number" className="form-control" placeholder="How many?" />}
+
+          <button type="button" onClick={addSiblings} className="btn btn-success">
+            +Add
+          </button>
         </div>
 
         {/* question 9 */}
@@ -778,7 +804,7 @@ const Questions = () => {
           <div className="d-flex gap-4">
             <input {...register("living_City_State", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="City and State" />
             <input {...register("Who_do_you_live_with", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="Who_do_you_live_with?" />
-          </div>
+          </div>Single
         </div>
 
         {/* question 20 */}
@@ -895,7 +921,7 @@ const Questions = () => {
               <h6 className="form-label my-3">I. Type of drug.</h6>
               <input {...register("Type_of_drug", { required: true })} type="text" className="form-control" placeholder="Times (1,2,3,4,5,,,,10) per (Week, Month, Year)" />
               <h6 className="form-label my-3">II. Frequency Frequency (daily, monthly, yearly)</h6>
-              <select {...register("Alcohol_Frequency", { required: true })} className="form-select" aria-label="Default select example">
+              <select {...register("Drugs_Frequency", { required: true })} className="form-select" aria-label="Default select example">
                 <option defaultValue>Select Option</option>
                 <option value="daily">Daily</option>
                 <option value="monthly">Monthly</option>
@@ -956,7 +982,7 @@ const Questions = () => {
               <h6 className="form-label my-3">I. Dates of attendance</h6>
               <input {...register("Dates_of_attendance", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
               <h6 className="form-label my-3">II. Number of sessions </h6>
-              <input {...register("Timeline_of_experienced_symptoms", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Number_of_sessions", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
             </div>
           )}
         </div>
@@ -1220,7 +1246,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">48. What are your long-term goals? -short answer</h6>
           <input {...register("long_term_goals", { required: true })} type="text" className="form-control" placeholder="Short Answer" />
-          {errors.long_term_goals && <p className="text-danger">This is required</p> }
+          {errors.long_term_goals && <p className="text-danger">This is required</p>}
         </div>
 
         <input type="submit" className="btn btn-primary my-3" value="submit" />
