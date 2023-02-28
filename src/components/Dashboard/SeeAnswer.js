@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 import AnswersDetails from "./AnswersDetails";
 
 const SeeAnswer = () => {
@@ -11,14 +12,17 @@ const SeeAnswer = () => {
   const [authUser, authLoading, autherror] = useAuthState(auth);
   const [validator, setValidator] = useState([]);
   const token = localStorage.getItem("accessToken");
+  const [loading, setLoading] = useState(true)
 
   const [questionAnswer, setQuestionAnswer] = useState([]);
 
   useEffect(() => {
     axios.get(`https://questionary-website.onrender.com/questions/${questionId}`).then((res) => {
       setQuestionAnswer(res?.data?.data[0]?.questionAnswer);
+      setLoading(false)
     });
   }, [questionAnswer, questionId]);
+  
 
   useEffect(() => {
     axios.get(`https://questionary-website.onrender.com/user/validator?email=${authUser?.email}`, {
@@ -36,11 +40,14 @@ const SeeAnswer = () => {
     if (approved) {
       axios.patch(`https://questionary-website.onrender.com/questions/${id}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+
         toast.success("Candidate Approved for the Next Step...");
       });
     }
   };
+
+  if(loading) return <Loading/>
 
   return (
     <div style={{ backgroundColor: "#F1F3F5" }}>

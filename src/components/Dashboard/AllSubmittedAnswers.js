@@ -45,6 +45,7 @@ const AllSubmittedAnswers = () => {
                 <td><span className={`badge ${ question?.status !== 'approved' ? 'text-bg-warning': "text-bg-success" }`}>{question?.status}</span></td>
                 <td>
                   <button onClick={()=> navigate(`/seeAnswer/${question?._id}`)} className="btn btn-warning fw-bold">View Answer</button>
+                  <button onClick={()=> navigate(`/answers/${question?._id}`)} className="btn btn-success ml-2 fw-bold">View Detail Answer</button>
                 </td>
                 <td>
                   <button className="btn btn-success fw-bold mx-2">Approved</button>
