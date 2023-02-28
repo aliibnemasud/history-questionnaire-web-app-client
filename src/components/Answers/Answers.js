@@ -17,25 +17,30 @@ const Answers = () => {
       setQuestionAnswer(res?.data?.data[0]?.questionAnswer);
       setLoading(false);
     });
-  }, []);
-
-  // console.log(questionAnswer[0]?.answer[0]);
-
-  /* const answers = [
-    {
-      questionNo: 7,
-      question: "Are your biological parents married to each other?",
-      answer: `${authUser?.displayName} grew up with ${questionAnswer[8]?.answer[0]?.Growing_Up} in the household.`,
-    },
-
-  ]; */
+  }, []);  
 
   // console.log(answers)
 
   if (loading) return <Loading />;
 
   return (
-    <section className="container p-5">
+    <section style={{ backgroundColor: "#F1F3F5" }}>
+    <div className="container p-5">
+
+      {/* question No #7 */}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+
+        {/* <h4>1. {questionAnswer[0]?.question}</h4> */}
+        <h6>Name: {questionAnswer[0]?.answer[0]?.First_Name + " " + questionAnswer[0]?.answer[0]?.Last_Name }</h6>
+        <h6>Date Of Birth: {questionAnswer[1]?.answer[0]?.Date_Of_Birth }</h6>
+        <h6>Gender: {questionAnswer[2]?.answer[0]?.Gender }</h6>        
+        <h6>Department: {questionAnswer[3]?.answer[0]?.Department }</h6>
+        <h6>Position: {questionAnswer[4]?.answer[0]?.Position }</h6>
+        <h6>Address: {questionAnswer[5]?.answer[0]?.City}, {questionAnswer[5]?.answer[0]?.State}, {questionAnswer[5]?.answer[0]?.Ages}, {questionAnswer[5]?.answer[0]?.Other_Address}</h6>
+
+      </div>
+
+
       {/* question No #7 */}
       <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
         <h4 className="form-label my-3">7. {questionAnswer[6]?.question}</h4>
@@ -444,7 +449,6 @@ const Answers = () => {
         </div>
       </div>
 
-
       {/* question No #37*/}
       <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
         <h4 className="form-label my-3">38. {questionAnswer[37]?.question}</h4>
@@ -552,6 +556,7 @@ const Answers = () => {
           <h4>{questionAnswer[47]?.answer[0]?.long_term_goals}</h4>
         </div>
       </div>
+    </div>
     </section>
   );
 };
