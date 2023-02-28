@@ -283,7 +283,7 @@ const Questions = () => {
       },
       {
         questionNo: 38,
-        question: "Have you ever been fined/charged with a serious traffic violation?",
+        question: "Have you ever been charged with a criminal offense?",
         answer: [
           {
             Charged_criminal_offense: data.Charged_criminal_offense,
@@ -302,7 +302,7 @@ const Questions = () => {
       {
         questionNo: 40,
         question: "Please list any special job-relevant skills or talents?- short answer",
-        answer: [{ Hobbies_and_interests: data.Hobbies_and_interests }],
+        answer: [{ Job_relevant_skills: data.Job_relevant_skills }],
       },
       {
         questionNo: 41,
@@ -1000,11 +1000,11 @@ const Questions = () => {
           {Psychiatric_purposes === "yes" && (
             <div>
               <h6 className="form-label my-3">I. Type of medication</h6>
-              <input {...register("Type_of_medication", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
+              <input {...register("Type_of_medication", { required: true })} type="text" className="form-control" placeholder="Type of medication" />
               <h6 className="form-label my-3">II. Reason for prescription </h6>
               <input {...register("Reason_for_prescription", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
               <h6 className="form-label my-3">III. Dosage </h6>
-              <input {...register("Dosage", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Dosage", { required: true })} type="text" className="form-control mt-2" placeholder="Reason for prescription" />
               <h6 className="form-label my-3">IV. When did you take the medication? </h6>
               <input {...register("When_did_you_take_the_medication", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
               <h6 className="form-label my-3">V. +Add </h6>
@@ -1026,11 +1026,11 @@ const Questions = () => {
           {Psychiatric_reason === "yes" && (
             <div>
               <h6 className="form-label my-3">I. Reason- short answer</h6>
-              <input {...register("Reason_short_answer", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
+              <input {...register("Reason_short_answer", { required: true })} type="text" className="form-control" placeholder="Answer" />
               <h6 className="form-label my-3">II. Timeline </h6>
-              <input {...register("Psychiatric_reason_Timeline", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Psychiatric_reason_Timeline", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline" />
               <h6 className="form-label my-3">III. Location </h6>
-              <input {...register("Psychiatric_reason_Location", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Psychiatric_reason_Location", { required: true })} type="text" className="form-control mt-2" placeholder="Location" />
               <h6 className="form-label my-3">IV. When did you take the medication? </h6>
               <input {...register("Psychiatric_reason_Name_of_hospital", { required: true })} type="text" className="form-control mt-2" placeholder="Psychiatric reason Name of hospital" />
               <h6 className="form-label my-3">V. +Add </h6>

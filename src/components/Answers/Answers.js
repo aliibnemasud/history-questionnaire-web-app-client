@@ -308,27 +308,250 @@ const Answers = () => {
         <h5 className="text-success">Answer: </h5>
         <div>
           {questionAnswer[26]?.answer[0]?.Psychotherapy_services === "no" && <h4>{authUser?.displayName} never attended counseling or psychotherapy services.</h4>}
-          {questionAnswer[26]?.answer[0]?.Psychotherapy_services === "yes" && <h4>{authUser?.displayName} attended counseling or psychotherapy services at Dates of attendance:{questionAnswer[26]?.answer[0]?.Dates_of_attendance} Number of sessions: {questionAnswer[26]?.answer[0]?.Number_of_sessions}.</h4>
-          }
+          {questionAnswer[26]?.answer[0]?.Psychotherapy_services === "yes" && (
+            <h4>
+              {authUser?.displayName} attended counseling or psychotherapy services at Dates of attendance:{questionAnswer[26]?.answer[0]?.Dates_of_attendance} Number of sessions: {questionAnswer[26]?.answer[0]?.Number_of_sessions}.
+            </h4>
+          )}
         </div>
       </div>
 
       {/* question No #28*/}
       <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
-        <h4 className="form-label my-3">27. {questionAnswer[27]?.question}</h4>
+        <h4 className="form-label my-3">28. {questionAnswer[27]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+
+        <div>
+          {questionAnswer[27]?.answer[0]?.Psychiatric_purposes === "no" && <h4>{authUser?.displayName} never prescribed medication for psychiatric purposes.</h4>}
+
+          {questionAnswer[27]?.answer[0]?.Psychiatric_purposes === "yes" && (
+            <h4>
+              {authUser?.displayName} attend {questionAnswer[27]?.answer[0]?.Type_of_medication} for {questionAnswer[27]?.answer[0]?.Reason_for_prescription}. And he take it {questionAnswer[27]?.answer[0]?.When_did_you_take_the_medication} Dosage: {questionAnswer[27]?.answer[0]?.Dosage}{" "}
+            </h4>
+          )}
+        </div>
+      </div>
+
+      {/* question No #29*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">29. {questionAnswer[28]?.question}</h4>
         <h5 className="text-success">Answer: </h5>
         <div>
-          {questionAnswer[26]?.answer[0]?.Psychotherapy_services === "no" && <h4>{authUser?.displayName} never attended counseling or psychotherapy services.</h4>}
-          {questionAnswer[26]?.answer[0]?.Psychotherapy_services === "yes" && <h4>{authUser?.displayName} attended counseling or psychotherapy services at Dates of attendance:{questionAnswer[26]?.answer[0]?.Dates_of_attendance} Number of sessions: {questionAnswer[26]?.answer[0]?.Number_of_sessions}.</h4>
-          }
+          {questionAnswer[28]?.answer[0]?.Psychiatric_reason === "no" && <h4>{authUser?.displayName} never hospitalized for a psychiatric reason.</h4>}
+
+          {questionAnswer[28]?.answer[0]?.Psychiatric_reason === "yes" && (
+            <h4>
+              {authUser?.displayName} attend {questionAnswer[28]?.answer[0]?.Type_of_medication} for {questionAnswer[28]?.answer[0]?.Reason_short_answer}. And he take it {questionAnswer[28]?.answer[0]?.Psychiatric_reason_Timeline} Location:{" "}
+              {questionAnswer[28]?.answer[0]?.Psychiatric_reason_Location}, Psychiatric reason Name of hospital: {questionAnswer[28]?.answer[0]?.Psychiatric_reason_Name_of_hospital}, Extra Reason: {questionAnswer[28]?.answer[0]?.Psychiatric_reason_add}{" "}
+            </h4>
+          )}
+        </div>
+      </div>
+
+      {/* question No #30*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">30. {questionAnswer[29]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[29]?.answer[0]?.Thoughts_about_suicide}</h4>
+        </div>
+      </div>
+
+      {/* question No #31*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">31. {questionAnswer[30]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[30]?.answer[0]?.Self_harm_behaviors}</h4>
+        </div>
+      </div>
+
+      {/* question No #32*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">32. {questionAnswer[31]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[31]?.answer[0]?.Harming_someone_else}</h4>
+        </div>
+      </div>
+
+      {/* question No #33*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">33. {questionAnswer[32]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[32]?.answer[0]?.Visual_hallucination}</h4>
+        </div>
+      </div>
+
+      {/* question No #34*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">34. {questionAnswer[33]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[33]?.answer[0]?.Delusional_Thoughts}</h4>
+        </div>
+      </div>
+
+      {/* question No #35*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">35. {questionAnswer[34]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          {questionAnswer[34]?.answer[0]?.Unconscious_accident === "no" && <h4>No</h4>}
+          {questionAnswer[34]?.answer[0]?.Unconscious_accident === "yes" && <h4>Yes, It was {questionAnswer[34]?.answer[0]?.Unconscious_accident_Year} </h4>}
+
+          <ul>
+            <li>Sort Answer: {questionAnswer[34]?.answer[0]?.Experience_Prolonged_Symptoms_sort_answer}</li>
+            <li>Timeline: {questionAnswer[34]?.answer[0]?.How_long_did_you_lose_consciousness_for}</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* question No #36*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">36. {questionAnswer[35]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          {questionAnswer[35]?.answer[0]?.Credit_related_difficulties === "no" && <h4>No</h4>}
+          {questionAnswer[35]?.answer[0]?.Credit_related_difficulties === "yes" && (
+            <>
+              <h4>Yes</h4>
+              <ul>
+                <li>Sort Answer: {questionAnswer[35]?.answer[0]?.Credit_related_difficulties_timeline}</li>
+                <li>Date: {questionAnswer[35]?.answer[0]?.Credit_related_difficulties_Explain}</li>
+              </ul>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* question No #36*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">37. {questionAnswer[36]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          {questionAnswer[36]?.answer[0]?.Traffic_violation === "no" && <h4>No</h4>}
+          {questionAnswer[36]?.answer[0]?.Traffic_violation === "yes" && (
+            <>
+              <h4>Yes</h4>
+              <ul>
+                <li>Sort Answer: {questionAnswer[36]?.answer[0]?.Traffic_violation_Explain}</li>
+                <li>Date: {questionAnswer[36]?.answer[0]?.Traffic_violation_date}</li>
+              </ul>
+            </>
+          )}
         </div>
       </div>
 
 
+      {/* question No #37*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">38. {questionAnswer[37]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          {questionAnswer[37]?.answer[0]?.Charged_criminal_offense === "no" && <h4>No</h4>}
+          {questionAnswer[37]?.answer[0]?.Charged_criminal_offense === "yes" && (
+            <>
+              <h4>Yes</h4>
+              <ul>
+                <li>What were the consequences: {questionAnswer[37]?.answer[0]?.What_were_the_consequences}</li>
+                <li>Were you arrested: {questionAnswer[37]?.answer[0]?.Were_you_arrested}</li>
+                <li>Date: {questionAnswer[37]?.answer[0]?.Charged_criminal_offense_date}</li>
+              </ul>
+            </>
+          )}
+        </div>
+      </div>
 
+      {/* question No #39*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">39. {questionAnswer[38]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[38]?.answer[0]?.Hobbies_and_interests}</h4>
+        </div>
+      </div>
 
+      {/* question No #40*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">40. {questionAnswer[39]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[39]?.answer[0]?.Job_relevant_skills}</h4>
+        </div>
+      </div>
 
+      {/* question No #41*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">41. {questionAnswer[40]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[40]?.answer[0]?.Stressed}</h4>
+        </div>
+      </div>
 
+      {/* question No #42*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">42. {questionAnswer[41]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[41]?.answer[0]?.Cope_with_stress}</h4>
+        </div>
+      </div>
+
+      {/* question No #43*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">43. {questionAnswer[43]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[43]?.answer[0]?.Particularly_angry}</h4>
+        </div>
+      </div>
+
+      {/* question No #44*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">44. {questionAnswer[43]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[43]?.answer[0]?.cope_with_anger}</h4>
+        </div>
+      </div>
+      {/* question No #45*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">45. {questionAnswer[44]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[44]?.answer[0]?.faced_adversity}</h4>
+        </div>
+      </div>
+
+      {/* question No #46*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">46. {questionAnswer[45]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[45]?.answer[0]?.with_adversity}</h4>
+        </div>
+      </div>
+
+      {/* question No #47*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">47. {questionAnswer[46]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[46]?.answer[0]?.short_term_goals}</h4>
+        </div>
+      </div>
+
+      {/* question No #48*/}
+      <div style={{ backgroundColor: "#fff" }} className="p-4 mb-2">
+        <h4 className="form-label my-3">48. {questionAnswer[47]?.question}</h4>
+        <h5 className="text-success">Answer: </h5>
+        <div>
+          <h4>{questionAnswer[47]?.answer[0]?.long_term_goals}</h4>
+        </div>
+      </div>
     </section>
   );
 };
