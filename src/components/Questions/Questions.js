@@ -347,7 +347,7 @@ const Questions = () => {
     ];
     axios
       .post(
-        "http://localhost:5000/questions",
+        "https://questionary-website.onrender.com/questions",
         { questionAnswer: answer, email: user?.email },
         {
           headers: {

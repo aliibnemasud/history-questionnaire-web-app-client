@@ -13,7 +13,7 @@ const Answers = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/questions/${questionId}`).then((res) => {
+    axios.get(`https://questionary-website.onrender.com/questions/${questionId}`).then((res) => {
       setQuestionAnswer(res?.data?.data[0]?.questionAnswer);
       setLoading(false);
     });

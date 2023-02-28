@@ -14,7 +14,7 @@ const MySubmittedQuestions = () => {
   const token = localStorage.getItem('accessToken')
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/myQuestions?email=${user?.email}`, {
+    axios.get(`https://questionary-website.onrender.com/myQuestions?email=${user?.email}`, {
       headers: {
         "authorization": `Barer ${token}`
       }

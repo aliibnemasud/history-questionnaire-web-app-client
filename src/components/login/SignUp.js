@@ -30,8 +30,8 @@ const SignUp = () => {
       await updateProfile({ displayName })      
     }
 
-    await axios.post('http://localhost:5000/user', {name: displayName, email: email })    
-    const {data} = await axios.post('http://localhost:5000/login', {email})      
+    await axios.post('https://questionary-website.onrender.com/user', {name: displayName, email: email })    
+    const {data} = await axios.post('https://questionary-website.onrender.com/login', {email})      
     localStorage.setItem('accessToken', data?.accessToken)
   };
 

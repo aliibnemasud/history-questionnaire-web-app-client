@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/validator?email=${authUser?.email}`, {
+      .get(`https://questionary-website.onrender.com/user/validator?email=${authUser?.email}`, {
         headers: {
           Authorization: `Barer ${token}`,
         },

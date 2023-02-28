@@ -15,13 +15,13 @@ const SeeAnswer = () => {
   const [questionAnswer, setQuestionAnswer] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/questions/${questionId}`).then((res) => {
+    axios.get(`https://questionary-website.onrender.com/questions/${questionId}`).then((res) => {
       setQuestionAnswer(res?.data?.data[0]?.questionAnswer);
     });
   }, [questionAnswer, questionId]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/validator?email=${authUser?.email}`, {
+    axios.get(`https://questionary-website.onrender.com/user/validator?email=${authUser?.email}`, {
         headers: {
           Authorization: `Barer ${token}`,
         },
@@ -34,7 +34,7 @@ const SeeAnswer = () => {
   const handleApprove = (id) => {
     const approved = window.confirm("Are you sure want to approve for the next step?");
     if (approved) {
-      axios.patch(`http://localhost:5000/questions/${id}`)
+      axios.patch(`https://questionary-website.onrender.com/questions/${id}`)
       .then((res) => {
         console.log(res);
         toast.success("Candidate Approved for the Next Step...");

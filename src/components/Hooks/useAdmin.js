@@ -8,7 +8,7 @@ const useAdmin = user => {
       const email = user?.email;
 
       if(email){
-          fetch(`http://localhost:5000/user?email=${email}`, {
+          fetch(`https://questionary-website.onrender.com/user?email=${email}`, {
               method: 'GET',
               headers:{
                 'content-type': 'application/json'

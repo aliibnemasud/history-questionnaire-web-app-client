@@ -8,7 +8,7 @@ const Users = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user`, {
+      .get(`https://questionary-website.onrender.com/user`, {
         headers: {
           authorization: `Barer ${token}`,
         },
@@ -22,7 +22,7 @@ const Users = () => {
     const makeValidator = window.confirm("Are you sure want to make him validator?");
     if (makeValidator) {
       axios.patch(
-        `http://localhost:5000/user?userId=${id}`,
+        `https://questionary-website.onrender.com/user?userId=${id}`,
         { role: "validator" },
         {
           headers: {
