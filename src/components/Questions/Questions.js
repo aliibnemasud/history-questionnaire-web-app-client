@@ -203,7 +203,7 @@ const Questions = () => {
       {
         questionNo: 27,
         question: "Have you ever attended counseling or psychotherapy services?",
-        answer: [{ Psychotherapy_services: data.Psychotherapy_services, Dates_of_attendance: data.Dates_of_attendance, Number_of_sessions:data.Number_of_sessions }],
+        answer: [{ Psychotherapy_services: data.Psychotherapy_services, Dates_of_attendance: data.Dates_of_attendance, Number_of_sessions:data.Number_of_sessions, Range_of_this_service: data.Range_of_this_service }],
       },
       {
         questionNo: 28,
@@ -390,8 +390,11 @@ const Questions = () => {
   const Traffic_violation = watch("Traffic_violation");
   const Charged_criminal_offense = watch("Charged_criminal_offense");
   const Siblings = watch("Siblings");
+  const Additional_Option_psychiatric_purposes = watch("Additional_Option_psychiatric_purposes")
 
   // console.log(Siblings);
+
+  /// console.log(Additional_Option_psychiatric_purposes);
 
   const addSiblings = () => {
     setSiblingState(siblingState + 1);
@@ -400,7 +403,7 @@ const Questions = () => {
   let siblingsArray = [];
   for (let i = 1; i <= siblingState; i++) {
     siblingsArray.push(
-      <select className="form-select" {...register("Siblings", { required: true })} aria-label="Default select example">
+      <select className="form-select my-2" {...register(`Siblings${i}`, { required: true })} aria-label="Default select example">
         <option defaultValue>Select Option</option>
         {siblings.map((position, index) => (
           <option value={position} key={index}>
@@ -534,7 +537,7 @@ const Questions = () => {
 
           {Siblings === "biological brother" && <input {...register("Biological_brother", { required: true })} type="number" className="form-control" placeholder="How many?" />}
 
-          <button type="button" onClick={addSiblings} className="btn btn-success">
+          <button type="button" onClick={addSiblings}  className="btn btn-success">
             +Add
           </button>
         </div>
@@ -597,7 +600,7 @@ const Questions = () => {
             <div className="d-flex justify-content-around gap-3 mt-3">
               <input {...register("Attend_University_Name", { required: true })} type="text" className="form-control" placeholder="Institution name" />
               <input {...register("Attend_University_Location_City", { required: true })} type="text" className="form-control" placeholder="Location of institution City" />
-              <input {...register("Attend_University_Location_State", { required: true })} type="text" className="form-control" placeholder="Location of institution City" />
+              <input {...register("Attend_University_Location_State", { required: true })} type="text" className="form-control" placeholder="State or Country" />
               <input {...register("Year_of_Graduation", { required: true })} type="text" className="form-control" placeholder="Year of graduation" />
               <select className="form-select" {...register("Associate", { required: true })} aria-label="Default select example">
                 <option defaultValue>Degree</option>
@@ -659,7 +662,7 @@ const Questions = () => {
 
         <div>
           <h6 className="form-label my-3">16. Please describe your previous 2 positions of employment.</h6>
-          <p>First Employment</p>
+          <h6>✦ 1</h6>
           <div className="d-flex justify-content-around gap-3">
             <input {...register("Place_of_employment_One", { required: false })} type="text" className="form-control" placeholder="Place of employment" />
             <input {...register("Job_Title_One", { required: false })} type="text" className="form-control" placeholder="Job_Title" />
@@ -676,7 +679,8 @@ const Questions = () => {
             </select>
           </div>
 
-          <p>Second Employment</p>
+          <h6 className="my-2">✦ 2</h6>
+
           <div className="d-flex justify-content-around gap-3">
             <input {...register("Place_of_employment_Second", { required: false })} type="text" className="form-control" placeholder="Place of employment" />
             <input {...register("Job_Title_Second", { required: false })} type="text" className="form-control" placeholder="Job_Title" />
@@ -804,7 +808,7 @@ const Questions = () => {
           <div className="d-flex gap-4">
             <input {...register("living_City_State", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="City and State" />
             <input {...register("Who_do_you_live_with", { required: true, maxLength: 80 })} type="text" className="form-control" placeholder="Who_do_you_live_with?" />
-          </div>Single
+          </div>
         </div>
 
         {/* question 20 */}
@@ -882,7 +886,7 @@ const Questions = () => {
         </div>
         {/* questions 22 */}
         <div>
-          <h6 className="form-label my-3">22. Do you have any history of alcohol use?</h6>
+          <h6 className="form-label my-3">22. Do you drink alcohol?</h6>
           <select {...register("Alcohol", { required: true })} className="form-select" aria-label="Default select example">
             <option defaultValue>Select Option</option>
             <option value="yes">Yes</option>
@@ -920,12 +924,13 @@ const Questions = () => {
             <div>
               <h6 className="form-label my-3">I. Type of drug.</h6>
               <input {...register("Type_of_drug", { required: true })} type="text" className="form-control" placeholder="Times (1,2,3,4,5,,,,10) per (Week, Month, Year)" />
-              <h6 className="form-label my-3">II. Frequency Frequency (daily, monthly, yearly)</h6>
+              <h6 className="form-label my-3">II. Frequency (daily, monthly, yearly)</h6>
               <select {...register("Drugs_Frequency", { required: true })} className="form-select" aria-label="Default select example">
                 <option defaultValue>Select Option</option>
                 <option value="daily">Daily</option>
                 <option value="monthly">Monthly</option>
                 <option value="yearly">Yearly</option>
+                <option value="I don’t use it anymore">I don’t use it anymore</option>
               </select>
               <h6 className="form-label my-3">III. Timeline of use</h6>
               <input {...register("Timeline_of_use", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
@@ -948,7 +953,7 @@ const Questions = () => {
         {/* questions 26 */}
 
         <div>
-          <h6 className="form-label my-3">26. Do you have any history of drug-related issues/concerns?</h6>
+          <h6 className="form-label my-3">26. Do you have any history of mental health symptoms or diagnoses (i.e., anxiety, depression, PTSD, ADHD)?</h6>
           <select {...register("Health_symptoms", { required: true })} className="form-select" aria-label="Default select example">
             <option defaultValue>Select Option</option>
             <option value="yes">Yes</option>
@@ -982,7 +987,9 @@ const Questions = () => {
               <h6 className="form-label my-3">I. Dates of attendance</h6>
               <input {...register("Dates_of_attendance", { required: true })} type="date" className="form-control" placeholder="Dates of attendance" />
               <h6 className="form-label my-3">II. Number of sessions </h6>
-              <input {...register("Number_of_sessions", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Number_of_sessions", { required: true })} type="text" className="form-control mt-2" placeholder="Approximate number of sessions attended" />
+              <h6 className="form-label my-3">III. Range of this service </h6>
+              <input {...register("Range_of_this_service", { required: true })} type="text" className="form-control mt-2" placeholder="Range of this service" />
             </div>
           )}
         </div>
@@ -997,12 +1004,21 @@ const Questions = () => {
             <option value="no">No</option>
           </select>
 
-          {Psychiatric_purposes === "yes" && (
+          <div class="col-12 mt-2">
+            <div class="form-check">
+              <input {...register("Additional_Option_psychiatric_purposes", { required: false })} class="form-check-input" type="checkbox" value="" />
+              <label class="form-check-label" for="invalidCheck">
+            Additional Option
+              </label>     
+            </div>
+        </div>
+
+          {Additional_Option_psychiatric_purposes && (
             <div>
               <h6 className="form-label my-3">I. Type of medication</h6>
               <input {...register("Type_of_medication", { required: true })} type="text" className="form-control" placeholder="Type of medication" />
               <h6 className="form-label my-3">II. Reason for prescription </h6>
-              <input {...register("Reason_for_prescription", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Reason_for_prescription", { required: true })} type="text" className="form-control mt-2" placeholder="e.g., depression, anxiety, etc" />
               <h6 className="form-label my-3">III. Dosage </h6>
               <input {...register("Dosage", { required: true })} type="text" className="form-control mt-2" placeholder="Reason for prescription" />
               <h6 className="form-label my-3">IV. When did you take the medication? </h6>
@@ -1131,9 +1147,9 @@ const Questions = () => {
           {Credit_related_difficulties === "yes" && (
             <div>
               <h6 className="form-label my-3">I. Explain- short answer</h6>
-              <input {...register("Credit_related_difficulties_Explain", { required: true })} type="text" className="form-control" placeholder="Explain- short answer" />
+              <input {...register("Credit_related_difficulties_Explain", { required: true })} type="text" className="form-control" placeholder="" />
               <h6 className="form-label my-3">II. Timeline </h6>
-              <input {...register("Credit_related_difficulties_timeline", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Credit_related_difficulties_timeline", { required: true })} type="text" className="form-control mt-2" placeholder="" />
             </div>
           )}
         </div>
@@ -1150,9 +1166,9 @@ const Questions = () => {
           {Traffic_violation === "yes" && (
             <div>
               <h6 className="form-label my-3">I. Explain - short answer</h6>
-              <input {...register("Traffic_violation_Explain", { required: true })} type="text" className="form-control" placeholder="Explain- short answer" />
+              <input {...register("Traffic_violation_Explain", { required: true })} type="text" className="form-control" placeholder="" />
               <h6 className="form-label my-3">II. Date </h6>
-              <input {...register("Traffic_violation_date", { required: true })} type="date" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Traffic_violation_date", { required: true })} type="text" className="form-control mt-2" placeholder="" />
               <h6 className="form-label my-3">II. +Add </h6>
               <input {...register("Traffic_violation_Add", { required: true })} type="text" className="form-control mt-2" placeholder="Add" />
             </div>
