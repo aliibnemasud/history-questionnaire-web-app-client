@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const AllSubmittedAnswers = () => {
   const [questions, setQuestions] = useState([]);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
   const token = localStorage.getItem('accessToken')
 
   useEffect(() => {

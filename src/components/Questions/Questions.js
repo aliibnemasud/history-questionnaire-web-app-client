@@ -401,7 +401,7 @@ const Questions = () => {
   for (let i = 1; i <= siblingState; i++) {
     siblingsArray.push(
       <select className="form-select" {...register("Siblings", { required: true })} aria-label="Default select example">
-        <option defaultValue>Select position</option>
+        <option defaultValue>Select Option</option>
         {siblings.map((position, index) => (
           <option value={position} key={index}>
             {position}
@@ -485,8 +485,8 @@ const Questions = () => {
           <h6 className="form-label my-3">6. Where did you grow-up?</h6>
           <div className="d-flex justify-content-around gap-3">
             <input {...register("City", { required: true })} type="text" className="form-control" placeholder="City" />
-            <input {...register("State", { required: true })} type="text" className="form-control" placeholder="State" />
-            <input {...register("Ages", { required: true })} type="text" className="form-control" placeholder="Ages/Timeline" />
+            <input {...register("State", { required: true })} type="text" className="form-control" placeholder="State or Country" />
+            <input {...register("Ages", { required: true })} type="text" className="form-control" placeholder="From (e.g., birth)" />
             <input {...register("Other_Address")} type="text" className="form-control" placeholder="+add" />
           </div>
         </div>
