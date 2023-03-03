@@ -8,6 +8,8 @@ import Questions from './components/Questions/Questions';
 import Error from './components/Shared/Error';
 import { ToastContainer} from 'react-toastify';
 import Answers from './components/Answers/Answers';
+import Thanks from './components/Shared/Thanks';
+import SiblingsForm from './components/Questions/SiblingsForm';
 
 function App() {
   return (
@@ -17,6 +19,10 @@ function App() {
         <Route path='/signup' element={<SignUp/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/questions' element={<Questions/>}></Route>
+        <Route path='/thanks' element={<Thanks/>}></Route>
+        <Route path='/siblings' element={<SiblingsForm/>}></Route>
+        
+
         <Route path='/seeAnswer/:questionId' element={<SeeAnswer/>}></Route>
 
         <Route path='/answers/:questionId' element={<Answers/>}></Route>

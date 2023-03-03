@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { applyingPosition, militaryBranch, siblings } from "./data";
@@ -22,6 +23,19 @@ const Questions = () => {
   const token = localStorage.getItem("accessToken");
 
   const onSubmit = (data) => {
+    const siblingsArray = {};
+
+    for (const sib in data) {
+      if (sib.startsWith("Siblings")) {
+        siblingsArray[sib] = data[sib];
+      }
+      if (sib.startsWith("YoungerOrOlder")) {
+        siblingsArray[sib] = data[sib];
+      }
+    }
+
+    console.log(siblingsArray)   
+
     let answer = [
       {
         questionNo: 1,
@@ -61,7 +75,7 @@ const Questions = () => {
       {
         questionNo: 8,
         question: "How many siblings do you have?",
-        answer: [{ Siblings: data.Siblings, Biological_brother: data.Biological_brother }],
+        answer: [siblingsArray],
       },
       {
         questionNo: 9,
@@ -153,7 +167,7 @@ const Questions = () => {
         questionNo: 19,
         question: "What is your current living situation?",
         answer: [{ living_City_State: data.living_City_State, Who_do_you_live_with: data.Who_do_you_live_with }],
-      },      
+      },
       {
         questionNo: 20,
         question: "What is your current relationship status?",
@@ -203,7 +217,7 @@ const Questions = () => {
       {
         questionNo: 27,
         question: "Have you ever attended counseling or psychotherapy services?",
-        answer: [{ Psychotherapy_services: data.Psychotherapy_services, Dates_of_attendance: data.Dates_of_attendance, Number_of_sessions:data.Number_of_sessions, Range_of_this_service: data.Range_of_this_service }],
+        answer: [{ Psychotherapy_services: data.Psychotherapy_services, Dates_of_attendance: data.Dates_of_attendance, Number_of_sessions: data.Number_of_sessions, Range_of_this_service: data.Range_of_this_service }],
       },
       {
         questionNo: 28,
@@ -345,6 +359,7 @@ const Questions = () => {
         answer: [{ long_term_goals: data.long_term_goals }],
       },
     ];
+
     axios
       .post(
         "https://questionary-website.onrender.com/questions",
@@ -390,27 +405,32 @@ const Questions = () => {
   const Traffic_violation = watch("Traffic_violation");
   const Charged_criminal_offense = watch("Charged_criminal_offense");
   const Siblings = watch("Siblings");
-  const Additional_Option_psychiatric_purposes = watch("Additional_Option_psychiatric_purposes")
+  const Additional_Option_psychiatric_purposes = watch("Additional_Option_psychiatric_purposes");
 
-  // console.log(Siblings);
-
-  /// console.log(Additional_Option_psychiatric_purposes);
+  const Number_Of_Siblings = watch('Number_Of_Siblings');
 
   const addSiblings = () => {
     setSiblingState(siblingState + 1);
   };
 
   let siblingsArray = [];
-  for (let i = 1; i <= siblingState; i++) {
+  for (let i = 1; i <= Number_Of_Siblings; i++) {
     siblingsArray.push(
-      <select className="form-select my-2" {...register(`Siblings${i}`, { required: true })} aria-label="Default select example">
-        <option defaultValue>Select Option</option>
+      <div className="d-flex justify-content-between gap-2">
+        <select className="form-select my-2" {...register(`Siblings${i}`, { required: true })} aria-label="Default select example">
+        <option >Select Option</option>
         {siblings.map((position, index) => (
           <option value={position} key={index}>
             {position}
           </option>
         ))}
       </select>
+        <select className="form-select my-2" {...register(`YoungerOrOlder${i}`, { required: true })} aria-label="Default select example">
+        <option >Select Option</option>        
+          <option value="older" >Older</option>
+          <option value="younger" >Younger</option>        
+      </select>
+      </div>
     );
   }
 
@@ -533,13 +553,25 @@ const Questions = () => {
         {/* question 8 */}
         <div>
           <h6 className="form-label my-3">8. How many siblings do you have?</h6>
-          {siblingsArray}
 
-          {Siblings === "biological brother" && <input {...register("Biological_brother", { required: true })} type="number" className="form-control" placeholder="How many?" />}
+          <select {...register("Number_Of_Siblings", { required: true })} className="form-select" aria-label="Default select example">
+            <option >Select Option</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+          </select>
+          {siblingsArray}       
 
-          <button type="button" onClick={addSiblings}  className="btn btn-success">
+          {/* <button type="button" onClick={addSiblings} className="btn btn-success">
             +Add
-          </button>
+          </button> */}
         </div>
 
         {/* question 9 */}
@@ -1004,14 +1036,14 @@ const Questions = () => {
             <option value="no">No</option>
           </select>
 
-          <div class="col-12 mt-2">
-            <div class="form-check">
-              <input {...register("Additional_Option_psychiatric_purposes", { required: false })} class="form-check-input" type="checkbox" value="" />
-              <label class="form-check-label" for="invalidCheck">
-            Additional Option
-              </label>     
+          <div className="col-12 mt-2">
+            <div className="form-check">
+              <input {...register("Additional_Option_psychiatric_purposes", { required: false })} className="form-check-input" type="checkbox" value="" />
+              <label className="form-check-label" for="invalidCheck">
+                Additional Option
+              </label>
             </div>
-        </div>
+          </div>
 
           {Additional_Option_psychiatric_purposes && (
             <div>
