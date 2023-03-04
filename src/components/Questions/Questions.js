@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 const Questions = () => {
   const [position, setPosition] = useState("");
   const [biologicalParentsStatus, setBiologicalParentsStatus] = useState("");
-  const [user, loading] = useAuthState(auth);
-  const [siblingState, setSiblingState] = useState(1);
+  const [user, loading] = useAuthState(auth);  
   const navigate = useNavigate();
+  const [numberOfUniversity, setNumberOfUniversity] = useState(1);
   const {
     register,
     watch,
@@ -23,18 +23,37 @@ const Questions = () => {
   const token = localStorage.getItem("accessToken");
 
   const onSubmit = (data) => {
-    const siblingsArray = {};
 
+    // Making Siblings Multiple Values 
+    const siblingsArray = {};
     for (const sib in data) {
-      if (sib.startsWith("Siblings")) {
+      if (sib.startsWith("Siblings")) {        
         siblingsArray[sib] = data[sib];
       }
       if (sib.startsWith("YoungerOrOlder")) {
         siblingsArray[sib] = data[sib];
       }
     }
-
-    console.log(siblingsArray)   
+    // Making university Multiple Values 
+    const allUniversity = {};
+    for (const uniValue in data) {
+      if (uniValue.startsWith("Attend_University_Name_")) {        
+        allUniversity[uniValue] = data[uniValue];
+      }
+      if (uniValue.startsWith("Attend_University_Location_City_")) {
+        allUniversity[uniValue] = data[uniValue];
+      }
+      if (uniValue.startsWith("Attend_University_Location_State_")) {        
+        allUniversity[uniValue] = data[uniValue];
+      }
+      if (uniValue.startsWith("Year_of_Graduation_")) {
+        allUniversity[uniValue] = data[uniValue];
+      }
+      if (uniValue.startsWith("Associate_")) {
+        allUniversity[uniValue] = data[uniValue];
+      }
+    }    
+    
 
     let answer = [
       {
@@ -100,17 +119,7 @@ const Questions = () => {
       {
         questionNo: 13,
         question: "Did you attend a college/university?",
-        answer: [
-          {
-            Attend_University: data.Attend_University,
-            Attend_University_Name: data.Attend_University_Name,
-            Attend_University_Location_City: data.Attend_University_Location_City,
-            Attend_University_Location_State: data.Attend_University_Location_State,
-            Year_of_Graduation: data.Year_of_Graduation,
-            Associate: data.Associate,
-            Specify: data.Specify,
-          },
-        ],
+        answer: [allUniversity],
       },
       {
         questionNo: 14,
@@ -407,29 +416,51 @@ const Questions = () => {
   const Siblings = watch("Siblings");
   const Additional_Option_psychiatric_purposes = watch("Additional_Option_psychiatric_purposes");
 
-  const Number_Of_Siblings = watch('Number_Of_Siblings');
-
-  const addSiblings = () => {
-    setSiblingState(siblingState + 1);
-  };
+  const Number_Of_Siblings = watch("Number_Of_Siblings");
+  
 
   let siblingsArray = [];
   for (let i = 1; i <= Number_Of_Siblings; i++) {
     siblingsArray.push(
       <div className="d-flex justify-content-between gap-2">
         <select className="form-select my-2" {...register(`Siblings${i}`, { required: true })} aria-label="Default select example">
-        <option >Select Option</option>
-        {siblings.map((position, index) => (
-          <option value={position} key={index}>
-            {position}
-          </option>
-        ))}
-      </select>
+          <option>Select Option</option>
+          {siblings.map((position, index) => (
+            <option value={position} key={index}>
+              {position}
+            </option>
+          ))}
+        </select>
         <select className="form-select my-2" {...register(`YoungerOrOlder${i}`, { required: true })} aria-label="Default select example">
-        <option >Select Option</option>        
-          <option value="older" >Older</option>
-          <option value="younger" >Younger</option>        
-      </select>
+          <option>Select Option</option>
+          <option value="older">Older</option>
+          <option value="younger">Younger</option>
+        </select>
+      </div>
+    );
+  }
+
+  let university = [];
+  for (let i = 1; i <= numberOfUniversity; i++) {
+    university.push(
+      <div className="d-flex justify-content-around gap-3 mt-3">
+        <input {...register(`Attend_University_Name_${i}`, { required: true })} type="text" className="form-control" placeholder="Institution name" />
+        <input {...register(`Attend_University_Location_City_${i}`, { required: true })} type="text" className="form-control" placeholder="Location of institution City" />
+        <input {...register(`Attend_University_Location_State_${i}`, { required: true })} type="text" className="form-control" placeholder="State or Country" />
+        <input {...register(`Year_of_Graduation_${i}`, { required: true })} type="text" className="form-control" placeholder="Year of graduation" />
+        <select className="form-select" {...register(`Associate_${i}`, { required: true })} aria-label="Default select example">
+          <option>Degree</option>
+          <option value="No degree">No degree</option>
+          <option value="Associate’s">Associate’s</option>
+          <option value="Bachelor’s">Bachelor’s</option>
+          <option value="Master’s">Master’s</option>
+        </select>
+
+        {Associate === "Associate’s" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor_" />}
+        {Associate === "Bachelor’s" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor" />}
+
+        {Associate === "Doctorate" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
+        {Associate === "Master’s" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
       </div>
     );
   }
@@ -555,7 +586,7 @@ const Questions = () => {
           <h6 className="form-label my-3">8. How many siblings do you have?</h6>
 
           <select {...register("Number_Of_Siblings", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
@@ -567,7 +598,7 @@ const Questions = () => {
             <option value={9}>9</option>
             <option value={10}>10</option>
           </select>
-          {siblingsArray}       
+          {siblingsArray}
 
           {/* <button type="button" onClick={addSiblings} className="btn btn-success">
             +Add
@@ -602,7 +633,6 @@ const Questions = () => {
         </div>
 
         {/* question 12 */}
-
         <div>
           <h6 className="form-label my-3">12. What school or institution issued your high school diploma/GED?</h6>
           <div className="d-flex justify-content-around gap-3">
@@ -619,7 +649,7 @@ const Questions = () => {
           </div>
         </div>
 
-        {/* question 13 */}
+        {/* question 13 start */}
         <div className="w-100">
           <h6 className="form-label my-3">13. Did you attend a college/university?</h6>
           <select {...register("Attend_University", { required: true })} className="form-select" aria-label="Default select example">
@@ -629,25 +659,17 @@ const Questions = () => {
           </select>
 
           {attendUniversity === "yes" && (
-            <div className="d-flex justify-content-around gap-3 mt-3">
-              <input {...register("Attend_University_Name", { required: true })} type="text" className="form-control" placeholder="Institution name" />
-              <input {...register("Attend_University_Location_City", { required: true })} type="text" className="form-control" placeholder="Location of institution City" />
-              <input {...register("Attend_University_Location_State", { required: true })} type="text" className="form-control" placeholder="State or Country" />
-              <input {...register("Year_of_Graduation", { required: true })} type="text" className="form-control" placeholder="Year of graduation" />
-              <select className="form-select" {...register("Associate", { required: true })} aria-label="Default select example">
-                <option defaultValue>Degree</option>
-                <option value="No degree">No degree</option>
-                <option value="Associate’s">Associate’s</option>
-                <option value="Bachelor’s">Bachelor’s</option>
-                <option value="Master’s">Master’s</option>
-              </select>
+            <div>
+              {/* coming from the loop */}
+              {university}              
+              <button type="button" onClick={() => setNumberOfUniversity(numberOfUniversity + 1)} className="btn btn-success  mt-2">               
+                + Add
+              </button>
+              <button type="button" onClick={() => setNumberOfUniversity(numberOfUniversity - 1)} className="btn btn-danger mt-2">               
+               Remove
+              </button>
             </div>
           )}
-          {Associate === "Associate’s" && <input {...register("Specify", { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor" />}
-          {Associate === "Bachelor’s" && <input {...register("Specify", { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor" />}
-
-          {Associate === "Doctorate" && <input {...register("Specify", { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
-          {Associate === "Master’s" && <input {...register("Specify", { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
         </div>
 
         {/* question 14 */}
@@ -874,6 +896,7 @@ const Questions = () => {
               <input {...register("How_long_have_you_been_married", { required: false })} type="text" className="form-control" placeholder="Answer" />
               <h6 className="form-label my-3">II. How long have you been together?</h6>
               <input {...register("How_long_have_you_been_together", { required: false })} type="text" className="form-control" placeholder="Answer" />
+              
               <h6 className="form-label my-3">III. Do you have any previous marriages?</h6>
               <input {...register("Do_you_have_any_previous_marriages", { required: false })} type="text" className="form-control" placeholder="Timeline" />
             </div>
