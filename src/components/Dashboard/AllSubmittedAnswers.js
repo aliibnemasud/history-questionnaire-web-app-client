@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Shared/Loading";
 
 
 const AllSubmittedAnswers = () => {
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken')
 
@@ -17,8 +19,13 @@ const AllSubmittedAnswers = () => {
     })
     .then((res) => {
       setQuestions(res.data.data);
+      setLoading(false)
     });
   }, []);
+
+  if(loading){
+    return <Loading/>
+  }
 
   return (
     <div>
@@ -34,7 +41,7 @@ const AllSubmittedAnswers = () => {
           </tr>
         </thead>
         <tbody>
-          {questions.map((question, index) => {
+          {questions?.map((question, index) => {
             let name = question.questionAnswer[0].answer[0].First_Name + " " + question?.questionAnswer[0]?.answer[0]?.Last_Name;
             return (
               <tr>

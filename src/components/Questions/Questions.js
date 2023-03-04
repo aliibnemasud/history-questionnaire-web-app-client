@@ -11,8 +11,11 @@ import { useNavigate } from "react-router-dom";
 const Questions = () => {
   const [position, setPosition] = useState("");
   const [biologicalParentsStatus, setBiologicalParentsStatus] = useState("");
-  const [user, loading] = useAuthState(auth);  
+  // marriage
+  const [preMarriageTimeline, setPreMarriageTimeline] = useState(1);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
+
   const [numberOfUniversity, setNumberOfUniversity] = useState(1);
   const {
     register,
@@ -23,27 +26,26 @@ const Questions = () => {
   const token = localStorage.getItem("accessToken");
 
   const onSubmit = (data) => {
-
-    // Making Siblings Multiple Values 
+    // Making Siblings Multiple Values
     const siblingsArray = {};
     for (const sib in data) {
-      if (sib.startsWith("Siblings")) {        
+      if (sib.startsWith("Siblings")) {
         siblingsArray[sib] = data[sib];
       }
       if (sib.startsWith("YoungerOrOlder")) {
         siblingsArray[sib] = data[sib];
       }
     }
-    // Making university Multiple Values 
+    // Making university Multiple Values
     const allUniversity = {};
     for (const uniValue in data) {
-      if (uniValue.startsWith("Attend_University_Name_")) {        
+      if (uniValue.startsWith("Attend_University_Name_")) {
         allUniversity[uniValue] = data[uniValue];
       }
       if (uniValue.startsWith("Attend_University_Location_City_")) {
         allUniversity[uniValue] = data[uniValue];
       }
-      if (uniValue.startsWith("Attend_University_Location_State_")) {        
+      if (uniValue.startsWith("Attend_University_Location_State_")) {
         allUniversity[uniValue] = data[uniValue];
       }
       if (uniValue.startsWith("Year_of_Graduation_")) {
@@ -52,8 +54,7 @@ const Questions = () => {
       if (uniValue.startsWith("Associate_")) {
         allUniversity[uniValue] = data[uniValue];
       }
-    }    
-    
+    }
 
     let answer = [
       {
@@ -415,9 +416,13 @@ const Questions = () => {
   const Charged_criminal_offense = watch("Charged_criminal_offense");
   const Siblings = watch("Siblings");
   const Additional_Option_psychiatric_purposes = watch("Additional_Option_psychiatric_purposes");
-
+  const Do_you_have_any_previous_marriages = watch("Do_you_have_any_previous_marriages");
   const Number_Of_Siblings = watch("Number_Of_Siblings");
-  
+
+  let previousMarriagesTimeline = [];
+  for (let i = 1; i <= preMarriageTimeline; i++) {
+    previousMarriagesTimeline.push(<input {...register(`Do_you_have_any_previous_marriages_Timeline${i}`, { required: false })} type="text" className="form-control" placeholder="Timeline" />);
+  }
 
   let siblingsArray = [];
   for (let i = 1; i <= Number_Of_Siblings; i++) {
@@ -661,12 +666,12 @@ const Questions = () => {
           {attendUniversity === "yes" && (
             <div>
               {/* coming from the loop */}
-              {university}              
-              <button type="button" onClick={() => setNumberOfUniversity(numberOfUniversity + 1)} className="btn btn-success  mt-2">               
+              {university}
+              <button type="button" onClick={() => setNumberOfUniversity(numberOfUniversity + 1)} className="btn btn-success  mt-2">
                 + Add
               </button>
-              <button type="button" onClick={() => setNumberOfUniversity(numberOfUniversity - 1)} className="btn btn-danger mt-2">               
-               Remove
+              <button type="button" onClick={() => setNumberOfUniversity(numberOfUniversity - 1)} className="btn btn-danger mt-2">
+                Remove
               </button>
             </div>
           )}
@@ -896,9 +901,46 @@ const Questions = () => {
               <input {...register("How_long_have_you_been_married", { required: false })} type="text" className="form-control" placeholder="Answer" />
               <h6 className="form-label my-3">II. How long have you been together?</h6>
               <input {...register("How_long_have_you_been_together", { required: false })} type="text" className="form-control" placeholder="Answer" />
-              
+
               <h6 className="form-label my-3">III. Do you have any previous marriages?</h6>
-              <input {...register("Do_you_have_any_previous_marriages", { required: false })} type="text" className="form-control" placeholder="Timeline" />
+
+              {/* <div className="form-check">
+                <input {...register("Do_you_have_any_previous_marriages", { required: false })} className="form-check-input" type="checkbox" value="" />
+                <label className="form-check-label" for="invalidCheck">
+                  Yes
+                </label>
+              </div>
+              <div className="form-check">
+                <input {...register("Do_you_have_any_previous_marriages_no", { required: false })} className="form-check-input" type="checkbox" value="" />
+                <label className="form-check-label" for="invalidCheck">
+                  No
+                </label>
+              </div> */}
+
+              <div>
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" {...register("Do_you_have_any_previous_marriages", { required: true })} type="radio" htmlFor="inlineRadio1" value="yes" />
+                  <label className="form-check-label" htmlFor="inlineRadio1">
+                    Yes
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input className="form-check-input" {...register("Do_you_have_any_previous_marriages", { required: true })} type="radio" value="no" />
+                  <label className="form-check-label">No</label>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {Do_you_have_any_previous_marriages === "yes" && (
+            <div>
+              {previousMarriagesTimeline}
+              <button type="button" className="btn btn-success mt-2" onClick={() => setPreMarriageTimeline(preMarriageTimeline + 1)}>
+                +Add
+              </button>
+              <button type="button" className="btn btn-danger mt-2" onClick={() => setPreMarriageTimeline(preMarriageTimeline - 1)}>
+                Remove
+              </button>
             </div>
           )}
 
