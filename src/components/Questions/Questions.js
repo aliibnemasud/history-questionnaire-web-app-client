@@ -11,9 +11,10 @@ import { useNavigate } from "react-router-dom";
 const Questions = () => {
   const [position, setPosition] = useState("");
   const [biologicalParentsStatus, setBiologicalParentsStatus] = useState("");
+  const [loading, setLoading] = useState(false);
   // marriage
   const [preMarriageTimeline, setPreMarriageTimeline] = useState(1);
-  const [user, loading] = useAuthState(auth);
+  const [atuhUser, authLoading] = useAuthState(auth);
   const navigate = useNavigate();
 
   const [numberOfUniversity, setNumberOfUniversity] = useState(1);
@@ -27,6 +28,7 @@ const Questions = () => {
 
   const onSubmit = (data) => {
     // Making Siblings Multiple Values
+    setLoading(true)
     const siblingsArray = {};
     for (const sib in data) {
       if (sib.startsWith("Siblings")) {
@@ -385,7 +387,7 @@ const Questions = () => {
 
     axios.post(
         "https://questionary-website.onrender.com/questions",
-        { questionAnswer: answer, email: user?.email },
+        { questionAnswer: answer, email: atuhUser?.email },
         {
           headers: {
             authorization: `Barer ${token}`,
@@ -394,15 +396,16 @@ const Questions = () => {
       )
       .then((res) => {
         console.log(res.data);
+        setLoading(false)
         alert("Data Posted Successfully!");
       });
   };
 
-  if (loading) {
+  if (authLoading || loading) {
     return <Loading />;
   }
 
-  if (!user?.uid) {
+  if (!atuhUser?.uid) {
     return navigate("/");
   }
 
