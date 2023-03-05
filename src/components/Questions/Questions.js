@@ -12,12 +12,14 @@ const Questions = () => {
   const [position, setPosition] = useState("");
   const [biologicalParentsStatus, setBiologicalParentsStatus] = useState("");
   const [loading, setLoading] = useState(false);
-  // marriage
-  const [preMarriageTimeline, setPreMarriageTimeline] = useState(1);
+
   const [atuhUser, authLoading] = useAuthState(auth);
   const navigate = useNavigate();
-
+  // marriage
+  const [preMarriageTimeline, setPreMarriageTimeline] = useState(1);
   const [numberOfUniversity, setNumberOfUniversity] = useState(1);
+  const [numberOfChildren, setNumberOfChildren] = useState(1);
+
   const {
     register,
     watch,
@@ -28,7 +30,7 @@ const Questions = () => {
 
   const onSubmit = (data) => {
     // Making Siblings Multiple Values
-    setLoading(true)
+    setLoading(true);
     const siblingsArray = {};
     for (const sib in data) {
       if (sib.startsWith("Siblings")) {
@@ -42,11 +44,24 @@ const Questions = () => {
     // Multiple Marriage timeline
     const multipleMarriageTimeline = {};
     for (const timeline in data) {
-      if(timeline.startsWith('Previous_marriages_Timeline')){
-        multipleMarriageTimeline[timeline] = data[timeline]
+      if (timeline.startsWith("Previous_marriages_Timeline")) {
+        multipleMarriageTimeline[timeline] = data[timeline];
       }
     }
 
+    // Multiple children data
+    const multipleChildData = {};
+    for (const timeline in data) {
+      if (timeline.startsWith("Son_Or_Daughter_")) {
+        multipleChildData[timeline] = data[timeline];
+      }
+      if (timeline.startsWith("Children_Type_")) {
+        multipleChildData[timeline] = data[timeline];
+      }
+      if (timeline.startsWith("Children_Age_")) {
+        multipleChildData[timeline] = data[timeline];
+      }
+    }
 
     // Making university Multiple Values
     const allUniversity = {};
@@ -67,9 +82,6 @@ const Questions = () => {
         allUniversity[uniValue] = data[uniValue];
       }
     }
-
-
-
 
     let answer = [
       {
@@ -212,7 +224,7 @@ const Questions = () => {
       {
         questionNo: 21,
         question: "Do you have any children?",
-        answer: [{ Children: data.Children, Son_Or_Daughter: data.Son_Or_Daughter, Children_Type: data.Children_Type, Children_Age: data.Children_Age }],
+        answer: [{ Children: data.Children, ...multipleChildData }],
       },
       {
         questionNo: 22,
@@ -385,7 +397,8 @@ const Questions = () => {
       },
     ];
 
-    axios.post(
+    axios
+      .post(
         "https://questionary-website.onrender.com/questions",
         { questionAnswer: answer, email: atuhUser?.email },
         {
@@ -396,9 +409,9 @@ const Questions = () => {
       )
       .then((res) => {
         console.log(res.data);
-        setLoading(false)
+        setLoading(false);
         alert("Data Posted Successfully!");
-       navigate(`/thanks/${res?.data?.data?._id}`)
+        navigate(`/thanks/${res?.data?.data?._id}`);
       });
   };
 
@@ -440,6 +453,7 @@ const Questions = () => {
     previousMarriagesTimeline.push(<input {...register(`Previous_marriages_Timeline${i}`, { required: false })} type="text" className="form-control" placeholder="Timeline" />);
   }
 
+  /// Multiple siblings
   let siblingsArray = [];
   for (let i = 1; i <= Number_Of_Siblings; i++) {
     siblingsArray.push(
@@ -461,6 +475,7 @@ const Questions = () => {
     );
   }
 
+  // Multiple University
   let university = [];
   for (let i = 1; i <= numberOfUniversity; i++) {
     university.push(
@@ -482,6 +497,28 @@ const Questions = () => {
 
         {Associate === "Doctorate" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
         {Associate === "Master’s" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
+      </div>
+    );
+  }
+
+  // multiple children's
+  let multipleChildrenS = [];
+
+  for (let i = 1; i <= numberOfChildren; i++) {
+    multipleChildrenS.push(
+      <div>
+        <select {...register(`Son_Or_Daughter_${i}`, { required: true })} className="form-select mt-2" aria-label="Default select example">
+          <option defaultValue>Select Option</option>
+          <option value="son">Son</option>
+          <option value="daughter">Daughter</option>
+        </select>
+        <select {...register(`Children_Type_${i}`, { required: true })} className="form-select mt-2" aria-label="Default select example">
+          <option defaultValue>Select Option</option>
+          <option value="Biological">Biological</option>
+          <option value="Step">Step</option>
+          <option value="Adopted">Adopted</option>
+        </select>
+        <input {...register(`Children_Age_${i}`, { required: true })} type="number" className="form-control mt-2" placeholder="Age" />
       </div>
     );
   }
@@ -981,19 +1018,13 @@ const Questions = () => {
           </select>
           {Children === "yes" && (
             <div>
-              <select {...register("Son_Or_Daughter", { required: true })} className="form-select mt-2" aria-label="Default select example">
-                <option defaultValue>Select Option</option>
-                <option value="son">Son</option>
-                <option value="daughter">Daughter</option>
-              </select>
-              <select {...register("Children_Type", { required: true })} className="form-select mt-2" aria-label="Default select example">
-                <option defaultValue>Select Option</option>
-                <option value="Biological">Biological</option>
-                <option value="Step">Step</option>
-                <option value="Adopted">Adopted</option>
-              </select>
-
-              <input {...register("Children_Age", { required: true })} type="text" className="form-control mt-2" placeholder="Age" />
+              {multipleChildrenS}
+              <button type="button" className="btn btn-success mt-2" onClick={() => setNumberOfChildren(numberOfChildren + 1)}>
+                +Add
+              </button>
+              <button type="button" className="btn btn-danger mt-2" onClick={() => setNumberOfChildren(numberOfChildren - 1)}>
+                Remove
+              </button>
             </div>
           )}
         </div>
