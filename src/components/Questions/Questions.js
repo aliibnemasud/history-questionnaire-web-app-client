@@ -36,6 +36,16 @@ const Questions = () => {
         siblingsArray[sib] = data[sib];
       }
     }
+
+    // Multiple Marriage timeline
+    const multipleMarriageTimeline = {};
+    for (const timeline in data) {
+      if(timeline.startsWith('Previous_marriages_Timeline')){
+        multipleMarriageTimeline[timeline] = data[timeline]
+      }
+    }
+
+
     // Making university Multiple Values
     const allUniversity = {};
     for (const uniValue in data) {
@@ -55,6 +65,9 @@ const Questions = () => {
         allUniversity[uniValue] = data[uniValue];
       }
     }
+
+
+
 
     let answer = [
       {
@@ -185,7 +198,7 @@ const Questions = () => {
           {
             Relationship_Status: data.Relationship_Status,
             How_long_have_you_been_in_this_relationship: data.How_long_have_you_been_in_this_relationship,
-            Do_you_have_any_previous_marriages: data.Do_you_have_any_previous_marriages,
+            ...multipleMarriageTimeline,
             How_long_have_you_been_together: data.How_long_have_you_been_together,
             How_long_have_you_been_married: data.How_long_have_you_been_married,
             Timeline_of_the_marriage: data.Timeline_of_the_marriage,
@@ -370,8 +383,7 @@ const Questions = () => {
       },
     ];
 
-    axios
-      .post(
+    axios.post(
         "https://questionary-website.onrender.com/questions",
         { questionAnswer: answer, email: user?.email },
         {
@@ -421,7 +433,7 @@ const Questions = () => {
 
   let previousMarriagesTimeline = [];
   for (let i = 1; i <= preMarriageTimeline; i++) {
-    previousMarriagesTimeline.push(<input {...register(`Do_you_have_any_previous_marriages_Timeline${i}`, { required: false })} type="text" className="form-control" placeholder="Timeline" />);
+    previousMarriagesTimeline.push(<input {...register(`Previous_marriages_Timeline${i}`, { required: false })} type="text" className="form-control" placeholder="Timeline" />);
   }
 
   let siblingsArray = [];
