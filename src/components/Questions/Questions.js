@@ -398,6 +398,7 @@ const Questions = () => {
         console.log(res.data);
         setLoading(false)
         alert("Data Posted Successfully!");
+       navigate(`/thanks/${res?.data?.data?._id}`)
       });
   };
 

@@ -19,9 +19,9 @@ function App() {
         <Route path='/signup' element={<SignUp/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/questions' element={<Questions/>}></Route>
-        <Route path='/thanks' element={<Thanks/>}></Route>
         <Route path='/siblings' element={<SiblingsForm/>}></Route>
         
+        <Route path='/thanks/:submittedQuestionId' element={<Thanks/>}></Route>
 
         <Route path='/seeAnswer/:questionId' element={<SeeAnswer/>}></Route>
 

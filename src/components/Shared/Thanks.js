@@ -1,9 +1,12 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const Thanks = () => {
+    const {submittedQuestionId} = useParams();
     return (
         <div className='container text-center vh-100 d-flex align-items-center justify-content-center'>
             <div className='text-center'>
+                <h5>{submittedQuestionId}</h5>
             <h1 className='my-3 fw-bold'>Congratulations!</h1>
             <p>You have completed the History Form. Please move on to the next step in the testing process. Refer to your initial email for step-by-step instructions</p>
 
