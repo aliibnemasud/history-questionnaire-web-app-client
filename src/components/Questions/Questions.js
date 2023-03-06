@@ -28,6 +28,8 @@ const Questions = () => {
   } = useForm();
   const token = localStorage.getItem("accessToken");
 
+
+
   const onSubmit = (data) => {
     // Making Siblings Multiple Values
     setLoading(true);
@@ -419,6 +421,10 @@ const Questions = () => {
     return <Loading />;
   }
 
+  if(errors){
+    console.log(errors)
+  }
+
   if (!atuhUser?.uid) {
     return navigate("/");
   }
@@ -450,7 +456,7 @@ const Questions = () => {
 
   let previousMarriagesTimeline = [];
   for (let i = 1; i <= preMarriageTimeline; i++) {
-    previousMarriagesTimeline.push(<input {...register(`Previous_marriages_Timeline${i}`, { required: false })} type="text" className="form-control" placeholder="Timeline" />);
+    previousMarriagesTimeline.push(<input {...register(`Previous_marriages_Timeline${i}`)} type="text" className="form-control" placeholder="Timeline" />);
   }
 
   /// Multiple siblings
@@ -458,7 +464,7 @@ const Questions = () => {
   for (let i = 1; i <= Number_Of_Siblings; i++) {
     siblingsArray.push(
       <div className="d-flex justify-content-between gap-2">
-        <select className="form-select my-2" {...register(`Siblings${i}`, { required: true })} aria-label="Default select example">
+        <select className="form-select my-2" {...register(`Siblings${i}`)} aria-label="Default select example">
           <option>Select Option</option>
           {siblings.map((position, index) => (
             <option value={position} key={index}>
@@ -466,7 +472,7 @@ const Questions = () => {
             </option>
           ))}
         </select>
-        <select className="form-select my-2" {...register(`YoungerOrOlder${i}`, { required: true })} aria-label="Default select example">
+        <select className="form-select my-2" {...register(`YoungerOrOlder${i}`)} aria-label="Default select example">
           <option>Select Option</option>
           <option value="older">Older</option>
           <option value="younger">Younger</option>
@@ -480,11 +486,11 @@ const Questions = () => {
   for (let i = 1; i <= numberOfUniversity; i++) {
     university.push(
       <div className="d-flex justify-content-around gap-3 mt-3">
-        <input {...register(`Attend_University_Name_${i}`, { required: true })} type="text" className="form-control" placeholder="Institution name" />
-        <input {...register(`Attend_University_Location_City_${i}`, { required: true })} type="text" className="form-control" placeholder="Location of institution City" />
-        <input {...register(`Attend_University_Location_State_${i}`, { required: true })} type="text" className="form-control" placeholder="State or Country" />
-        <input {...register(`Year_of_Graduation_${i}`, { required: true })} type="text" className="form-control" placeholder="Year of graduation" />
-        <select className="form-select" {...register(`Associate_${i}`, { required: true })} aria-label="Default select example">
+        <input {...register(`Attend_University_Name_${i}`)} type="text" className="form-control" placeholder="Institution name" />
+        <input {...register(`Attend_University_Location_City_${i}`)} type="text" className="form-control" placeholder="Location of institution City" />
+        <input {...register(`Attend_University_Location_State_${i}`)} type="text" className="form-control" placeholder="State or Country" />
+        <input {...register(`Year_of_Graduation_${i}`)} type="text" className="form-control" placeholder="Year of graduation" />
+        <select className="form-select" {...register(`Associate_${i}`)} aria-label="Default select example">
           <option>Degree</option>
           <option value="No degree">No degree</option>
           <option value="Associate’s">Associate’s</option>
@@ -492,11 +498,11 @@ const Questions = () => {
           <option value="Master’s">Master’s</option>
         </select>
 
-        {Associate === "Associate’s" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor_" />}
-        {Associate === "Bachelor’s" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor" />}
+        {Associate === "Associate’s" && <input {...register(`Specify_${i}`)} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor_" />}
+        {Associate === "Bachelor’s" && <input {...register(`Specify_${i}`)} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor" />}
 
-        {Associate === "Doctorate" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
-        {Associate === "Master’s" && <input {...register(`Specify_${i}`, { required: false })} type="text" className="form-control mt-2" placeholder="Specify Major" />}
+        {Associate === "Doctorate" && <input {...register(`Specify_${i}`)} type="text" className="form-control mt-2" placeholder="Specify Major" />}
+        {Associate === "Master’s" && <input {...register(`Specify_${i}`)} type="text" className="form-control mt-2" placeholder="Specify Major" />}
       </div>
     );
   }
@@ -507,18 +513,18 @@ const Questions = () => {
   for (let i = 1; i <= numberOfChildren; i++) {
     multipleChildrenS.push(
       <div>
-        <select {...register(`Son_Or_Daughter_${i}`, { required: true })} className="form-select mt-2" aria-label="Default select example">
+        <select {...register(`Son_Or_Daughter_${i}`)} className="form-select mt-2" aria-label="Default select example">
           <option defaultValue>Select Option</option>
           <option value="son">Son</option>
           <option value="daughter">Daughter</option>
         </select>
-        <select {...register(`Children_Type_${i}`, { required: true })} className="form-select mt-2" aria-label="Default select example">
+        <select {...register(`Children_Type_${i}`)} className="form-select mt-2" aria-label="Default select example">
           <option defaultValue>Select Option</option>
           <option value="Biological">Biological</option>
           <option value="Step">Step</option>
           <option value="Adopted">Adopted</option>
         </select>
-        <input {...register(`Children_Age_${i}`, { required: true })} type="number" className="form-control mt-2" placeholder="Age" />
+        <input {...register(`Children_Age_${i}`)} type="number" className="form-control mt-2" placeholder="Age" />
       </div>
     );
   }
@@ -1012,7 +1018,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">21. Do you have any children?</h6>
           <select {...register("Children", { required: true })} className="form-select" aria-label="Default select example">
-            <option defaultValue>Select Option</option>
+            <option >Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1057,29 +1063,36 @@ const Questions = () => {
 
         {/* questions 24 */}
         <div>
-          <h6 className="form-label my-3">24. Have you ever used drugs/illicit substances?</h6>
-          <select {...register("Drugs_illicit", { required: true })} className="form-select" aria-label="Default select example">
-            <option defaultValue>Select Option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+          <h6 className="form-label my-3">24. Have you ever used drugs/illicit substances?</h6>     
+
+          <h6 className="form-label my-3">Frequency (daily, monthly, yearly)</h6>
+          <select {...register("Drugs_Frequency", { required: true })} className="form-select" aria-label="Default select example">
+            <option>Select Option</option>
+            <option value="daily">Daily</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+            <option value="I don’t use it anymore">I don’t use it anymore</option>
           </select>
 
-          {Drugs_illicit === "yes" && (
+          <div className="col-12 mt-2">
+            <div className="form-check">
+              <input {...register("Drugs_illicit", { required: false })} className="form-check-input" type="checkbox" value="" />
+              <label className="form-check-label" htmlFor="invalidCheck">
+                Additional Option
+              </label>
+            </div>
+          </div>
+
+          {Drugs_illicit && (
             <div>
               <h6 className="form-label my-3">I. Type of drug.</h6>
-              <input {...register("Type_of_drug", { required: true })} type="text" className="form-control" placeholder="Times (1,2,3,4,5,,,,10) per (Week, Month, Year)" />
-              <h6 className="form-label my-3">II. Frequency (daily, monthly, yearly)</h6>
-              <select {...register("Drugs_Frequency", { required: true })} className="form-select" aria-label="Default select example">
-                <option defaultValue>Select Option</option>
-                <option value="daily">Daily</option>
-                <option value="monthly">Monthly</option>
-                <option value="yearly">Yearly</option>
-                <option value="I don’t use it anymore">I don’t use it anymore</option>
-              </select>
-              <h6 className="form-label my-3">III. Timeline of use</h6>
-              <input {...register("Timeline_of_use", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+
+              <input {...register("Type_of_drug", { required: false })} type="text" className="form-control" placeholder="Times (1,2,3,4,5,,,,10) per (Week, Month, Year)" />
+              <h6 className="form-label my-3">II. Timeline of use</h6>
+              <input {...register("Timeline_of_use", { required: false })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+
               <h6 className="form-label my-3">III. +Add</h6>
-              <input {...register("Alcohol_Add", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              <input {...register("Alcohol_Add", { required: false })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
             </div>
           )}
         </div>
@@ -1151,7 +1164,7 @@ const Questions = () => {
           <div className="col-12 mt-2">
             <div className="form-check">
               <input {...register("Additional_Option_psychiatric_purposes", { required: false })} className="form-check-input" type="checkbox" value="" />
-              <label className="form-check-label" for="invalidCheck">
+              <label className="form-check-label" htmlFor="invalidCheck">
                 Additional Option
               </label>
             </div>
