@@ -6,6 +6,7 @@ import Loading from "../Shared/Loading";
 import SocialLogin from "./SocialLogin";
 import axios from "axios";
 
+
 const Login = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
@@ -24,8 +25,8 @@ const Login = () => {
       e.preventDefault();
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
-      await signInWithEmailAndPassword(email, password);      
-      const {data} = await axios.post('https://questionary-website.onrender.com/login', {email})      
+      await signInWithEmailAndPassword(email, password);
+      const { data } = await axios.post('https://questionary-website.onrender.com/login', { email })
       localStorage.setItem('accessToken', data?.accessToken)
 
     } catch (error) {
@@ -33,50 +34,55 @@ const Login = () => {
     }
   };
 
-  useEffect(()=> {
+  useEffect(() => {
 
     /* if(token){
       return navigate("/dashboard");
      } */
-    
-  },[token, gUser, authUser])
+
+  }, [token, gUser, authUser])
 
   if (gLoading || loading || authLoading) {
-    return <Loading/>
+    return <Loading />
   }
 
-  if (authUser?.uid) {      
+  if (authUser?.uid) {
     navigate("/dashboard");
-  }  
+  }
 
   // console.log({authUser}, {user})
 
   return (
-    <div className="row vh-100">
-      <div className="col-lg-4 bg-primary d-flex align-items-center justify-content-center">
-        <h1 className="text-white">Login Page</h1>
-      </div>
-      <div className="col-lg-8 d-flex align-items-center justify-content-center">
-        <div className="w-50 text-center">
-          <h1 className="mb-3">Login</h1>
-          <form onSubmit={handleLogin}>
-            <input autoComplete="false" ref={emailRef} className="form-control" type="email" required placeholder="email or username" aria-label="default input example" /> <br />
-            <input autoComplete="false" ref={passwordRef} className="form-control" type="password" required placeholder="Password" aria-label="default input example" />
-            <p className="mt-2">Don't have account? <Link to="/signup">Sign Up</Link></p>
-            {googleError && <p className="text-danger">{googleError}</p>}
-            {passSignError && <p className="text-danger">{passSignError}</p>}            
-            {
-              error && <p className="text-danger">Error: {error?.message}</p>
-            }                        
-            <button type="submit" className="btn btn-primary my-3">
-              Login
-            </button>
-            
-          </form>
-          <SocialLogin/>
+    <div className="container-fluid">
+      <div className="login__wrap">
+        <div className="login-left">
+          <h2 className="text-light">Login Page</h2>
         </div>
 
-        
+        <div className="login-box">
+        <h2 className="mb-4">Login</h2>
+      
+          <form onSubmit={handleLogin}>
+            <input autoComplete="false" ref={emailRef} className="login-input" type="email" required placeholder="Email or username" aria-label="default input example" /> <br />
+            <input autoComplete="false" ref={passwordRef} className="login-input" type="password" required placeholder="Password" aria-label="default input example" />
+            <h6 className="mt-2">Don't have account? <Link to="/signup">Sign Up</Link></h6>
+            {googleError && <p className="text-danger">{googleError}</p>}
+            {passSignError && <p className="text-danger">{passSignError}</p>}
+            {
+              error && <p className="text-danger">Error: {error?.message}</p>
+            }
+            <div className="d-grid">
+            <button type="submit" className="btn btn-dark my-3">
+              Login
+            </button>
+            </div>
+
+          </form>
+          <div className="text-center">
+            <SocialLogin />
+          </div>
+        </div>
+
       </div>
     </div>
   );

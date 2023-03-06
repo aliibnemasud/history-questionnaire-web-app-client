@@ -17,45 +17,43 @@ const AllSubmittedAnswers = () => {
         "authorization": `Barer ${token}`
       }
     })
-    .then((res) => {
-      setQuestions(res.data.data);
-      setLoading(false)
-    });
+      .then((res) => {
+        setQuestions(res.data.data);
+        setLoading(false)
+      });
   }, []);
 
-  if(loading){
-    return <Loading/>
+  if (loading) {
+    return <Loading />
   }
 
   return (
     <div>
-      <Table responsive="sm">
+      <Table className="table-bordered table-striped table-hover" responsive="sm">
         <thead>
-          <tr>
-            <th>#ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Test Status</th>
-            <th>Answer</th>
-            <th>Action</th>
-          </tr>
+          <th>#ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Test Status</th>
+          <th>Answer</th>
+          <th>Action</th>
         </thead>
         <tbody>
           {questions?.map((question, index) => {
             let name = question.questionAnswer[0].answer[0].First_Name + " " + question?.questionAnswer[0]?.answer[0]?.Last_Name;
             return (
               <tr>
-                <td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td>{name}</td>
                 <td>{question?.email}</td>
-                <td><span className={`badge ${ question?.status !== 'approved' ? 'text-bg-warning': "text-bg-success" }`}>{question?.status}</span></td>
+                <td><span className={`badge ${question?.status !== 'approved' ? 'text-bg-success' : "text-bg-success"}`}>{question?.status}</span></td>
                 <td>
-                  <button onClick={()=> navigate(`/seeAnswer/${question?._id}`)} className="btn btn-warning fw-bold">View Answer</button>
-                  <button onClick={()=> navigate(`/answers/${question?._id}`)} className="btn btn-success ml-2 fw-bold">View Detail Answer</button>
+                  <button onClick={() => navigate(`/seeAnswer/${question?._id}`)} className="btn btn-secondary fw-bold btn-sm">View Answer</button>
+                  <button onClick={() => navigate(`/answers/${question?._id}`)} className="btn btn-dark ml-2 fw-bold btn-sm ms-2">View Detail Answer</button>
                 </td>
                 <td>
-                  <button className="btn btn-success fw-bold mx-2">Approved</button>
-                  <button className="btn btn-danger fw-bold">Delete</button>
+                  <button className="btn btn-success fw-bold mx-2 btn-sm">Approved</button>
+                  <button className="btn btn-danger fw-bold btn-sm">Delete</button>
                 </td>
               </tr>
             );

@@ -35,7 +35,7 @@ const Users = () => {
   };
 
   return (
-    <Table responsive="sm">
+    <Table className="table-bordered table-striped table-hover" responsive="sm">
       <thead>
         <tr>
           <th>#ID</th>
@@ -56,10 +56,10 @@ const Users = () => {
               <span className={`badge ${ user?.role !== 'validator' ? 'text-bg-warning': "text-bg-success" }`}>{user?.role}</span>                
               </td>
               <td>
-                <button onClick={() => makeValidator(user?._id)} className="btn btn-success fw-bold mx-2">
+                <button onClick={() => makeValidator(user?._id)} className="btn btn-success btn-sm fw-bold mx-2">
                   Make Validator
                 </button>
-                <button className="btn btn-danger fw-bold">Delete</button>
+                <button className="btn btn-danger fw-bold btn-sm">Delete</button>
               </td>
             </tr>
           );

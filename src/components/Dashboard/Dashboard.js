@@ -12,6 +12,7 @@ import MySubmittedQuestions from "./MySubmittedQuestions";
 import Users from "./Users";
 import axios from "axios";
 
+
 const Dashboard = () => {
   const [signOut, loading, error] = useSignOut(auth);
   const [authUser, authLoading, autherror] = useAuthState(auth);
@@ -28,7 +29,7 @@ const Dashboard = () => {
         },
       })
       .then((res) => {
-        setValidator(res?.data?.validator);        
+        setValidator(res?.data?.validator);
       });
   }, [authUser]);
 
@@ -41,67 +42,98 @@ const Dashboard = () => {
   if (!authUser?.uid) {
     navigate("/");
   }
-  
+
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-      <Row className="vh-100">
-        <Col sm={2} className="col-lg-2 bg-success p-4">
-          <h3 className="mb-5 text-uppercase fw-bold text-white">Dashboard</h3>
-          <Nav variant="pills" className="flex-column">
-            <Nav.Item className="btn w-100 mb-3 btn-light">
-              <Nav.Link eventKey="first">User Profile</Nav.Link>
-            </Nav.Item>
-            {validator && (
-              <Nav.Item className="btn w-100 mb-3 btn-light">
-                <Nav.Link eventKey="second">Submitted Answer</Nav.Link>
-              </Nav.Item>
-            )}
-            <Nav.Item className="btn w-100 mb-3 btn-light">
-              <Nav.Link eventKey="mySubmittedQuestions">My Submitted Questions</Nav.Link>
-            </Nav.Item>
-            {validator && (
-              <Nav.Item className="btn w-100 mb-3 btn-light">
-                <Nav.Link eventKey="users">Users</Nav.Link>
-              </Nav.Item>
-            )}
-          </Nav>
-        </Col>
-        <Col sm={10} className="p-5">
-          <div className="bg-warning p-5 mb-3">
-            <button
-              onClick={() => {
-                signOut();
-                localStorage.removeItem("accessToken");
-              }}
-              className="btn btn-dark"
-            >
-              Sign Out
-            </button>
-          </div>
-          <Tab.Content>
-            <Tab.Pane eventKey="first" className="d-flex justify-content-center align-items-center">
-              <div>
-                <h1>
-                  Welcome <span className="text-success">{authUser?.displayName}</span> to Dashboard!
-                </h1>
-                <button className="btn btn-primary" onClick={() => navigate("/questions")}>
-                  Start Test
-                </button>
+    <div className="container-fluid p-0 overflow-hidden">
+
+
+
+      <div className="row">
+        <div className="col-md-2">
+          <div className="sidebar">
+            <h2 className="p-3 text-secondary">Dashboard</h2>
+            <div class="nav nabs__tabs-custom flex-column nav-pills me-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+              <div class="reservation__tabs active" id="v-pills-customer-tab" data-bs-toggle="pill" data-bs-target="#v-pills-customer" type="button" role="tab" aria-controls="v-pills-customer" aria-selected="true">
+                User Profile
               </div>
-            </Tab.Pane>
-            <Tab.Pane eventKey="second">
+
+              {validator && (
+                <div class="reservation__tabs tabs-gap" id="v-pills-details-tab" data-bs-toggle="pill" data-bs-target="#v-pills-details" type="button" role="tab" aria-controls="v-pills-details" aria-selected="true">
+                  Submitted Answer
+                </div>
+              )}
+
+              <div class="reservation__tabs tabs-gap" id="v-pills-rates-tab" data-bs-toggle="pill" data-bs-target="#v-pills-rates" type="button" role="tab" aria-controls="v-pills-rates" aria-selected="true">
+                My Submitted Questions
+              </div>
+
+              {validator && (
+                <div class="reservation__tabs tabs-gap" id="v-pills-damages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-damages" type="button" role="tab" aria-controls="v-pills-damages" aria-selected="true">
+                  Users
+                </div>
+              )}
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-10">
+          <div class="tab-content"id="v-pills-tabContent">
+            {/* tab 1 */}
+            <div class="tab-pane fade show active" id="v-pills-customer" role="tabpanel" aria-labelledby="v-pills-customer-tab" tabindex="0">
+              <div className=" p-5">
+
+                <div className="d-flex align-items-center justify-content-between bg-white shadow-sm rounded p-3">
+                  <h2>Welcome <span className="text-success">{authUser?.displayName}</span></h2>
+
+
+                  <button
+                    onClick={() => {
+                      signOut();
+                      localStorage.removeItem("accessToken");
+                    }}
+                    className="btn btn-danger"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+
+
+                <div className="mt-5">
+                  <button className="btn btn-primary" onClick={() => navigate("/questions")}>
+                    Start Test
+                  </button>
+                </div>
+
+
+              </div>
+
+            </div>
+
+            {/* tab 2  */}
+            <div class="tab-pane fade mt-3" id="v-pills-details" role="tabpanel" aria-labelledby="v-pills-details-tab" tabindex="0">
               <AllSubmittedAnswers />
-            </Tab.Pane>
-            <Tab.Pane eventKey="mySubmittedQuestions">
+            </div>
+
+            {/* tab 3 */}
+            <div class="tab-pane fade mt-3" id="v-pills-rates" role="tabpanel" aria-labelledby="v-pills-rates-tab" tabindex="0">
               <MySubmittedQuestions />
-            </Tab.Pane>
-            <Tab.Pane eventKey="users">
+            </div>
+
+            {/* tab 4 */}
+            <div class="tab-pane fade mt-3" id="v-pills-damages" role="tabpanel" aria-labelledby="v-pills-damages-tab" tabindex="0">
               <Users />
-            </Tab.Pane>
-          </Tab.Content>
-        </Col>
-      </Row>
-    </Tab.Container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
   );
 };
 

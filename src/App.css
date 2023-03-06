@@ -1,0 +1,50 @@
+.tabs-wrap__body{
+    display: flex;
+    align-items: start;
+}
+
+.reservation__tabs{
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.2rem 0.7rem;
+    background: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    color: #484848;
+    
+    transition: all 0.5s ease;
+}
+.reservation__tabs:hover{
+    background-color: #0B5ED7;
+    color: #fff;
+}
+
+
+.nav-pills .reservation__tabs.active, .nav-pills .show>.reservation__tabs {
+    background-color: #0B5ED7;
+    color: #fff;
+    border-radius: 4px;
+}
+
+
+.sidebar{
+    background-color: #fff;
+    height: 100vh;
+    position: fixed;
+    box-shadow: rgba(37, 209, 137, 0.4) 5px 5px, rgba(28, 110, 90, 0.3) 10px 10px, rgba(20, 11, 134, 0.2) 15px 15px, rgba(68, 0, 255, 0.1) 20px 20px, rgba(10, 141, 119, 0.05) 25px 25px;
+    padding-top: 1rem;
+}
+
+thead{
+    background-color: #000;
+    color: #fff;
+    height: 40px;
+    vertical-align: middle !important;
+}
+
+
+.col-md-2 {
+    flex: 0 0 auto;
+    width: 15.5% !important;
+}
+
