@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import auth from "../../firebase.init";
 import { siblings } from "../Questions/data";
 import Loading from "../Shared/Loading";
+import './NartiveResponse.css'
 
 const NarrativeResponse = () => {
   const { questionId } = useParams();
@@ -26,7 +27,7 @@ const NarrativeResponse = () => {
   const address = questionAnswer[5]?.answer[0]?.City + "," + questionAnswer[5]?.answer[0]?.State + ", " + questionAnswer[5]?.answer[0]?.Ages + ", " + questionAnswer[5]?.answer[0]?.Other_Address;
 
   // question 9
-  const q9 = questionAnswer[8]?.answer[0]?.Growing_Up
+  const q9 = questionAnswer[8]?.answer[0]?.Growing_Up;
   // question 10
   const q10 = questionAnswer[9]?.answer[0];
   // Question 11
@@ -118,41 +119,64 @@ const NarrativeResponse = () => {
       counts[x] = (counts[x] || 0) + 1;
     });
     for (const [key, value] of Object.entries(counts)) {
-      if(key === 'younger' || key === 'older'){
+      if (key === "younger" || key === "older") {
         continue;
-    }
+      }
       str += `${value} ${key}, `;
     }
     let strOutput = " has " + str.slice(0, -2);
     return strOutput;
   }
 
-  const siblingsStrOutput  = gender + siblingsStr(sibKeys)
+  const siblingsStrOutput = gender + siblingsStr(sibKeys);
 
   return (
     <div className="container my-5">
       <div className="box-shadow">
         <h3 className="fw-bold">Answer: </h3>
         <p>
-          <span className="fw-bold text-success underline">Background Information: </span> {name} grew up in {address}, his parents {parentsStatus} when {gender} was five years old, and {siblingsStrOutput} with whom he was raised. Following the {parentsStatus} of their parents, {name} and his siblings were and his siblings were raised by {q9}. 
+          <span className="fw-bold text-success underline">Background Information: </span> {name} grew up in {address}, his parents {parentsStatus} when {gender} was five years old, and {siblingsStrOutput} with whom he was raised. Following the {parentsStatus} of their parents, {name} and his
+          siblings were and his siblings were raised by {q9}.{name} {questionAnswer[9]?.answer[0]?.Basic_Needs === "no" ? "denies having ever gone without basic needs" : " family deprived him of basic needs"} and {gender}{" "}
+          {questionAnswer[10]?.answer[0]?.Experience_any_abuse_or_neglect === "no" ? "denies a history of abuse or neglect" : " confirm a history of abuse or neglect"}.{name} graduated from {questionAnswer[11]?.answer[0]?.Institution_Name} in {questionAnswer[11]?.answer[0]?.Year_of_graduation} and
+          attended some college at {questionAnswer[12]?.answer[0]?.Attend_University_Name_1} between {questionAnswer[11]?.answer[0]?.Year_of_graduation} and {questionAnswer[12]?.answer[0]?.Year_of_Graduation_1} {gender}{" "}
+          {questionAnswer[12]?.answer[0]?.Associate_1 === "no degree" ? "but does not hold a " : `and achieved ${questionAnswer[12]?.answer[0]?.Associate_1}`} postsecondary degree. Currently, {name} works as a {q15.Job_Title} at {q15.Place_of_employment} and has been doing so since {q15.Timeline}.
+          Prior, {name} worked as a {q16?.Job_Title_One} at {q16?.Place_of_employment_One} between {q16.Timeline_One} and was an {q16?.Job_Title_Two} for {q16?.Place_of_employment_Second} between {q16?.Timeline_Two}.{name}{" "}
+          {q17?.Served_military === "no" ? "doesn't served in the military" : "served in the military"}
+          {name} {q18?.Job_relevant_Experience === "N/A" ? "don't have job-relevant volunteer experience" : `have job-relevant volunteer experience like ${q18?.Job_relevant_Experience}`}. currently {gender} lived in {q20?.living_City_State} with {q20?.Who_do_you_live_with}
+          {q20?.Relationship_Status === "Single" && <h4>{name} is single.</h4>}
+          {q20?.Relationship_Status === "In a relationship" && (
+            <p>
+              {authUser?.displayName} has been In a Relationship for {q20?.How_long_have_you_been_in_this_relationship} years
+            </p>
+          )}
+          {q20?.Relationship_Status === "Engaged" && (
+            <p>
+              {name} has been married for {q20?.answer[0]?.How_long_have_you_been_married} years
+            </p>
+          )}
+          {q20?.Relationship_Status === "Divorced/single" && (
+            <p>
+              {name} is divorced {q20?.Timeline_of_current_relationship} years
+            </p>
+          )}
+          {q20?.Relationship_Status === "Married" && (
+            <p>
+              {name} is Married {q20?.How_long_have_you_been_married} years. and together from {q20?.How_long_have_you_been_together}
+            </p>
+          )}
+        </p>{" "}
+        <br />
+        <p>
+          <span className="fw-bold text-success underline">Children: </span>
+          {name} has
+        </p>
+
+        <p>
+          <span className="fw-bold text-success underline">Alcohol and Drug Use History: </span>
+        </p>
 
 
-         {name} {questionAnswer[9]?.answer[0]?.Basic_Needs === "no" ? "denies having ever gone without basic needs" : " family deprived him of basic needs"}  and {gender} {questionAnswer[10]?.answer[0]?.Experience_any_abuse_or_neglect === "no" ? "denies a history of abuse or neglect" : " confirm a history of abuse or neglect"}.
 
-
-         {name} graduated from {questionAnswer[11]?.answer[0]?.Institution_Name} in {questionAnswer[11]?.answer[0]?.Year_of_graduation} and attended some college at {questionAnswer[12]?.answer[0]?.Attend_University_Name_1} between {questionAnswer[11]?.answer[0]?.Year_of_graduation} and {questionAnswer[12]?.answer[0]?.Year_of_Graduation_1}    {gender} {questionAnswer[12]?.answer[0]?.Associate_1 === 'no degree'? 'but does not hold a ' : `and achieved ${questionAnswer[12]?.answer[0]?.Associate_1}` } postsecondary degree.
-
-
-         Currently, {name} works as a {q15.Job_Title} at {q15.Place_of_employment} and has been doing so since {q15.Timeline}. Prior, {name} worked as a {q16.Job_Title_One} at {q16.Place_of_employment_One} between {q16.Timeline_One} and was an {q16.Job_Title_Two} for {q16.Place_of_employment_Second} between {q16.Timeline_Two}.
-
-
-         
-
-
-         
-
-
-         </p>
       </div>
     </div>
   );
