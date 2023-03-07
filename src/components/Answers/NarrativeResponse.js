@@ -187,20 +187,49 @@ const NarrativeResponse = () => {
         <p>
         <span className="fw-bold text-success underline">Psychological History: </span> <br />
 
-        {name} reports that {q26?.Health_symptoms === 'no' ? 'no history of mental health symptoms or diagnoses' : `in ${q26?.Timeline_of_experienced_symptoms} or so ${gender} was diagnosed with ${q26?.Specify_Symptoms} ${q26?.Drug_related_add}`}
+        {name} reports that {q26?.Health_symptoms === 'no' ? `denies any other history of mental health treatment, diagnoses, or risk-related symptoms of any kind. ${gender}  also denies a history of emotional trauma resulting in stress-related response symptoms` : `in ${q26?.Timeline_of_experienced_symptoms} or so ${gender} was diagnosed with ${q26?.Specify_Symptoms} also ${q26?.Drug_related_add}`}.
 
         {gender} also {q27?.Psychotherapy_services === 'no' ? "no history of attended counseling or psychotherapy" : `in ${q27?.Dates_of_attendance} or so he was attend ${q27?.Number_of_sessions} ${q27?.Number_of_sessions}`}.
 
-        {q28?.Psychiatric_purposes === 'no'? '' : '' }
+        {name} {q28?.Psychiatric_purposes === 'no' ? ' never prescribed medication for psychiatric purposes.' : `has since been prescribed ${q28?.Type_of_medication} and  ${q28?.Reason_for_prescription} attended counseling or psychotherapy services and Dosage: ${q28?.Dosage} (${q28?.When_did_you_take_the_medication})` }.
 
 
+        {gender} also said that {q29?.Psychiatric_reason ==='no'? ` never hospitalized for a psychiatric reason` : `${gender} was hospitalized for ${q29?.Psychiatric_reason_Timeline && q29?.Psychiatric_reason_Timeline} & ${q29?.Psychiatric_reason_Location} it was on the ${q29?.Psychiatric_reason_Name_of_hospital} & ${q29?.Psychiatric_reason_add}`}
         </p>
 
+        <p>
+        <span className="fw-bold text-success underline">Other Information: </span> <br />
+        {name} {q30?.Thoughts_about_suicide === 'no' ? 'never thought about suicide' : 'thought about suicide once'}. {gender} {q31?.Self_harm_behaviors === 'no' ? 'never engaged in self-harm behaviors' : ' engaged in self-harm behaviors once' }. {gender} {q32?.Harming_someone_else === 'no' ? 'never harming someone else' : ' experienced thoughts about seriously harming someone else' }.
 
+        {gender} {q33?.Visual_hallucination === 'no' ? 'never experienced auditory/visual hallucinations' : ' experienced auditory/visual hallucinations' }.
+
+        {gender} {q34?.Delusional_Thoughts === 'no' ? 'never experienced paranoid thinking or delusional thoughts' : ' experienced paranoid thinking or delusional thoughts' }.
+
+        {name} {q35?.Unconscious_accident === 'no' ? 'never been knocked unconscious following an accident, an assault, or any kind of injury' : `in ${q35?.Unconscious_accident_Year} it was ${q35?.How_long_did_you_lose_consciousness_for} & ${q35?.How_long_did_you_lose_consciousness_for} ` }. 
         
+        <br />
 
 
+        {name} {q36?.Credit_related_difficulties_timeline === 'no' ? 'never experienced significant financial- or credit-related difficulties' : `in ${q36?.Credit_related_difficulties_timeline} it was ${q36?.Credit_related_difficulties_Explain}`}. 
 
+        {gender} {q37?.Traffic_violation === 'no' ? 'never been fined/charged with a serious traffic violation' : `in ${q37?.Traffic_violation_date} for ${q37?.Traffic_violation_Explain} & ${q37?.Traffic_violation_Add}` }. <br />
+
+
+        {name} {q38?.Charged_criminal_offense === 'no' ? 'never been charged with a criminal offense' : `in ${q38?.Charged_criminal_offense_date} for ${q38?.Charged_criminal_offense_Sort_Answer} & ${q37?.Were_you_arrested} consequence ${q38?.What_were_the_consequences}`}. <br /> <br />
+
+
+        <b> Hobby: </b> {q39?.Hobbies_and_interests} <br />
+        <b>  Special job-relevant skills: </b> 
+        {name}  {q40?.Job_relevant_skills}. <br /> 
+        {name} {q41?.Stressed}. <br />
+        {name} {q42?.Cope_with_stress}. <br />
+        {name} {q43?.Particularly_angry}. <br />
+        {name} {q44?.cope_with_anger}. <br />
+        {name} {q45?.faced_adversity}. <br />
+        {name} {q46?.with_adversity}. <br />
+        {name} {q47?.short_term_goals}. <br />
+        {name} {q48?.long_term_goals}. <br />
+        </p>
       </div>
     </div>
   );

@@ -331,7 +331,7 @@ const Answers = () => {
 
           {questionAnswer[27]?.answer[0]?.Psychiatric_purposes === "yes" && (
             <h4>
-              {authUser?.displayName} attend {questionAnswer[27]?.answer[0]?.Type_of_medication} for {questionAnswer[27]?.answer[0]?.Reason_for_prescription}. And he take it {questionAnswer[27]?.answer[0]?.When_did_you_take_the_medication} Dosage: {questionAnswer[27]?.answer[0]?.Dosage}{" "}
+              {authUser?.displayName} attend {questionAnswer[27]?.answer[0]?.Type_of_medication} for {questionAnswer[27]?.answer[0]?.Reason_for_prescription}. And he take it {questionAnswer[27]?.answer[0]?.When_did_you_take_the_medication} Dosage: {questionAnswer[27]?.answer[0]?.Dosage}
             </h4>
           )}
         </div>
