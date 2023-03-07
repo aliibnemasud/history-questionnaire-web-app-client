@@ -10,6 +10,7 @@ import { ToastContainer} from 'react-toastify';
 import Answers from './components/Answers/Answers';
 import Thanks from './components/Shared/Thanks';
 import SiblingsForm from './components/Questions/SiblingsForm';
+import NarrativeResponse from './components/Answers/NarrativeResponse';
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/questions' element={<Questions/>}></Route>
         <Route path='/siblings' element={<SiblingsForm/>}></Route>
+        <Route path='/siblings' element={<SiblingsForm/>}></Route>
         
+        <Route path='/narrative/:questionId' element={<NarrativeResponse/>}></Route>
         <Route path='/thanks/:submittedQuestionId' element={<Thanks/>}></Route>
 
         <Route path='/seeAnswer/:questionId' element={<SeeAnswer/>}></Route>

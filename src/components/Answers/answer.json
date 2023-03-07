@@ -1,0 +1,594 @@
+{
+    "_id": {
+        "$oid": "6406cb6d4701c9b2c066e55f"
+    },
+    "questionAnswer": [
+        {
+            "questionNo": {
+                "$numberInt": "1"
+            },
+            "question": "What is your legal name?",
+            "answer": [
+                {
+                    "First_Name": "Robbie",
+                    "Last_Name": "McCuistion"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "2"
+            },
+            "question": "What is your date of birth?",
+            "answer": [
+                {
+                    "Date_Of_Birth": "1981-04-03"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "3"
+            },
+            "question": "Please identify your gender?",
+            "answer": [
+                {
+                    "Gender": "Male"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "4"
+            },
+            "question": "Which department are you being evaluated for (i.e., specific police department, sheriff's office, dispatch center, fire department, corrections facility, etc.)?",
+            "answer": [
+                {
+                    "Department": "Marysville Fire"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "5"
+            },
+            "question": "What position are you applying for?",
+            "answer": [
+                {
+                    "Position": "Firefighter"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "6"
+            },
+            "question": "Where did you grow-up?",
+            "answer": [
+                {
+                    "City": "Lake Tapps",
+                    "State": "WA",
+                    "Ages": "13-22",
+                    "Other_Address": "Covington, WA 2-13"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "7"
+            },
+            "question": "Are your biological parents married to each other?",
+            "answer": [
+                {
+                    "Biological_Parents": "yes",
+                    "Biological_Parents_Status": "Select Option",
+                    "Deceased": "13-22"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "8"
+            },
+            "question": "How many siblings do you have?",
+            "answer": [
+                {
+                    "Siblings1": "biological sister",
+                    "YoungerOrOlder1": "younger",
+                    "Siblings2": "biological brother",
+                    "YoungerOrOlder2": "younger"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "9"
+            },
+            "question": "Who was in your household while you were growing up?",
+            "answer": [
+                {
+                    "Growing_Up": "Mom, Dad and my two siblings"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "10"
+            },
+            "question": "Did your family ever go without basic needs?",
+            "answer": [
+                {
+                    "Basic_Needs": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "11"
+            },
+            "question": "Did you experience any abuse or neglect in your childhood?",
+            "answer": [
+                {
+                    "Experience_any_abuse_or_neglect": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "12"
+            },
+            "question": "What school or institution issued your high school diploma/GED?",
+            "answer": [
+                {
+                    "Institution_Name": "Auburn Riverside",
+                    "Institution_City": "Auburn",
+                    "Institution_State": "WA",
+                    "Year_of_graduation": "1999",
+                    "Type_of_degree": "High School Diploma"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "13"
+            },
+            "question": "Did you attend a college/university?",
+            "answer": [
+                {
+                    "Attend_University_Name_1": "Western Washington",
+                    "Attend_University_Location_City_1": "Bellinghan",
+                    "Attend_University_Location_State_1": "WA",
+                    "Year_of_Graduation_1": "2004",
+                    "Associate_1": "Bachelor’s",
+                    "Attend_University_Name_2": "Washington University",
+                    "Attend_University_Location_City_2": "Seattle",
+                    "Attend_University_Location_State_2": "WA",
+                    "Year_of_Graduation_2": "2006",
+                    "Associate_2": "Master’s"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "14"
+            },
+            "question": "Have you earned any job-relevant certificates?",
+            "answer": [
+                {
+                    "Job_relevant_certificates": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "15"
+            },
+            "question": "Please describe your current position of employment.",
+            "answer": [
+                {
+                    "Place_of_employment": "Wilson Medical Specialties",
+                    "Job_Title": "Territory Manager",
+                    "Location": "Seattle",
+                    "Timeline": "2005-present",
+                    "Duties": "Sales",
+                    "Reprimanded": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "16"
+            },
+            "question": "Please describe your previous 2 positions of employment.",
+            "answer": [
+                {
+                    "Place_of_employment_One": "J&J",
+                    "Job_Title_One": "Sales Rep",
+                    "Location_One": "Seattle, WA",
+                    "Timeline_One": "2004-2005",
+                    "Duties_One": "Sales",
+                    "Reprimanded_One": "no",
+                    "Place_of_employment_Second": "J&J",
+                    "Job_Title_Second": "Market Researcher",
+                    "Location_Second": "Seattle, WA",
+                    "Timeline_Second": "2003-2004",
+                    "Duties_Second": "Research",
+                    "Reprimanded_Second": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "17"
+            },
+            "question": "Have you served in the military?",
+            "answer": [
+                {
+                    "Served_military": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "18"
+            },
+            "question": "Please list any job-relevant volunteer experience?",
+            "answer": [
+                {
+                    "Job_relevant_Experience": "N/A"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "19"
+            },
+            "question": "What is your current living situation?",
+            "answer": [
+                {
+                    "living_City_State": "Seattle, WA",
+                    "Who_do_you_live_with": "Wife and daughter"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "20"
+            },
+            "question": "What is your current relationship status?",
+            "answer": [
+                {
+                    "Relationship_Status": "Married",
+                    "Previous_marriages_Timeline1": "2005-2007",
+                    "Previous_marriages_Timeline2": "2007-2009",
+                    "How_long_have_you_been_together": "13yrs",
+                    "How_long_have_you_been_married": "9yrs"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "21"
+            },
+            "question": "Do you have any children?",
+            "answer": [
+                {
+                    "Children": "yes",
+                    "Son_Or_Daughter_1": "daughter",
+                    "Children_Type_1": "Biological",
+                    "Children_Age_1": "2"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "22"
+            },
+            "question": "Do you have any history of alcohol use?",
+            "answer": [
+                {
+                    "Alcohol": "yes",
+                    "Times": "4 times per month",
+                    "Drinks_per_time": "2 drinks per time"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "23"
+            },
+            "question": "Do you have any history of alcohol-related issues/concerns (i.e. dependence, problem drinking, legal issues, relationship issues related to your drinking)?",
+            "answer": [
+                {
+                    "Alcohol_related_issues": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "24"
+            },
+            "question": "Have you ever used drugs/illicit substances?",
+            "answer": [
+                {
+                    "Drugs_illicit": false,
+                    "Timeline_of_use": "",
+                    "Type_of_drug": "",
+                    "Drugs_Frequency": "Select Option",
+                    "Alcohol_Add": ""
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "25"
+            },
+            "question": "Do you have any history of drug-related issues/concerns?",
+            "answer": [
+                {
+                    "Drug_related_issues": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "26"
+            },
+            "question": "Do you have any history of mental health symptoms or diagnoses (i.e., anxiety, depression, PTSD, ADHD)?",
+            "answer": [
+                {
+                    "Health_symptoms": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "27"
+            },
+            "question": "Have you ever attended counseling or psychotherapy services?",
+            "answer": [
+                {
+                    "Psychotherapy_services": "Select Option"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "28"
+            },
+            "question": "Have you ever been prescribed medication for psychiatric purposes?",
+            "answer": [
+                {
+                    "Psychiatric_purposes": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "29"
+            },
+            "question": "Have you ever been hospitalized for a psychiatric reason?",
+            "answer": [
+                {
+                    "Psychiatric_reason": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "30"
+            },
+            "question": "Have you ever experienced thoughts about suicide?",
+            "answer": [
+                {
+                    "Thoughts_about_suicide": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "31"
+            },
+            "question": "Have you ever engaged in self-harm behaviors (i.e., cutting or hitting yourself)?",
+            "answer": [
+                {
+                    "Self_harm_behaviors": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "32"
+            },
+            "question": "Have you ever experienced thoughts about seriously harming someone else?",
+            "answer": [
+                {
+                    "Harming_someone_else": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "33"
+            },
+            "question": "Have you ever experienced auditory/visual hallucinations?",
+            "answer": [
+                {
+                    "Visual_hallucination": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "34"
+            },
+            "question": "Have you ever experienced paranoid thinking or delusional thoughts?",
+            "answer": [
+                {
+                    "Delusional_Thoughts": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "35"
+            },
+            "question": "Have you ever been knocked unconscious following an accident, an assault, or any kind of injury?",
+            "answer": [
+                {
+                    "Unconscious_accident": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "36"
+            },
+            "question": "Have you ever experienced significant financial- or credit-related difficulties (i.e., being sent to collections, bankruptcy, foreclosure)?",
+            "answer": [
+                {
+                    "Credit_related_difficulties": "yes",
+                    "Credit_related_difficulties_timeline": "2007",
+                    "Credit_related_difficulties_Explain": "I had property in Georgia with a business partner during 2008 financial crisis.  We did a Short Sell on the property"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "37"
+            },
+            "question": "Have you ever been fined/charged with a serious traffic violation?",
+            "answer": [
+                {
+                    "Traffic_violation": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "38"
+            },
+            "question": "Have you ever been charged with a criminal offense?",
+            "answer": [
+                {
+                    "Charged_criminal_offense": "no"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "39"
+            },
+            "question": "Please provide a list of your hobbies and interests.- short answer",
+            "answer": [
+                {
+                    "Hobbies_and_interests": "I enjoy hiking and boating"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "40"
+            },
+            "question": "Please list any special job-relevant skills or talents?- short answer",
+            "answer": [
+                {
+                    "Job_relevant_skills": "I enjoy reading"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "41"
+            },
+            "question": "Please provide a brief summary of the last time you were stressed. -short answer",
+            "answer": [
+                {
+                    "Stressed": "I was stressed during a work presentation in front of 1,000 people"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "42"
+            },
+            "question": "How do you typically cope with stress? -short answer",
+            "answer": [
+                {
+                    "Cope_with_stress": "I work on breathing and meditation skills to cope with stressful situations"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "43"
+            },
+            "question": "Please provide a brief summary of the last time you were particularly angry. -short answer",
+            "answer": [
+                {
+                    "Particularly_angry": "I was angry at a driver who cut me off last week"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "44"
+            },
+            "question": "How do you typically cope with anger? -short answer",
+            "answer": [
+                {
+                    "cope_with_anger": "I try to put things in perspective and focus on gratitude's in my life"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "45"
+            },
+            "question": "Please provide a brief summary related to the last time you faced adversity. -short answer",
+            "answer": [
+                {
+                    "faced_adversity": "I had a major knee injury that changed many things in my life.  I had to change my workout routines and my hobbies"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "46"
+            },
+            "question": "How do you typically cope with adversity? -short answer",
+            "answer": [
+                {
+                    "with_adversity": "Focus on the Good"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "47"
+            },
+            "question": "What are your short-term goals? -short answer",
+            "answer": [
+                {
+                    "short_term_goals": "Get a new car"
+                }
+            ]
+        },
+        {
+            "questionNo": {
+                "$numberInt": "48"
+            },
+            "question": "What are your short-term goals? -short answer",
+            "answer": [
+                {
+                    "long_term_goals": "Retire early"
+                }
+            ]
+        }
+    ],
+    "email": "robbie.mccuistion@reigncenter.com",
+    "status": "in progress",
+    "__v": {
+        "$numberInt": "0"
+    }
+}

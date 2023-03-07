@@ -32,7 +32,7 @@ const Questions = () => {
 
   const onSubmit = (data) => {
     // Making Siblings Multiple Values
-    setLoading(true);
+    // setLoading(true);
     const siblingsArray = {};
     for (const sib in data) {
       if (sib.startsWith("Siblings")) {
@@ -42,6 +42,8 @@ const Questions = () => {
         siblingsArray[sib] = data[sib];
       }
     }
+
+    // console.log(siblingsArray)
 
     // Multiple Marriage timeline
     const multipleMarriageTimeline = {};
@@ -399,7 +401,9 @@ const Questions = () => {
       },
     ];
 
-    axios
+    console.log(answer)
+
+    /* axios
       .post(
         "https://questionary-website.onrender.com/questions",
         { questionAnswer: answer, email: atuhUser?.email },
@@ -414,12 +418,12 @@ const Questions = () => {
         setLoading(false);
         alert("Data Posted Successfully!");
         navigate(`/thanks/${res?.data?.data?._id}`);
-      });
+      }); */
   };
 
-  if (authLoading || loading) {
+  /* if (authLoading || loading) {
     return <Loading />;
-  }
+  } */
 
   if(errors){
     console.log(errors)
@@ -962,20 +966,6 @@ const Questions = () => {
               <input {...register("How_long_have_you_been_together", { required: false })} type="text" className="form-control" placeholder="Answer" />
 
               <h6 className="form-label my-3">III. Do you have any previous marriages?</h6>
-
-              {/* <div className="form-check">
-                <input {...register("Do_you_have_any_previous_marriages", { required: false })} className="form-check-input" type="checkbox" value="" />
-                <label className="form-check-label" for="invalidCheck">
-                  Yes
-                </label>
-              </div>
-              <div className="form-check">
-                <input {...register("Do_you_have_any_previous_marriages_no", { required: false })} className="form-check-input" type="checkbox" value="" />
-                <label className="form-check-label" for="invalidCheck">
-                  No
-                </label>
-              </div> */}
-
               <div>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" {...register("Do_you_have_any_previous_marriages", { required: true })} type="radio" htmlFor="inlineRadio1" value="yes" />

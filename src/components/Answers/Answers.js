@@ -17,7 +17,7 @@ const Answers = () => {
       setQuestionAnswer(res?.data?.data[0]?.questionAnswer);
       setLoading(false);
     });
-  }, []);  
+  }, []);
 
   // console.log(answers)
 
