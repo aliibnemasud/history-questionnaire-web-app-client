@@ -51,7 +51,7 @@ const SeeAnswer = () => {
 
   return (
     <div style={{ backgroundColor: "#F1F3F5" }}>
-      <div className="p-3 bg-success text-white text-center">
+      <div className="p-3 bg-success text-white text-center sticky-top">
         <div>         
           <Link to='/dashboard' className="btn btn-light">Dashboard</Link>
         </div>

@@ -46,12 +46,41 @@ const Dashboard = () => {
   return (
     <div className="container-fluid p-0 overflow-hidden">
 
+      <header className="fixed-top">
+        <div className="d-flex align-items-center justify-content-between bg-white shadow-sm p-3">
+          <h2>Welcome <span className="text-success">{authUser?.displayName}</span></h2>
 
+
+          <div className="">
+            <button className="btn btn-primary" onClick={() => navigate("/questions")}>
+              Start Test
+            </button>
+          </div>
+
+          <button
+            onClick={() => {
+              signOut();
+              localStorage.removeItem("accessToken");
+            }}
+            className="btn btn-danger"
+          >
+            Sign Out
+          </button>
+
+          
+
+        </div>
+
+
+      </header>
+            <br />
+            <br />
+            <br />
+            {/* <br /> */}
 
       <div className="row">
         <div className="col-md-2">
           <div className="sidebar">
-            <h2 className="p-3 text-secondary">Dashboard</h2>
             <div class="nav nabs__tabs-custom flex-column nav-pills me-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
               <div class="reservation__tabs active" id="v-pills-customer-tab" data-bs-toggle="pill" data-bs-target="#v-pills-customer" type="button" role="tab" aria-controls="v-pills-customer" aria-selected="true">
@@ -81,34 +110,11 @@ const Dashboard = () => {
         </div>
 
         <div className="col-md-10">
-          <div class="tab-content"id="v-pills-tabContent">
+          <div class="tab-content" id="v-pills-tabContent">
             {/* tab 1 */}
             <div class="tab-pane fade show active" id="v-pills-customer" role="tabpanel" aria-labelledby="v-pills-customer-tab" tabindex="0">
               <div className=" p-5">
-
-                <div className="d-flex align-items-center justify-content-between bg-white shadow-sm rounded p-3">
-                  <h2>Welcome <span className="text-success">{authUser?.displayName}</span></h2>
-
-
-                  <button
-                    onClick={() => {
-                      signOut();
-                      localStorage.removeItem("accessToken");
-                    }}
-                    className="btn btn-danger"
-                  >
-                    Sign Out
-                  </button>
-                </div>
-
-
-                <div className="mt-5">
-                  <button className="btn btn-primary" onClick={() => navigate("/questions")}>
-                    Start Test
-                  </button>
-                </div>
-
-
+                <h5 className="text-danger">No Data Found !!</h5>
               </div>
 
             </div>
