@@ -50,6 +50,7 @@ const AllSubmittedAnswers = () => {
                 <td>
                   <button onClick={() => navigate(`/seeAnswer/${question?._id}`)} className="btn btn-secondary fw-bold btn-sm">View Answer</button>
                   <button onClick={() => navigate(`/answers/${question?._id}`)} className="btn btn-dark ml-2 fw-bold btn-sm ms-2">View Detail Answer</button>
+                  <button onClick={() => navigate(`/narrative/${question?._id}`)} className="btn btn-dark ml-2 fw-bold btn-sm ms-2">Narrative Detail Answer</button>
                 </td>
                 <td>
                   <button className="btn btn-success fw-bold mx-2 btn-sm">Approved</button>

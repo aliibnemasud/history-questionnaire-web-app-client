@@ -168,12 +168,36 @@ const NarrativeResponse = () => {
         <br />
         <p>
           <span className="fw-bold text-success underline">Children: </span>
-          {name} has
+          {name} has {q21?.Children === 'no' ? "no children" : "children"}
         </p>
 
         <p>
-          <span className="fw-bold text-success underline">Alcohol and Drug Use History: </span>
+          <span className="fw-bold text-success underline">Alcohol and Drug Use History: </span> <br />
+            {name} {q22?.Alcohol === 'no' ? "don't drink alcohol" : `reports that ${gender} drinks used to drink ${q22?.Times} per ${q22?.Drinks_per_time}`}, and
+
+
+            {gender} {q23?.Alcohol_related_issues === 'no' ? " denies a history of alcohol-related issues" : " has history of alcohol-related issues/concerns" }.
+            {
+              q24?.Drugs_Frequency === 'I don’t use it anymore' ? `${gender} don’t use it anymore` : `In the past, ${gender} used used ${q24?.Type_of_drug} per ${q24?.Drugs_Frequency} and ${q24?.Timeline_of_use}`}.
+
+              {q25?.Drug_related_issues === 'no' ? `${name} denies any other history of drug use.` : 
+              `${name} has history of drug use.`}
+        </p> <br />
+
+        <p>
+        <span className="fw-bold text-success underline">Psychological History: </span> <br />
+
+        {name} reports that {q26?.Health_symptoms === 'no' ? 'no history of mental health symptoms or diagnoses' : `in ${q26?.Timeline_of_experienced_symptoms} or so ${gender} was diagnosed with ${q26?.Specify_Symptoms} ${q26?.Drug_related_add}`}
+
+        {gender} also {q27?.Psychotherapy_services === 'no' ? "no history of attended counseling or psychotherapy" : `in ${q27?.Dates_of_attendance} or so he was attend ${q27?.Number_of_sessions} ${q27?.Number_of_sessions}`}.
+
+        {q28?.Psychiatric_purposes === 'no'? '' : '' }
+
+
         </p>
+
+
+        
 
 
 
