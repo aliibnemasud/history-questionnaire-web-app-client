@@ -28,8 +28,6 @@ const Questions = () => {
   } = useForm();
   const token = localStorage.getItem("accessToken");
 
-
-
   const onSubmit = (data) => {
     // Making Siblings Multiple Values
     // setLoading(true);
@@ -243,7 +241,7 @@ const Questions = () => {
       {
         questionNo: 24,
         question: "Have you ever used drugs/illicit substances?",
-        answer: [{ Drugs_illicit: data.Drugs_illicit, Timeline_of_use: data.Timeline_of_use, Type_of_drug: data.Type_of_drug, Drugs_Frequency: data.Drugs_Frequency, Alcohol_Add: data.Alcohol_Add }],
+        answer: [{ Drugs_illicit: data.Drugs_illicit, Timeline_of_use: data.Timeline_of_use, Type_of_drug: data.Type_of_drug, Drugs_Frequency: data.Drugs_Frequency, Alcohol_Add: data.Alcohol_Add, Used_Drag: data.Used_Drag }],
       },
       {
         questionNo: 25,
@@ -401,9 +399,7 @@ const Questions = () => {
       },
     ];
 
-    console.log(answer)
-
-    /* axios
+    axios
       .post(
         "https://questionary-website.onrender.com/questions",
         { questionAnswer: answer, email: atuhUser?.email },
@@ -418,15 +414,15 @@ const Questions = () => {
         setLoading(false);
         alert("Data Posted Successfully!");
         navigate(`/thanks/${res?.data?.data?._id}`);
-      }); */
+      });
   };
 
-  /* if (authLoading || loading) {
+  if (authLoading || loading) {
     return <Loading />;
-  } */
+  }
 
-  if(errors){
-    console.log(errors)
+  if (errors) {
+    console.log(errors);
   }
 
   if (!atuhUser?.uid) {
@@ -457,6 +453,8 @@ const Questions = () => {
   const Additional_Option_psychiatric_purposes = watch("Additional_Option_psychiatric_purposes");
   const Do_you_have_any_previous_marriages = watch("Do_you_have_any_previous_marriages");
   const Number_Of_Siblings = watch("Number_Of_Siblings");
+  const Other_Address_checkbox = watch("Other_Address_checkbox");
+  const Additional_Option_Type_of_drug = watch("Additional_Option_Type_of_drug");
 
   let previousMarriagesTimeline = [];
   for (let i = 1; i <= preMarriageTimeline; i++) {
@@ -500,6 +498,7 @@ const Questions = () => {
           <option value="Associate’s">Associate’s</option>
           <option value="Bachelor’s">Bachelor’s</option>
           <option value="Master’s">Master’s</option>
+          <option value="Doctorate degree">Doctorate Degree</option>
         </select>
 
         {Associate === "Associate’s" && <input {...register(`Specify_${i}`)} type="text" className="form-control mt-2" placeholder="Specify Major/Specify Minor_" />}
@@ -518,12 +517,12 @@ const Questions = () => {
     multipleChildrenS.push(
       <div>
         <select {...register(`Son_Or_Daughter_${i}`)} className="form-select mt-2" aria-label="Default select example">
-          <option >Select Option</option>
+          <option>Select Option</option>
           <option value="son">Son</option>
           <option value="daughter">Daughter</option>
         </select>
         <select {...register(`Children_Type_${i}`)} className="form-select mt-2" aria-label="Default select example">
-          <option >Select Option</option>
+          <option>Select Option</option>
           <option value="Biological">Biological</option>
           <option value="Step">Step</option>
           <option value="Adopted">Adopted</option>
@@ -585,7 +584,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">5. What position are you applying for?</h6>
           <select {...register("Position", { required: true })} className="form-select" onChange={(e) => setPosition(e.target.value)} aria-label="Default select example">
-            <option >Select position</option>
+            <option>Select position</option>
             {applyingPosition.map((position, index) => (
               <option value={position} key={index}>
                 {position}
@@ -609,21 +608,30 @@ const Questions = () => {
             <input {...register("City", { required: true })} type="text" className="form-control" placeholder="City" />
             <input {...register("State", { required: true })} type="text" className="form-control" placeholder="State or Country" />
             <input {...register("Ages", { required: true })} type="text" className="form-control" placeholder="From (e.g., birth)" />
-            <input {...register("Other_Address")} type="text" className="form-control" placeholder="+add" />
           </div>
+
+          <div className="col-12 mt-2">
+            <div className="form-check">
+              <input {...register("Other_Address_checkbox", { required: false })} className="form-check-input" type="checkbox" value="" />
+              <label className="form-check-label" htmlFor="invalidCheck">
+                Add
+              </label>
+            </div>
+          </div>
+          {Other_Address_checkbox && <input {...register("Other_Address")} type="text" className="form-control" placeholder="New city, state/country" />}
         </div>
 
         <div>
           <h6 className="form-label my-3">7. Are your biological parents married to each other?</h6>
           <select {...register("Biological_Parents", { required: true })} className="form-select mb-2" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
 
           {Biological_Parents === "no" && (
             <select {...register("Biological_Parents_Status", { required: true })} className="form-select" onChange={(e) => setBiologicalParentsStatus(e.target.value)} aria-label="Default select example">
-              <option >Select Option</option>
+              <option>Select Option</option>
               <option value="separated">Separated</option>
               <option value="Divorced">Divorced</option>
               <option value="NeverMarried">Never Married</option>
@@ -685,7 +693,7 @@ const Questions = () => {
         <div className="w-100">
           <h6 className="form-label my-3">10. Did your family ever go without basic needs?</h6>
           <select {...register("Basic_Needs", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -694,7 +702,7 @@ const Questions = () => {
         <div className="w-100">
           <h6 className="form-label my-3">11. Did you experience any abuse or neglect in your childhood?</h6>
           <select {...register("Experience_any_abuse_or_neglect", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -710,7 +718,7 @@ const Questions = () => {
             <input {...register("Year_of_graduation", { required: false })} type="text" className="form-control" placeholder="Year of graduation" />
 
             <select {...register("Type_of_degree", { required: false })} className="form-select" aria-label="Default select example">
-              <option >Type of degree</option>
+              <option>Type of degree</option>
               <option value="High School Diploma">High School Diploma</option>
               <option value="GED">GED</option>
             </select>
@@ -721,7 +729,7 @@ const Questions = () => {
         <div className="w-100">
           <h6 className="form-label my-3">13. Did you attend a college/university?</h6>
           <select {...register("Attend_University", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -746,18 +754,18 @@ const Questions = () => {
           <h6 className="form-label my-3">14. Have you earned any job-relevant certificates?</h6>
           <div className="d-flex justify-content-around gap-3">
             <select className="form-select" {...register("Job_relevant_certificates", { required: true })} aria-label="Default select example">
-              <option >Select Option</option>
+              <option>Select Option</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
-
-            {Job_relevant_certificates === "yes" && (
-              <div>
-                <input type="text" {...register("Specify_type_of_certificate", { required: true })} className="form-control mt-2" placeholder="Specify type of certificate" />
-                <input type="text" {...register("Earned_Year", { required: true })} className="form-control mt-2" placeholder="Date earned - Year" />
-              </div>
-            )}
           </div>
+
+          {Job_relevant_certificates === "yes" && (
+            <div className="d-flex gap-3">
+              <input type="text" {...register("Specify_type_of_certificate", { required: true })} className="form-control mt-2" placeholder="Specify type of certificate" />
+              <input type="text" {...register("Earned_Year", { required: true })} className="form-control mt-2" placeholder="Date earned - Year" />
+            </div>
+          )}
         </div>
 
         {/* question 15 */}
@@ -773,7 +781,7 @@ const Questions = () => {
           <div>
             <h6 className="form-label my-3">- Were you ever reprimanded?</h6>
             <select className="form-select" {...register("Reprimanded", { required: false })} aria-label="Default select example">
-              <option >Select Option</option>
+              <option>Select Option</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
@@ -795,7 +803,7 @@ const Questions = () => {
           <div>
             <h6 className="form-label my-3"> - Were you ever reprimanded?</h6>
             <select className="form-select" {...register("Reprimanded_One", { required: false })} aria-label="Default select example">
-              <option >Select Option</option>
+              <option>Select Option</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
@@ -813,7 +821,7 @@ const Questions = () => {
           <div>
             <h6 className="form-label my-3">- Were you ever reprimanded?</h6>
             <select className="form-select" {...register("Reprimanded_Second", { required: false })} aria-label="Default select example">
-              <option >Select Option</option>
+              <option>Select Option</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
@@ -825,7 +833,7 @@ const Questions = () => {
         <div className="w-100">
           <h6 className="form-label my-3">17. Have you served in the military?</h6>
           <select {...register("Served_military", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -835,7 +843,7 @@ const Questions = () => {
               <div>
                 <p>I. Branch</p>
                 <select {...register("Military_Branch", { required: true })} className="form-select" aria-label="Default select example">
-                  <option >Branch</option>
+                  <option>Branch</option>
                   {militaryBranch.map((b) => (
                     <option value={b}>{b}</option>
                   ))}
@@ -849,7 +857,7 @@ const Questions = () => {
               <div>
                 <p>III. Current Status</p>
                 <select {...register("Current_status", { required: true })} className="form-select" aria-label="Default select example">
-                  <option >Branch</option>
+                  <option>Branch</option>
                   <option value="Active">Active</option>
                   <option value="Reserve">Reserve</option>
                   <option value="Discharged">Discharged_discharge_status</option>
@@ -858,7 +866,7 @@ const Questions = () => {
 
               {Current_status === "Discharged" && (
                 <select {...register("Current_status", { required: true })} className="form-select" aria-label="Default select example">
-                  <option >Branch</option>
+                  <option>Branch</option>
                   <option value="Honorable">Honorable</option>
                   <option value="General, Under Honorable Conditions">General, Under Honorable Conditions</option>
                   <option value="Under Other than Honorable Conditions">Under Other than Honorable Conditions</option>
@@ -870,7 +878,7 @@ const Questions = () => {
               <div>
                 <p>IV. Were you ever deployed?</p>
                 <select {...register("Deployed", { required: true })} className="form-select" aria-label="Default select example">
-                  <option >Select Option</option>
+                  <option>Select Option</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
@@ -887,7 +895,7 @@ const Questions = () => {
               <div>
                 <p>V. Were you ever deployed?</p>
                 <select {...register("Combat", { required: true })} className="form-select" aria-label="Default select example">
-                  <option >Select Option</option>
+                  <option>Select Option</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
@@ -896,7 +904,7 @@ const Questions = () => {
               <div>
                 <p>VI. Did you experience any military-related traumatic experiences?</p>
                 <select {...register("military_related_traumatic_experiences", { required: true })} className="form-select" aria-label="Default select example">
-                  <option >Select Option</option>
+                  <option>Select Option</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
@@ -905,7 +913,7 @@ const Questions = () => {
               <div>
                 <p>VII. Do you have a history of formal military-related disciplinary actions?</p>
                 <select {...register("Disciplinary_actions", { required: true })} className="form-select" aria-label="Default select example">
-                  <option >Select Option</option>
+                  <option>Select Option</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
@@ -938,7 +946,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">20. What is your current relationship status?</h6>
           <select {...register("Relationship_Status", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="Single">Single</option>
             <option value="In a relationship">In a relationship</option>
             <option value="Engaged">Engaged</option>
@@ -1008,7 +1016,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">21. Do you have any children?</h6>
           <select {...register("Children", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1028,7 +1036,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">22. Do you drink alcohol?</h6>
           <select {...register("Alcohol", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1045,25 +1053,21 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">23. Do you have any history of alcohol-related issues/concerns (i.e. dependence, problem drinking, legal issues, relationship issues related to your drinking)?</h6>
           <select {...register("Alcohol_related_issues", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
         </div>
 
         {/* questions 24 */}
+
         <div>
-          <h6 className="form-label my-3">24. Have you ever used drugs/illicit substances?</h6>     
-
-          <h6 className="form-label my-3">Frequency (daily, monthly, yearly)</h6>
-          <select {...register("Drugs_Frequency", { required: true })} className="form-select" aria-label="Default select example">
+          <h6 className="form-label my-3">24. Have you ever used drugs/illicit substances?</h6>
+          <select {...register("Used_Drag", { required: true })} className="form-select" aria-label="Default select example">
             <option>Select Option</option>
-            <option value="daily">Daily</option>
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
-            <option value="I don’t use it anymore">I don’t use it anymore</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
           </select>
-
           <div className="col-12 mt-2">
             <div className="form-check">
               <input {...register("Drugs_illicit", { required: false })} className="form-check-input" type="checkbox" value="" />
@@ -1072,17 +1076,33 @@ const Questions = () => {
               </label>
             </div>
           </div>
-
           {Drugs_illicit && (
             <div>
+              <h6 className="form-label my-3">Frequency (daily, monthly, yearly)</h6>
+              <select {...register("Drugs_Frequency", { required: true })} className="form-select" aria-label="Default select example">
+                <option>Select Option</option>
+                <option value="daily">Daily</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+                <option value="I don’t use it anymore">I don’t use it anymore</option>
+              </select>
+
               <h6 className="form-label my-3">I. Type of drug.</h6>
 
               <input {...register("Type_of_drug", { required: false })} type="text" className="form-control" placeholder="Times (1,2,3,4,5,,,,10) per (Week, Month, Year)" />
               <h6 className="form-label my-3">II. Timeline of use</h6>
               <input {...register("Timeline_of_use", { required: false })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
 
-              <h6 className="form-label my-3">III. +Add</h6>
-              <input {...register("Alcohol_Add", { required: false })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
+              {/* <h6 className="form-label my-3">III. +Add</h6> */}
+              <div className="col-12 mt-2">
+                <div className="form-check">
+                  <input {...register("Additional_Option_Type_of_drug", { required: false })} className="form-check-input" type="checkbox" value="" />
+                  <label className="form-check-label" htmlFor="invalidCheck">
+                    +Add
+                  </label>
+                </div>
+              </div>
+              {Additional_Option_Type_of_drug && <input {...register("Alcohol_Add", { required: false })} type="text" className="form-control mt-2" placeholder="Additional Option" />}
             </div>
           )}
         </div>
@@ -1091,7 +1111,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">25. Do you have any history of drug-related issues/concerns?</h6>
           <select {...register("Drug_related_issues", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1102,7 +1122,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">26. Do you have any history of mental health symptoms or diagnoses (i.e., anxiety, depression, PTSD, ADHD)?</h6>
           <select {...register("Health_symptoms", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1124,7 +1144,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">27. Have you ever attended counseling or psychotherapy services?</h6>
           <select {...register("Psychotherapy_services", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1146,7 +1166,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">28. Have you ever been prescribed medication for psychiatric purposes?</h6>
           <select {...register("Psychiatric_purposes", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1181,7 +1201,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">29. Have you ever been hospitalized for a psychiatric reason?</h6>
           <select {...register("Psychiatric_reason", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1207,7 +1227,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">30. Have you ever experienced thoughts about suicide?</h6>
           <select {...register("Thoughts_about_suicide", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1217,7 +1237,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">31. Have you ever engaged in self-harm behaviors (i.e., cutting or hitting yourself)?</h6>
           <select {...register("Self_harm_behaviors", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1227,7 +1247,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">32. Have you ever experienced thoughts about seriously harming someone else?</h6>
           <select {...register("Harming_someone_else", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1237,7 +1257,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">33. Have you ever experienced auditory/visual hallucinations?</h6>
           <select {...register("Visual_hallucination", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1247,7 +1267,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">34. Have you ever experienced paranoid thinking or delusional thoughts?</h6>
           <select {...register("Delusional_Thoughts", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1258,7 +1278,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">35.Have you ever been knocked unconscious following an accident, an assault, or any kind of injury?</h6>
           <select {...register("Unconscious_accident", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1271,7 +1291,7 @@ const Questions = () => {
               <input {...register("How_long_did_you_lose_consciousness_for", { required: true })} type="text" className="form-control mt-2" placeholder="Timeline of use" />
               <h6 className="form-label my-3">III. Following the injury, did you experience prolonged symptoms (i.e., headaches, dizziness, depression) or functional issues (i.e., attention, memory, employment, relationship)? </h6>
               <select {...register("Experience_Prolonged_Symptoms", { required: true })} className="form-select" aria-label="Default select example">
-                <option >Select Option</option>
+                <option>Select Option</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
@@ -1286,7 +1306,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">36.Have you ever experienced significant financial- or credit-related difficulties (i.e., being sent to collections, bankruptcy, foreclosure)?</h6>
           <select {...register("Credit_related_difficulties", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1305,7 +1325,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">37. Have you ever been fined/charged with a serious traffic violation?</h6>
           <select {...register("Traffic_violation", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1326,7 +1346,7 @@ const Questions = () => {
         <div>
           <h6 className="form-label my-3">38. Have you ever been charged with a criminal offense?</h6>
           <select {...register("Charged_criminal_offense", { required: true })} className="form-select" aria-label="Default select example">
-            <option >Select Option</option>
+            <option>Select Option</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
@@ -1338,7 +1358,7 @@ const Questions = () => {
 
               <h6 className="form-label my-3">II. Were you arrested?</h6>
               <select {...register("Were_you_arrested", { required: true })} className="form-select" aria-label="Default select example">
-                <option >Select Option</option>
+                <option>Select Option</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>

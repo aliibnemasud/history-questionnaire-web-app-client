@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -7,12 +7,66 @@ import { siblings } from "../Questions/data";
 import Loading from "../Shared/Loading";
 import './NartiveResponse.css'
 
+// doc file saver
+import { Paragraph, Document, Packer } from "docx";
+import { saveAs } from "file-saver";
+
 const NarrativeResponse = () => {
   const { questionId } = useParams();
   const [authUser, authLoading, autherror] = useAuthState(auth);
   const [questionAnswer, setQuestionAnswer] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Getting the text from narrative response
+  let backgroundInfoRef = useRef();
+  let childrenRef = useRef();
+  let alcoholHistoryRef = useRef();
+  let psychologicalHistoryRef = useRef();
+  let otherInfoRef = useRef();
+
+  /// Making the function
+
+  const generate = () => {
+    const doc = new Document({
+      sections: [
+        {
+          children: [
+           /*  new Paragraph({
+              text: "Ali Ibne Masud",
+              bullet: {
+                level: 0, //How deep you want the bullet to be
+              },
+            }), */
+            new Paragraph({
+              text: backgroundInfoRef?.current?.innerText
+            }),
+            new Paragraph({
+              text: childrenRef?.current?.innerText
+            }),
+            new Paragraph({
+              text: alcoholHistoryRef?.current?.innerText
+            }),
+            new Paragraph({
+              text: psychologicalHistoryRef?.current?.innerText
+            }),
+            new Paragraph({
+              text: otherInfoRef?.current?.innerText
+            }),
+          ],
+        },
+      ],
+    });
+
+    Packer.toBlob(doc).then((blob) => {
+      console.log(blob);
+      saveAs(blob, `${name}.docx`);
+      // console.log("Document created successfully");
+    });
+  };
+
+
+
+  // console.log(backgroundInfoRef?.current?.innerText)
   useEffect(() => {
     axios.get(`https://questionary-website.onrender.com/questions/${questionId}`).then((res) => {
       setQuestionAnswer(res?.data?.data[0]?.questionAnswer);
@@ -133,8 +187,10 @@ const NarrativeResponse = () => {
   return (
     <div className="container my-5">
       <div className="box-shadow">
-        <h3 className="fw-bold">Answer: </h3>
-        <p>
+       <div className="d-flex justify-content-between  my-3">
+       <h3 className="fw-bold">Answer: </h3> <button className="btn btn-info" onClick={generate}>Download Doc</button>
+       </div>
+        <p ref={backgroundInfoRef} >
           <span className="fw-bold text-success underline">Background Information: </span> {name} grew up in {address}, his parents {parentsStatus} when {gender} was five years old, and {siblingsStrOutput} with whom he was raised. Following the {parentsStatus} of their parents, {name} and his
           siblings were and his siblings were raised by {q9}.{name} {questionAnswer[9]?.answer[0]?.Basic_Needs === "no" ? "denies having ever gone without basic needs" : " family deprived him of basic needs"} and {gender}{" "}
           {questionAnswer[10]?.answer[0]?.Experience_any_abuse_or_neglect === "no" ? "denies a history of abuse or neglect" : " confirm a history of abuse or neglect"}.{name} graduated from {questionAnswer[11]?.answer[0]?.Institution_Name} in {questionAnswer[11]?.answer[0]?.Year_of_graduation} and
@@ -166,12 +222,12 @@ const NarrativeResponse = () => {
           )}
         </p>{" "}
         <br />
-        <p>
+        <p ref={childrenRef}>
           <span className="fw-bold text-success underline">Children: </span>
           {name} has {q21?.Children === 'no' ? "no children" : "children"}
         </p>
 
-        <p>
+        <p ref={alcoholHistoryRef}>
           <span className="fw-bold text-success underline">Alcohol and Drug Use History: </span> <br />
             {name} {q22?.Alcohol === 'no' ? "don't drink alcohol" : `reports that ${gender} drinks used to drink ${q22?.Times} per ${q22?.Drinks_per_time}`}, and
 
@@ -184,7 +240,7 @@ const NarrativeResponse = () => {
               `${name} has history of drug use.`}
         </p> <br />
 
-        <p>
+        <p ref={psychologicalHistoryRef}>
         <span className="fw-bold text-success underline">Psychological History: </span> <br />
 
         {name} reports that {q26?.Health_symptoms === 'no' ? `denies any other history of mental health treatment, diagnoses, or risk-related symptoms of any kind. ${gender}  also denies a history of emotional trauma resulting in stress-related response symptoms` : `in ${q26?.Timeline_of_experienced_symptoms} or so ${gender} was diagnosed with ${q26?.Specify_Symptoms} also ${q26?.Drug_related_add}`}.
@@ -198,7 +254,7 @@ const NarrativeResponse = () => {
         </p>
 
         <p>
-        <span className="fw-bold text-success underline">Other Information: </span> <br />
+        <span ref={otherInfoRef} className="fw-bold text-success underline">Other Information: </span> <br />
         {name} {q30?.Thoughts_about_suicide === 'no' ? 'never thought about suicide' : 'thought about suicide once'}. {gender} {q31?.Self_harm_behaviors === 'no' ? 'never engaged in self-harm behaviors' : ' engaged in self-harm behaviors once' }. {gender} {q32?.Harming_someone_else === 'no' ? 'never harming someone else' : ' experienced thoughts about seriously harming someone else' }.
 
         {gender} {q33?.Visual_hallucination === 'no' ? 'never experienced auditory/visual hallucinations' : ' experienced auditory/visual hallucinations' }.
