@@ -30,7 +30,7 @@ const Questions = () => {
 
   const onSubmit = (data) => {
     // Making Siblings Multiple Values
-    // setLoading(true);
+    setLoading(true);
     const siblingsArray = {};
     for (const sib in data) {
       if (sib.startsWith("Siblings")) {
@@ -41,7 +41,7 @@ const Questions = () => {
       }
     }
 
-    // console.log(siblingsArray)
+    
 
     // Multiple Marriage timeline
     const multipleMarriageTimeline = {};
@@ -399,6 +399,8 @@ const Questions = () => {
       },
     ];
 
+    
+
     axios
       .post(
         "https://questionary-website.onrender.com/questions",
@@ -409,8 +411,7 @@ const Questions = () => {
           },
         }
       )
-      .then((res) => {
-        console.log(res.data);
+      .then((res) => {       
         setLoading(false);
         alert("Data Posted Successfully!");
         navigate(`/thanks/${res?.data?.data?._id}`);
