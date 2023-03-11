@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Shared/Loading";
+import { toast } from "react-toastify";
 
 
 const AllSubmittedAnswers = () => {
@@ -21,7 +22,17 @@ const AllSubmittedAnswers = () => {
         setQuestions(res.data.data);
         setLoading(false)
       });
-  }, []);
+  }, [questions]);
+
+  const handleDelete = async (id) => {    
+    if(window.confirm(id)){
+      await axios.delete(`https://questionary-website.onrender.com/questions/${id}`)
+      .then(res => {
+        toast.success('Question Deleted Successfully!')
+      })
+    }
+    
+  }
 
   if (loading) {
     return <Loading />
@@ -54,7 +65,7 @@ const AllSubmittedAnswers = () => {
                 </td>
                 <td>
                   <button className="btn btn-success fw-bold mx-2 btn-sm">Approved</button>
-                  <button className="btn btn-danger fw-bold btn-sm">Delete</button>
+                  <button onClick={()=> handleDelete(question?._id)} className="btn btn-danger fw-bold btn-sm">Delete</button>
                 </td>
               </tr>
             );
