@@ -117,7 +117,7 @@ const Questions = () => {
       {
         questionNo: 7,
         question: "Are your biological parents married to each other?",
-        answer: [{ Biological_Parents: data.Biological_Parents, Biological_Parents_Status: data.Biological_Parents_Status, Deceased: data.Deceased, Deceased_Year_Father: data.Deceased_Year_Father, Deceased_Year_Mother:data.Deceased_Year_Mother }],
+        answer: [{ Biological_Parents: data.Biological_Parents, Biological_Parents_Status: data.Biological_Parents_Status, Deceased: data.Deceased, Deceased_Year_Father: data.Deceased_Year_Father, Deceased_Year_Mother: data.Deceased_Year_Mother }],
       },
       {
         questionNo: 8,
@@ -186,6 +186,8 @@ const Questions = () => {
           {
             Served_military: data.Served_military,
             Current_status: data.Current_status,
+            Military_Branch: data.Military_Branch,
+            Military_Rank: data.Military_Rank,
             Deployed: data.Deployed,
             Deployed_Location: data.Deployed_Location,
             Deployed_Timeline: data.Deployed_Timeline,
@@ -455,7 +457,7 @@ const Questions = () => {
   const Additional_Option_Type_of_drug = watch("Additional_Option_Type_of_drug");
   const Deceased = watch("Deceased");
 
-  console.log(Deceased);
+ 
 
   let previousMarriagesTimeline = [];
   for (let i = 1; i <= preMarriageTimeline; i++) {
@@ -855,29 +857,31 @@ const Questions = () => {
           </select>
 
           {Served_military === "yes" && (
-            <div className="d-flex justify-content-around gap-3">
-              <div>
-                <p>I. Branch</p>
-                <select {...register("Military_Branch", { required: true })} className="form-select" aria-label="Default select example">
-                  <option>Branch</option>
-                  {militaryBranch.map((b) => (
-                    <option value={b}>{b}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <p>II. Rank</p>
-                <input {...register("Military_Rank", { required: false })} type="text" className="form-control" placeholder="Sort answer" />
-              </div>
+            <div>
+              <div className="d-flex justify-content-between gap-3 mt-2">
+                <div >
+                  <p>I. Branch</p>
+                  <select {...register("Military_Branch", { required: true })} className="form-select" aria-label="Default select example">
+                    <option>Branch</option>
+                    {militaryBranch.map((b) => (
+                      <option value={b}>{b}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <p>II. Rank</p>
+                  <input {...register("Military_Rank", { required: false })} type="text" className="form-control" placeholder="Sort answer" />
+                </div>
 
-              <div>
-                <p>III. Current Status</p>
-                <select {...register("Current_status", { required: true })} className="form-select" aria-label="Default select example">
-                  <option>Branch</option>
-                  <option value="Active">Active</option>
-                  <option value="Reserve">Reserve</option>
-                  <option value="Discharged">Discharged_discharge_status</option>
-                </select>
+                <div>
+                  <p>III. Current Status</p>
+                  <select {...register("Current_status", { required: true })} className="form-select" aria-label="Default select example">
+                    <option>Branch</option>
+                    <option value="Active">Active</option>
+                    <option value="Reserve">Reserve</option>
+                    <option value="Discharged">Discharged_discharge_status</option>
+                  </select>
+                </div>
               </div>
 
               {Current_status === "Discharged" && (
@@ -891,48 +895,50 @@ const Questions = () => {
                 </select>
               )}
 
-              <div>
+              <div className="">
                 <p>IV. Were you ever deployed?</p>
                 <select {...register("Deployed", { required: true })} className="form-select" aria-label="Default select example">
                   <option>Select Option</option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
+
+                {Deployed === "yes" && (
+                  <div className="d-flex justify-content-around gap-3 mt-2">
+                    <input {...register("Deployed_Location", { required: false })} type="text" className="form-control" placeholder="Location" />
+                    <input {...register("Deployed_Timeline", { required: false })} type="text" className="form-control" placeholder="Timeline" />
+                    <input {...register("Extra_field", { required: false })} type="text" className="form-control" placeholder="Add+" />
+                  </div>
+                )}
               </div>
 
-              {Deployed === "yes" && (
+              <div className="d-flex justify-content-around gap-3 mt-2">
                 <div>
-                  <input {...register("Deployed_Location", { required: false })} type="text" className="form-control" placeholder="Location" />
-                  <input {...register("Deployed_Timeline", { required: false })} type="text" className="form-control" placeholder="Timeline" />
-                  <input {...register("Extra_field", { required: false })} type="text" className="form-control" placeholder="Add+" />
+                  <p>V. Did you see any combat?</p>
+                  <select {...register("Combat", { required: true })} className="form-select" aria-label="Default select example">
+                    <option>Select Option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
                 </div>
-              )}
 
-              <div>
-                <p>V. Were you ever deployed?</p>
-                <select {...register("Combat", { required: true })} className="form-select" aria-label="Default select example">
-                  <option>Select Option</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
+                <div>
+                  <p>VI. Did you experience any military-related traumatic experiences?</p>
+                  <select {...register("military_related_traumatic_experiences", { required: true })} className="form-select" aria-label="Default select example">
+                    <option>Select Option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
 
-              <div>
-                <p>VI. Did you experience any military-related traumatic experiences?</p>
-                <select {...register("military_related_traumatic_experiences", { required: true })} className="form-select" aria-label="Default select example">
-                  <option>Select Option</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-
-              <div>
-                <p>VII. Do you have a history of formal military-related disciplinary actions?</p>
-                <select {...register("Disciplinary_actions", { required: true })} className="form-select" aria-label="Default select example">
-                  <option>Select Option</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
+                <div>
+                  <p>VII. Do you have a history of formal military-related disciplinary actions?</p>
+                  <select {...register("Disciplinary_actions", { required: true })} className="form-select" aria-label="Default select example">
+                    <option>Select Option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
               </div>
             </div>
           )}

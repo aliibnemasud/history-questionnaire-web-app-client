@@ -23,6 +23,7 @@ const NarrativeResponse = () => {
   let alcoholHistoryRef = useRef();
   let psychologicalHistoryRef = useRef();
   let otherInfoRef = useRef();
+ 
 
   /// Making the function
 
@@ -42,7 +43,7 @@ const NarrativeResponse = () => {
             }),
             new Paragraph({
               text: childrenRef?.current?.innerText
-            }),
+            }),            
             new Paragraph({
               text: alcoholHistoryRef?.current?.innerText
             }),
@@ -83,7 +84,7 @@ const NarrativeResponse = () => {
   // question 9
   const q7 = questionAnswer[6]?.answer[0];
   // question 9
-  const q9 = questionAnswer[8]?.answer[0]?.Growing_Up;
+  const q9 = questionAnswer[8]?.answer[0];
   // question 10
   const q10 = questionAnswer[9]?.answer[0];
   // Question 11
@@ -163,13 +164,16 @@ const NarrativeResponse = () => {
   // Question 48
   const q48 = questionAnswer[47]?.answer[0];
 
-  const parentsStatus = questionAnswer[5]?.answer[0]?.Biological_Parents === "no" ? "married to each other" : " Divorced";
+ /*  const parentsStatus = questionAnswer[5]?.answer[0]?.Biological_Parents === "no" ? "married to each other" : " Divorced"; */
 
-  // his parants are married to each other || his parents are saprated || never married 
+    
+  let parentsStatusAnswer = q7.Biological_Parents === 'yes'? 'married to each other' : q7?.Deceased === 'Both' ? `deceased both father in ${q7.Deceased_Year_Father} and Mother in ${q7.Deceased_Year_Mother}.` : q7.Deceased === 'Mother' ? `deceased mother in ${q7.Deceased_Year_Mother}`: q7.Deceased === 'Father' ? `deceased mother in ${q7.Deceased_Year_Father}` : '';
 
-  /* let parentsStatusAnswer = q7.Biological_Parents === 'no' ? `${q7.Biological_Parents_Status}`  : 'married to each other'; */
-  let parentsStatusAnswer = q7.Biological_Parents === 'yes'? 'married to each other' : q7.Deceased === 'Both' ? `deceased both father in ${q7.Deceased_Year_Father} and Mother in ${q7.Deceased_Year_Father}.` : q7.Deceased === 'Mother' ? `deceased mother in ${q7.Deceased_Year_Mother}`: q7.Deceased === 'Father' ? `deceased mother in ${q7.Deceased_Year_Father}` : '';
-  // let parrentsDecced  = q7.Deceased === ''
+  // Yes, He/She was on the {Militiry} on {Brnach Name} with {Rank}.The current Status now {Active}/{Discharge} for {Bad Conduct}. He also said {'never'no or yes} He {combat/yes-no} combat. He {did't or faced} military-related traumatic experiences. Also, He doesn't faced have disciplinary actions
+
+
+  const joinedMilitary = q17.Served_military === 'yes' ? `Yes, ${gender} was on the Militiry on ${q17.Military_Branch} with ${q17?.Military_Rank} The current Status now ${q17?.Current_status}. ${gender} ${q17.Combat === 'yes'? 'faced': 'never faced'} combat. He ${q17?.military_related_traumatic_experiences === 'yes' ? 'faced' : "did't"} military-related traumatic experiences. Also, ${gender} ${q17?.Disciplinary_actions === 'yes'? 'faced': "does not"} disciplinary actions.`  : `No, ${gender} served in the military.`;
+  
 
   const sibKeys = questionAnswer[7]?.answer[0];
   // Making the multiple siblings count and print a string output
@@ -199,13 +203,18 @@ const NarrativeResponse = () => {
        <h3 className="fw-bold">Answer: </h3> <button className="btn btn-info" onClick={generate}>Download Doc</button>
        </div>
         <p ref={backgroundInfoRef} >
-          <span className="fw-bold text-success underline">Background Information: </span> {name} grew up in {address}, his parents {parentsStatusAnswer}, and {siblingsStrOutput} with whom he was raised. Following the {parentsStatus} of their parents, {name} and his
-          siblings were and his siblings were raised by {q9}.{name} {questionAnswer[9]?.answer[0]?.Basic_Needs === "no" ? "denies having ever gone without basic needs" : " family deprived him of basic needs"} and {gender}{" "}
-          {questionAnswer[10]?.answer[0]?.Experience_any_abuse_or_neglect === "no" ? "denies a history of abuse or neglect" : " confirm a history of abuse or neglect"}.{name} graduated from {questionAnswer[11]?.answer[0]?.Institution_Name} in {questionAnswer[11]?.answer[0]?.Year_of_graduation} and
+          <span className="fw-bold text-success underline">Background Information: </span> {name} grew up in {address}, his parents {parentsStatusAnswer}, and {siblingsStrOutput} with whom he was raised. {name} and his siblings were and his siblings were raised by {q9?.Growing_Up}.{name} {q10?.Basic_Needs === "no" ? "denies having ever gone without basic needs" : " family deprived him of basic needs"} and {gender}{" "}
+          {q10?.Experience_any_abuse_or_neglect === "no" ? "denies a history of abuse or neglect" : " confirm a history of abuse or neglect"}.{name} graduated from {questionAnswer[11]?.answer[0]?.Institution_Name} in {questionAnswer[11]?.answer[0]?.Year_of_graduation} and
           attended some college at {questionAnswer[12]?.answer[0]?.Attend_University_Name_1} between {questionAnswer[11]?.answer[0]?.Year_of_graduation} and {questionAnswer[12]?.answer[0]?.Year_of_Graduation_1} {gender}{" "}
           {questionAnswer[12]?.answer[0]?.Associate_1 === "no degree" ? "but does not hold a " : `and achieved ${questionAnswer[12]?.answer[0]?.Associate_1}`} postsecondary degree. Currently, {name} works as a {q15.Job_Title} at {q15.Place_of_employment} and has been doing so since {q15.Timeline}.
           Prior, {name} worked as a {q16?.Job_Title_One} at {q16?.Place_of_employment_One} between {q16.Timeline_One} and was an {q16?.Job_Title_Two} for {q16?.Place_of_employment_Second} between {q16?.Timeline_Two}.{name}{" "}
-          {q17?.Served_military === "no" ? "doesn't served in the military" : "served in the military"}
+
+          <br />
+         
+          <span className="fw-bold text-success underline">Military Related Information: </span>
+             {joinedMilitary}
+        
+
           {name} {q18?.Job_relevant_Experience === "N/A" ? "don't have job-relevant volunteer experience" : `have job-relevant volunteer experience like ${q18?.Job_relevant_Experience}`}. currently {gender} lived in {q20?.living_City_State} with {q20?.Who_do_you_live_with}
           {q20?.Relationship_Status === "Single" && <h4>{name} is single.</h4>}
           {q20?.Relationship_Status === "In a relationship" && (
