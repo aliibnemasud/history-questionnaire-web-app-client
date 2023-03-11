@@ -41,8 +41,6 @@ const Questions = () => {
       }
     }
 
-    
-
     // Multiple Marriage timeline
     const multipleMarriageTimeline = {};
     for (const timeline in data) {
@@ -119,7 +117,7 @@ const Questions = () => {
       {
         questionNo: 7,
         question: "Are your biological parents married to each other?",
-        answer: [{ Biological_Parents: data.Biological_Parents, Biological_Parents_Status: data.Biological_Parents_Status, Deceased: data.Ages, Deceased_Year: data.Deceased_Year }],
+        answer: [{ Biological_Parents: data.Biological_Parents, Biological_Parents_Status: data.Biological_Parents_Status, Deceased: data.Deceased, Deceased_Year_Father: data.Deceased_Year_Father, Deceased_Year_Mother:data.Deceased_Year_Mother }],
       },
       {
         questionNo: 8,
@@ -399,8 +397,6 @@ const Questions = () => {
       },
     ];
 
-    
-
     axios
       .post(
         "https://questionary-website.onrender.com/questions",
@@ -411,7 +407,7 @@ const Questions = () => {
           },
         }
       )
-      .then((res) => {       
+      .then((res) => {
         setLoading(false);
         alert("Data Posted Successfully!");
         navigate(`/thanks/${res?.data?.data?._id}`);
@@ -438,6 +434,7 @@ const Questions = () => {
   const Current_status = watch("Current_status");
   const Deployed = watch("Deployed");
   const Relationship_Status = watch("Relationship_Status");
+  const Biological_Parents_Status = watch("Biological_Parents_Status");
   const Children = watch("Children");
   const Alcohol = watch("Alcohol");
   const Drugs_illicit = watch("Drugs_illicit");
@@ -456,6 +453,9 @@ const Questions = () => {
   const Number_Of_Siblings = watch("Number_Of_Siblings");
   const Other_Address_checkbox = watch("Other_Address_checkbox");
   const Additional_Option_Type_of_drug = watch("Additional_Option_Type_of_drug");
+  const Deceased = watch("Deceased");
+
+  console.log(Deceased);
 
   let previousMarriagesTimeline = [];
   for (let i = 1; i <= preMarriageTimeline; i++) {
@@ -631,7 +631,7 @@ const Questions = () => {
           </select>
 
           {Biological_Parents === "no" && (
-            <select {...register("Biological_Parents_Status", { required: true })} className="form-select" onChange={(e) => setBiologicalParentsStatus(e.target.value)} aria-label="Default select example">
+            <select {...register("Biological_Parents_Status", { required: true })} className="form-select" aria-label="Default select example">
               <option>Select Option</option>
               <option value="separated">Separated</option>
               <option value="Divorced">Divorced</option>
@@ -639,21 +639,36 @@ const Questions = () => {
               <option value="Deceased">Deceased</option>
             </select>
           )}
-          {biologicalParentsStatus === "Deceased" && (
+          {Biological_Parents_Status === "Deceased" && (
             <div>
-              <div className="form-check form-check-inline mt-2">
-                <input {...register("Deceased", { required: true })} className="form-check-input" type="radio" name="inlineRadioOptions" value="option1" />
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" {...register("Deceased", { required: true })} type="radio" htmlFor="inlineRadio1" value="Both" />
+                <label className="form-check-label" htmlFor="inlineRadio1">
+                  Both
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" {...register("Deceased", { required: true })} type="radio" htmlFor="inlineRadio1" value="Mother" />
+                <label className="form-check-label" htmlFor="inlineRadio1">
+                  Mother
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input className="form-check-input" {...register("Deceased", { required: true })} type="radio" htmlFor="inlineRadio1" value="Father" />
                 <label className="form-check-label" htmlFor="inlineRadio1">
                   Father
                 </label>
               </div>
-              <div className="form-check form-check-inline">
-                <input {...register("Deceased", { required: true })} className="form-check-input" type="radio" name="inlineRadioOptions" value="option2" />
-                <label className="form-check-label" htmlFor="inlineRadio2">
-                  Mother
-                </label>
-              </div>
-              <input {...register("Deceased_Year", { required: true })} type="text" className="form-control" placeholder="Year" />
+
+              {Deceased === "Father" && <input {...register("Deceased_Year_Father")} type="text" className="form-control" placeholder="Deceased Year Father" />}
+              {Deceased === "Mother" && <input {...register("Deceased_Year_Mother")} type="text" className="form-control" placeholder="Deceased Year Mother" />}
+
+              {Deceased === "Both" && (
+                <div className="d-flex gap-3">
+                  <input {...register("Deceased_Year_Mother")} type="text" className="form-control" placeholder="Deceased Year Mother" />
+                  <input {...register("Deceased_Year_Father")} type="text" className="form-control" placeholder="Deceased Year Father" />
+                </div>
+              )}
             </div>
           )}
         </div>
